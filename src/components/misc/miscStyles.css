@@ -1,0 +1,91 @@
+.header-title {
+    /* border: 1px solid black; */
+    color: #783f04;
+    font-weight: 700;
+    font-size: 65px;
+}
+
+.nav {
+    /* border: 1px solid black; */
+    margin-top: 10px;
+}
+
+.nav code {
+    color: #274e13;
+    font-size: 18px;
+}
+
+.nav a {
+    color: #783f04;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.nav a:hover {
+    color: rgb(219, 202, 202);
+}
+
+.footer {
+    /* position:  static; */
+    width: 100%;
+    /* line-height: 113px; */
+    /* bottom: 0; */
+    background-color: #999999;
+    color: #783f04;
+    text-align: center;
+    font-weight: 600;
+    height: 131px;
+    padding-top: 50px;
+    /* margin-top: 0px; */
+    /* border: 2px solid red; */
+    /* line-height: 65px; */
+}
+.homepage {
+    text-align: center;
+    /* border: 2px solid lightcoral; */
+}
+
+.rctngl {
+    border: 5px solid #783f04;
+    border-radius: 8px;
+    width: 242px;
+    height: 150px;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    color: #274e13;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.rctnglWide {
+    border: 5px solid #783f04;
+    border-radius: 8px;
+    width: 242px;
+    height: 150px;
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    color: #274e13;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.rctnglWider {
+    border: 5px solid #783f04;
+    border-radius: 8px;
+    width: 242px;
+    height: 150px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: #274e13;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.row1 {
+    /* padding-left: 25px; */
+    /* border: 2px solid red; */
+    /* display: inline-block; */
+}
