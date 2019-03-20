@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class PGSubmit extends Component {
+class SearchResultEditDelete extends Component {
 
     render() {
 
@@ -16,4 +16,4 @@ class PGSubmit extends Component {
 }
 
 
-export default PGSubmit
+export default SearchResultEditDelete

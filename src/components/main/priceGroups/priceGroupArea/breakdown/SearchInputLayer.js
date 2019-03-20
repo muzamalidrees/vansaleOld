@@ -32,32 +32,27 @@ class SearchInputLayer extends Component {
             <div className='row col-12 m-0 justify-content-center'>
 
                 <div className='col-md-2.5 mb-2  '>
-                    <select value={searchFilter} onChange={this.handleSearchFilterChange} className='select'>
+                    <select value={searchFilter} onChange={this.handleSearchFilterChange} className='PGselect'>
                         <option value="name">Search By Name</option>
-                        <option value="address">Search By Address</option>
-                        <option value="cell">Search By Cell #</option>
-                        <option value="email">Search By Email</option>
-                        <option value="role_id">Search By Role</option>
                     </select>
                 </div>
                 <div className='col-md-2.5 mb-2  '>
                     <div className="input-group">
-                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="search-input" ref='search' placeholder="Search Customers.." />
+                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="PGsearch-input" ref='search' placeholder="Search Customers.." />
                         <div className="input-group-append">
                             <button style={{ border: '2px solid #783f04', borderLeft: 'none', background: '#ddd' }} className="btn " type="button" disabled>
-                                <FontAwesomeIcon className='search-button' icon={faSearch} />
+                                <FontAwesomeIcon className='PGsearch-button' icon={faSearch} />
                             </button>
                         </div>
                     </div>
                 </div>
-                <div style={{ display: 'none' }} className='col-md-2.5 mb-2  '>
-                    <select value={searchLimit} onChange={this.handleSearchLimitChange} className='select'>
-                        <option value="" disabled>--Limit--</option>
+                <div style={{display:'none'}} className='col-md-2.5 mb-2  '>
+                    <select value={searchLimit} onChange={this.handleSearchLimitChange} className='PGselect'>
+                        <option value="">--Limit--</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="250">250</option>
+
                     </select>
                 </div>
             </div>

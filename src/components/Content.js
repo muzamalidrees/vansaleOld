@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { PropsRoute, PublicRoute, PrivateRoute } from 'react-router-with-props';
+import { Switch, Route } from 'react-router-dom';
+import { PropsRoute } from 'react-router-with-props';
 import About from './misc/About';
 import Contact from './misc/Contact';
 import Home from './misc/Home';
 import NotFound from './misc/NotFound';
 import Login from './auth/Login';
-import importExport from './importExport/ImportExport';
 import Customers from './main/customers/Customers';
-import CustomerArea from './main/customers/customerArea/CustomerArea'
+import PriceGroups from './main/priceGroups/PriceGroups';
+import PriceGroupArea from './main/priceGroups/priceGroupArea/PriceGroupArea';
 
 
 class Content extends Component {
@@ -38,9 +38,10 @@ class Content extends Component {
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/home" component={Home} />
-                    <Route path='/importExport' component={importExport} />
                     <PropsRoute path='/customers' component={Customers} date={this.state.date} />
-                    <PropsRoute path='/' component={NotFound} mt='222px' mb='221px' />
+                    <PropsRoute path='/priceGroups' component={PriceGroups} date={this.state.date} />
+
+                    <PropsRoute path='/' component={NotFound} pt='186px' pb='185px' class={'sol-sm-12'} />
 
 
                 </Switch>

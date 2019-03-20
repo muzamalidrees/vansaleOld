@@ -1,10 +1,10 @@
-const usersReducer = (state = [''], action) => {
+const customersReducer = (state = [''], action) => {
 
     switch (action.type) {
-        case "ADD_USER":
+        case "ADD_CUSTOMER":
             return [action.payload, ...state]
             break;
-        case "SET_USERS":
+        case "SET_CUSTOMERS":
             return action.payload
             break;
         default:
@@ -12,4 +12,4 @@ const usersReducer = (state = [''], action) => {
     }
 }
 
-export default usersReducer
+export default customersReducer

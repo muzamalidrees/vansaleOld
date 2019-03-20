@@ -7,10 +7,10 @@ class SearchResultsTable extends Component {
 
         const searchText = this.props.searchText;
         const searchFilter = this.props.searchFilter;
-        const searchResults = this.props.searchResults;
+        const PGSearchResults = this.props.PGSearchResults;
         const rows = [];
         var index = 0;
-        searchResults.forEach((searchResult) => {
+        PGSearchResults.forEach((searchResult) => {
             if (searchResult[searchFilter].indexOf(searchText) === -1) {
                 return;
             }
@@ -29,17 +29,14 @@ class SearchResultsTable extends Component {
         // }
 
         return (
-            <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md tbl">
+            <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md PGtbl">
                 <table className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Cell</th>
-                            <th>Address</th>
-                            <th>Area_ID</th>
-                            <th>Route_ID</th>
+                            <th>Price</th>
+                            <th>Buying_back Price</th>
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

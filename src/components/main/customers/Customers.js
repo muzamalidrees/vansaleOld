@@ -1,53 +1,41 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { PropsRoute, PublicRoute, PrivateRoute } from 'react-router-with-props';
-import CustomerArea from './customerArea/CustomerArea'
 import './customerArea/customerStyles.css'
+import CustomerArea from './customerArea/CustomerArea'
+import NewCustomer from './customerArea/breakDown/NewCustomer'
+import ImportExport from '../../importExport/ImportExport'
 import RightPane from '../RightPane'
 import NotFound from '../../misc/NotFound'
 
-import { setUsers } from '../../../actions/user-actions'
-
-
 
 class Customers extends Component {
-    // componentDidMount() {
-    //     console.log(this.props.users);
-    // }
-    getCustomersData = () => {
 
-        fetch('/getAllUsers')
-            .then((res) => res.json())
-            .then((json) => {
-                // console.log(json.data)
-                const users = json.data;
-                console.log(users)
-                this.props.dispatch(setUsers(users))
-
-            })
-            .catch((error) => console.log(error))
+    rightPaneLabel = () => {
+        return (
+            <label>Your<br></br>Customers</label>
+        )
     }
 
     render() {
-      const searchResults = [ {id: 6, name: "abc", email: "abc@abc.com", cell: "03041234567", address: "lahore"},
-       {id: 7, name: "abc", email: "abc@abc.com", cell: "03041234567", address: "lahore", },
-       {id: 8, name: "abc", email: "abc@abc.com", cell: "03041234567", address: "lahore", },
-       {id: 9, name: "abc", email: "abc@abc.com", cell: "03041234567", address: "lahore", },
-       {id: 10, name: "abc", email: "abc@abc.com", cell: "03041234567", address: "lahore", },
-       {id: 11, name: "abc", email: "abc@abc.com", cell: "03041234567", address: "lahore", }]
-        // const searchResults = this.props.users;
-        // console.log(searchResults);
+
+        const searchResults = [
+            { id: '', name: "", email: "", cell: "", address: "", role: '' }
+        ]
+
+
         return (
-            <div className="container-fluid " style={{ border: '2px solid green', backgroundColor: '#999999', marginTop: '70px', marginBottom: '0px' }}>
-                <div style={{ border: '2px solid pink' }} className='row m-0 p-0'>
+            <div className="container-fluid p-0" style={{ border: 'none', backgroundColor: '#999999', marginTop: '70px', marginBottom: '0px', padding: '0px' }}>
+                <div style={{ border: 'none' }} className='row m-0 p-0'>
                     <Switch>
                         <PropsRoute path='/customers/home' component={CustomerArea} searchResults={searchResults} />
-                        <PropsRoute path='/' component={NotFound} mt='154px' mb='155px' />
+                        <PropsRoute path='/customers/add' component={NewCustomer} />
+                        <PropsRoute path='/customers/import' component={ImportExport} mt='8px' mb='8px' pt='22px' pb='22px' />
+                        <PropsRoute path='/customers/export' component={ImportExport} mt='8px' mb='8px' pt='22px' pb='22px' />
+                        <PropsRoute path='/' component={NotFound} pt='158px' pb='159px' class={'col-sm-9'} />
                     </Switch>
 
-                    <RightPane date={this.props.date} />
-
+                    <RightPane label={this.rightPaneLabel()} date={this.props.date} />
                 </div>
             </div>
 
@@ -55,10 +43,5 @@ class Customers extends Component {
     }
 }
 
-const mapStateToProps = (store) => {
-    return {
-        users: store.usersReducer
-    }
-}
 
-export default connect(mapStateToProps)(Customers)
+export default (Customers)

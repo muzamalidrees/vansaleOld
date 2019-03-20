@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import FunctionLayer from './breakDown/FunctionLayer'
-import SearchResultsTable from './breakDown/SearchResultsTable';
-import { setCustomers } from '../../../../actions/customer-actions'
+import FunctionLayer from './breakdown/FunctionLayer'
+import SearchResultsTable from './breakdown/SearchResultsTable'
+import { setPriceGroups } from '../../../../actions/PG-actions'
 import { connect } from 'react-redux'
 
 
-class CustomerArea extends Component {
+class PriceGroupArea extends Component {
     componentWillMount() {
         // var options = {
         //     method: 'POST',
@@ -14,14 +14,14 @@ class CustomerArea extends Component {
         //         'Content-Type': 'application/json'
         //     }
         // }
-        fetch('/getAllCustomers',
+        fetch('/getAllPriceGroups',
             //  options
         )
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
-                this.props.dispatch(setCustomers(json.data))
-                this.setState({ searchResults: this.props.customers })
+                this.props.dispatch(setPriceGroups(json.data))
+                this.setState({ PGSearchResults: this.props.PriceGroups })
 
             })
             .catch((error) => console.log(error))
@@ -33,7 +33,7 @@ class CustomerArea extends Component {
             searchLimit: '',
             searchFilter: 'name',
             searchText: '',
-            searchResults: props.searchResults
+            PGSearchResults: props.PGSearchResults
         }
         // console.log(props.searchResults)
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);
@@ -41,13 +41,6 @@ class CustomerArea extends Component {
         this.handleSearchLimitChange = this.handleSearchLimitChange.bind(this);
 
     }
-    getCustomersData = () => {
-
-    }
-
-
-
-
 
     handleSearchFilterChange(searchFilter) {
         this.setState({
@@ -72,6 +65,7 @@ class CustomerArea extends Component {
         return (
 
             <div style={{ border: 'none' }} className=" col-sm-9 m-0 p-0 ">
+
                 <FunctionLayer
                     searchLimit={this.state.searchLimit}
                     searchFilter={this.state.searchFilter}
@@ -81,7 +75,7 @@ class CustomerArea extends Component {
                     onSearchLimitChange={this.handleSearchLimitChange}
                 />
                 <SearchResultsTable
-                    searchResults={this.state.searchResults}
+                    PGSearchResults={this.state.PGSearchResults}
                     searchFilter={this.state.searchFilter}
                     searchText={this.state.searchText}
                 />
@@ -94,8 +88,8 @@ class CustomerArea extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        customers: store.customersReducer
+        PriceGroups: store.PGReducer
     }
 }
 
-export default connect(mapStateToProps)(CustomerArea)
+export default connect(mapStateToProps)(PriceGroupArea)

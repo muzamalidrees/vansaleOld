@@ -12,6 +12,8 @@ class ImportExport extends Component {
             selectedDataValue: '',
             btnTxt: 'Import/Export'
         }
+        this.handleIEChange = this.handleIEChange.bind(this);
+        this.handleIEDataChange = this.handleIEDataChange.bind(this);
     }
     handleValidate = (evt) => {
 
@@ -30,8 +32,11 @@ class ImportExport extends Component {
 
     }
 
-    handleIEChange = (e) => {
+    handleIEChange(e) {
         this.setState({ selectedIEValue: e.target.value, btnTxt: e.target.value === "" ? "Import/Export" : e.target.value })
+    }
+    handleIEDataChange(e) {
+        this.setState({ selectedDataValue: e.target.value })
     }
 
     render() {
@@ -40,15 +45,16 @@ class ImportExport extends Component {
         // console.log(ievalue);
         // var datavalue = this.refs.dataSelect.value;
         return (
-            <div>
-                <div className="container " style={{ textAlign: 'center', backgroundColor: '#999999', marginTop: '30px', marginBottom: '30px', paddingTop: '43px', paddingBottom: '43px' }}>
-                    <h1 className='IEHdng'>Import/Export Data</h1>
 
-                    <form onSubmit={this.handleValidate} method="POST" ref="IEForm" className=" IEForm " noValidate>
-                        <div className=" form-group">
-                            <label htmlFor="IESelect">Import/Export</label>
+            <div className="col-sm-9" style={{ border: 'none', textAlign: 'center', marginTop: `${this.props.mt}`, marginBottom: `${this.props.mb}`, paddingTop: `${this.props.pt}`, paddingBottom: `${this.props.pb}` }}>
+                <h1 style={{ border: 'none' }} className='IEHdng'>Import/Export Data</h1>
+
+                <form style={{ border: 'none', textAlign: 'left' }} onSubmit={this.handleValidate} method="POST" ref="IEForm" className=" form-row m-0 justify-content-center " noValidate>
+                    <div className=" form-row col-8 justify-content-center">
+                        <div className='col-md-6 mb-3'>
+                            <label className='IELabel' htmlFor="IESelect">Import/Export</label>
                             <select value={this.state.selectedIEValue} onChange={this.handleIEChange} className='form-control' id='IESelect' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
-                                <option value='' >--Select--</option>
+                                <option value='' disabled>--Select--</option>
                                 <option value='Import' >Import</option>
                                 <option value='Export' >Export</option>
                             </select>
@@ -57,12 +63,14 @@ class ImportExport extends Component {
                             </div>
                             <div className="invalid-feedback">
                                 Please select at least one option.
-                            </div>
                         </div>
-                        <div className=" form-group">
-                            <label htmlFor="dataSelect">Select data which you want to {this.state.selectedIEValue}</label>
-                            <select className='form-control select' id='dataSelect' ref='dataSelect' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
-                                <option value='' >--Select--</option>
+                        </div>
+                    </div>
+                    <div className=" form-row col-8 justify-content-center">
+                        <div className='col-md-6 mb-3'>
+                            <label className='IELabel' htmlFor="dataSelect">Select data which you want to {this.state.selectedIEValue}</label>
+                            <select value={this.state.selectedDataValue} onChange={this.handleIEDataChange} className='form-control select' id='dataSelect' ref='dataSelect' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
+                                <option value='' disabled>--Select--</option>
                                 <option value='customers'>Customers</option>
                                 <option value='priceGroups'>Price-Groups</option>
                                 <option value='products'>Products</option>
@@ -76,28 +84,34 @@ class ImportExport extends Component {
                             </div>
                             <div className="invalid-feedback">
                                 Please select at least one option.
-                            </div>
                         </div>
-                        <div className=" form-group">
-                            <label htmlFor="chooseFile">Select file from which you want to {this.state.selectedIEValue} data</label><br></br>
-                            <input style={{ border: '1px solid #783f04', borderRadius: '5px', color: '#783f04' }} type='file' className='form-control-file chooseFile' id='chooseFile' required/>
+                        </div>
+                    </div>
+                    <div className=" form-row col-8 justify-content-center">
+                        <div className='col-md-6 mb-3'>
+                            <label className='IELabel' htmlFor="chooseFile">Select file from which you want to {this.state.selectedIEValue} data</label><br></br>
+                            <input style={{ border: '1px solid #783f04', borderRadius: '5px', color: '#783f04' }} type='file' className='form-control-file chooseFile' id='chooseFile' required />
                             <p className='note'>*you can only select excel files.</p>
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
                             <div className="invalid-feedback">
                                 Please choose a file.
-                            </div>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'center' }} className="form-group col-12">
+                        </div>
+                    </div>
+                    <div style={{ border: 'none' }} className="form-row col-7 justify-content-center">
+                        <div style={{ border: 'none' }} className="col-md-5.5 mb-3">
 
-                            <button className="IEBtn" type="submit">{this.state.btnTxt}</button>
+                            <button className="IEBtn align-self-center" type="submit">{this.state.btnTxt}</button>
                         </div>
 
-                    </form>
-                </div >
+                    </div>
 
+                </form>
             </div >
+
+
         )
     }
 }

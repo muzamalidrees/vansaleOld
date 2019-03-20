@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import './loginStyles.css';
-// import StructureLogin from './login/StructureLogin';
-
-
-
 
 class Login extends Component {
 
-    validateLogin = (evt) => {  //parameter used to gain event information.
+    validateLogin = (evt) => { 
 
 
-        evt.preventDefault();   //this prohibits page to reload.
+        evt.preventDefault(); 
         evt.stopPropagation();
         let form = this.refs.loginForm;
         if (form.checkValidity() === false) {
@@ -20,26 +16,6 @@ class Login extends Component {
             this.handleLogin();
         }
 
-        // var email = this.refs.email
-        // var password = this.refs.password
-        // var label = this.refs.loginLabel
-
-        // if (email.value.length === 0) {
-        //     label.innerHTML = "Please enter a valid Email";
-        //     email.focus();
-        // }
-        // else {
-        //     label.innerHTML = "";
-        //     if (password.value.length === 0) {
-        //         label.innerHTML = "Please enter Password";
-        //         password.focus();
-        //     }
-        //     else {
-        //         label.innerHTML = "";
-        //         this.handleLogin();
-
-        //     }
-        // }
     }
     handleLogin = () => {
 
@@ -56,20 +32,23 @@ class Login extends Component {
                 console.log(json);
                 // var message = JSON.stringify(json.message)
                 // console.log(json.message)
-                var message = json.message;
+                let message = json.message;
                 if (message == 'incorrect Password') {
                     console.log(message)
-                    this.refs.password.innerHTML = "";
+                    this.refs.password.value = "";
                     this.refs.password.focus();
                 }
                 else {
-                    console.log('message')
+                    console.log(message)
                 }
                 this.refs.loginLabel.innerHTML = message;
                 this.refs.loginBtn.style.marginTop = '0px';
                 this.props.history.push(json.route);
             })
             .catch((json) => console.log(json.error))
+    }
+    onChangeLabel = () => {
+        this.refs.loginLabel.innerHTML = '';
     }
 
     render() {
@@ -82,7 +61,7 @@ class Login extends Component {
 
                     <div style={{ display: 'inline-block' }} className="form-row col-lg-6 m-0 p-0">
                         <div className='col form-group'>
-                            <input type="email" className="form-control form-control-lg" ref="email" placeholder="Enter email" required />
+                            <input type="email" onChange={this.onChangeLabel} className="form-control form-control-lg" ref="email" placeholder="Enter email" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
@@ -96,7 +75,7 @@ class Login extends Component {
 
                     <div style={{ display: 'inline-block' }} className="form-row col-lg-6 m-0 p-0 ">
                         <div className='col form-group'>
-                            <input type="password" className="form-control form-control-lg" ref="password" placeholder="Password" required />
+                            <input type="password" onChange={this.onChangeLabel} className="form-control form-control-lg" ref="password" placeholder="Password" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
