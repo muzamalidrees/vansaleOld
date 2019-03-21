@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addNewCustomer } from '../../../../../actions/customer-actions';
+import { addNewDriver } from '../../../../../actions/driver-actions';
 
 
 
-class NewCustomer extends Component {
+class NewDriver extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +16,7 @@ class NewCustomer extends Component {
     }
 
 
-    handleCustomerRegister = (event) => {
+    handleDriverRegister = (event) => {
         event.preventDefault();
         event.stopPropagation();
         let form = this.refs.myForm;
@@ -36,19 +36,19 @@ class NewCustomer extends Component {
         let area = this.state.selectedAreaValue
         let route = this.state.selectedRouteValue
 
-        let customer = { name: name.value, email: email.value, cell: cell.value, address: address.value, area: area, route: route }
+        let driver = { name: name.value, email: email.value, cell: cell.value, address: address.value, area: area, route: route }
 
         var options = {
             method: 'POST',
-            body: JSON.stringify(customer),
+            body: JSON.stringify(driver),
             headers: { 'Content-Type': 'application/json' }
         }
-        fetch('/addNewCustomer', options)
+        fetch('/addNewDriver', options)
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
                 let message = json.message;
-                if (message == 'customer registered successfully') {
+                if (message == 'driver registered successfully') {
                     this.refs.name.value = ''
                     this.refs.email.value = ''
                     this.refs.cell.value = ''
@@ -58,7 +58,7 @@ class NewCustomer extends Component {
                 else {
                     this.refs.email.focus();
                 }
-                this.props.dispatch(addNewCustomer(json.data));
+                this.props.dispatch(addNewDriver(json.data));
                 this.refs.msgLabel.innerHTML = message;
 
             })
@@ -75,11 +75,11 @@ class NewCustomer extends Component {
     render() {
         return (
             <div style={{ border: 'none', textAlign: 'center', marginTop: '30px', marginBottom: '30px' }} className=" col-sm-9 ">
-                <h1 style={{ border: 'none' }} className='newCustomerHdng'>Customer Registration</h1>
-                <form style={{ border: 'none', textAlign: 'left' }} onSubmit={this.handleCustomerRegister} method="POST" ref="myForm" className="form-row m-0 justify-content-center " noValidate>
+                <h1 style={{ border: 'none' }} className='newDriverHdng'>Driver Registration</h1>
+                <form style={{ border: 'none', textAlign: 'left' }} onSubmit={this.handleDriverRegister} method="POST" ref="myForm" className="form-row m-0 justify-content-center " noValidate>
                     <div style={{ border: 'none' }} className="form-row col-8">
                         <div className="col-md-6 mb-3">
-                            <label className='label-customer' htmlFor="">Name</label>
+                            <label className='label-driver' htmlFor="">Name</label>
                             <input type="text" className="form-control" ref="name" placeholder="e.g. John" required />
                             <div className="valid-feedback">
                                 Looks good!
@@ -89,7 +89,7 @@ class NewCustomer extends Component {
                             </div>
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label className='label-customer' htmlFor="">Email</label>
+                            <label className='label-driver' htmlFor="">Email</label>
                             <input type="email" className="form-control" ref="email" placeholder="e.g. abc@abc.com" required />
                             <div className="valid-feedback">
                                 Looks good!
@@ -102,7 +102,7 @@ class NewCustomer extends Component {
                     <div style={{ border: 'none' }} className="form-row col-8">
 
                         <div className="col-md-6 mb-3">
-                            <label className='label-customer' htmlFor="">Cell</label>
+                            <label className='label-driver' htmlFor="">Cell</label>
                             <input type="text" className="form-control" ref="cell" placeholder="e.g. +923011234567" required />
                             <div className="valid-feedback">
                                 Looks good!
@@ -112,7 +112,7 @@ class NewCustomer extends Component {
                             </div>
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label className='label-customer' htmlFor="">Address</label>
+                            <label className='label-driver' htmlFor="">Address</label>
                             <input type="text" className="form-control" ref="address" placeholder="e.g. London" required />
                             <div className="valid-feedback">
                                 Looks good!
@@ -125,7 +125,7 @@ class NewCustomer extends Component {
                     <div style={{ border: 'none' }} className="form-row col-8">
 
                         <div className="col-md-6 mb-3">
-                            <label className='label-customer' htmlFor="">Area</label>
+                            <label className='label-driver' htmlFor="">Area</label>
                             <select value={this.state.selectedAreaValue} onChange={this.handleAreaChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value=''>--Select an Area--</option>
                                 <option value='1'>Area 1</option>
@@ -159,9 +159,9 @@ class NewCustomer extends Component {
 
                     </div>
                     <div style={{ border: 'none' }} className="form-row col-8 justify-content-center">
-                        <label ref='msgLabel' className='label-customer'></label>
+                        <label ref='msgLabel' className='label-driver'></label>
                         <div style={{ display: 'flex', justifyContent: 'center' }} className="form-group col-12">
-                            <button className="customerRegisterBtn" type="submit">Register</button>
+                            <button className="driverRegisterBtn" type="submit">Register</button>
                         </div>
                     </div>
 
@@ -175,8 +175,8 @@ class NewCustomer extends Component {
 }
 const mapStateToProps = (store) => {
     return {
-        customersReducer: store.customersReducer
+        driversReducer: store.driversReducer
     }
 }
 
-export default connect(mapStateToProps)(NewCustomer)
+export default connect(mapStateToProps)(NewDriver)

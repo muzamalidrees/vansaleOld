@@ -3,7 +3,7 @@
   border: 2px solid red;
 } */
 
-.PGbutton-contaner button {
+.Rbutton-contaner button {
     margin-left: 4px;
     margin-right: 4px;
     /* margin:0px; */
@@ -17,13 +17,13 @@
     border-radius: 5px;
 }
 
-.PGbutton-contaner button:hover {
+.Rbutton-contaner button:hover {
     background-color: #f2f2f2;
     color: #274e13;
     border: 2px solid #274e13;
 }
 
-.PGselect {
+.Rselect {
     margin-right: 1px;
     margin-left: 2px;
     box-sizing: border-box;
@@ -39,13 +39,13 @@
     border-radius: 5px;
 }
 
-.PGselect:hover {
+.Rselect:hover {
     background-color: #f2f2f2;
     color: #274e13;
     border: 2px solid #274e13;
 }
 
-.PGsearch-input {
+.Rsearch-input {
     margin-right: 2px;
     margin-left: 2px;
     background: #ddd;
@@ -58,28 +58,28 @@
     border-right: none;
 }
 
-.PGsearch-input:hover {
+.Rsearch-input:hover {
     background-color: #f2f2f2;
     border: 2px solid #274e13;
     border-right: none;
 }
 
-.PGsearch-button {
+.Rsearch-button {
     color: #783f04;
 }
 
-.PGtbl {
+.Rtbl {
     height: 393px;
 }
 
-.newPGHdng {
+.newRHdng {
     font-weight: 700;
     margin-bottom: 20px;
     color: #274e13;
     text-align: center;
 }
 
-.PGRegisterBtn {
+.RRegisterBtn {
     padding: 3px 120px 3px 120px;
     margin-top: 5px;
     height: 45px;
@@ -91,13 +91,13 @@
     border: 1px solid #274e13;
 }
 
-.PGRegisterBtn:hover {
+.RRegisterBtn:hover {
     color: #274e13;
     background-color: white;
     border: 1px solid #274e13;
 }
 
-.label-PG {
+.label-R {
     font-weight: bold;
     color: #783f04;
 }

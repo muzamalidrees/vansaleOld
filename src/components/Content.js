@@ -8,7 +8,8 @@ import NotFound from './misc/NotFound';
 import Login from './auth/Login';
 import Customers from './main/customers/Customers';
 import PriceGroups from './main/priceGroups/PriceGroups';
-import PriceGroupArea from './main/priceGroups/priceGroupArea/PriceGroupArea';
+import Drivers from './main/drivers/Drivers';
+import Routes from './main/routes/Routes';
 
 
 class Content extends Component {
@@ -38,8 +39,10 @@ class Content extends Component {
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/home" component={Home} />
+                    <PropsRoute path='/drivers' component={Drivers} date={this.state.date} />
                     <PropsRoute path='/customers' component={Customers} date={this.state.date} />
                     <PropsRoute path='/priceGroups' component={PriceGroups} date={this.state.date} />
+                    <PropsRoute path='/routes' component={Routes} date={this.state.date} />
 
                     <PropsRoute path='/' component={NotFound} pt='186px' pb='185px' class={'sol-sm-12'} />
 
