@@ -23,7 +23,6 @@ class CustomerPrices extends Component {
             })
         }
         else if (searchFilter === 'price_group_id' && searchText !== '') {
-            var text = '';
             priceGroups.forEach((priceGroup) => {
                 if (priceGroup["name"].indexOf(searchText) === -1) {
                     return;

@@ -33,7 +33,7 @@ class Login extends Component {
                 // var message = JSON.stringify(json.message)
                 // console.log(json.message)
                 let message = json.message;
-                if (message == 'incorrect Password') {
+                if (message === 'incorrect Password') {
                     console.log(message)
                     this.refs.password.value = "";
                     this.refs.password.focus();

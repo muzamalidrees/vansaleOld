@@ -7,22 +7,14 @@ import { connect } from 'react-redux'
 
 class PriceGroupArea extends Component {
     componentWillMount() {
-        // var options = {
-        //     method: 'POST',
-        //     body: JSON.stringify({ limit: 10 }),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }
+
         fetch('/getAllPriceGroups',
-            //  options
         )
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
                 this.props.dispatch(setPriceGroups(json.data))
-                this.setState({ PGSearchResults: this.props.PriceGroups })
-
+                this.setState({ showTable: true })
             })
             .catch((error) => console.log(error))
     }
@@ -33,13 +25,25 @@ class PriceGroupArea extends Component {
             searchLimit: '',
             searchFilter: 'name',
             searchText: '',
-            PGSearchResults: props.PGSearchResults
+            showTable: false
         }
         // console.log(props.searchResults)
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);
         this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
         this.handleSearchLimitChange = this.handleSearchLimitChange.bind(this);
 
+    }
+    callTable = () => {
+        if (this.state.showTable) {
+            return <SearchResultsTable
+                PGSearchResults={this.props.priceGroups}
+                searchFilter={this.state.searchFilter}
+                searchText={this.state.searchText}
+            />
+        }
+        else {
+            return null;
+        }
     }
 
     handleSearchFilterChange(searchFilter) {
@@ -74,12 +78,7 @@ class PriceGroupArea extends Component {
                     onSearchTextChange={this.handleSearchTextChange}
                     onSearchLimitChange={this.handleSearchLimitChange}
                 />
-                <SearchResultsTable
-                    PGSearchResults={this.state.PGSearchResults}
-                    searchFilter={this.state.searchFilter}
-                    searchText={this.state.searchText}
-                />
-
+                {this.callTable()}
             </div>
 
         )
@@ -88,7 +87,7 @@ class PriceGroupArea extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        PriceGroups: store.PGReducer
+        priceGroups: store.PGReducer
     }
 }
 

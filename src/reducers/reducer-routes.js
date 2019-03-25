@@ -1,12 +1,12 @@
-const routesReducer = (state = [''], action) => {
+const routesReducer = (state = [], action) => {
 
     switch (action.type) {
-        case "ADD_ROUTE":
-            return [action.payload, ...state]
-            break;
         case "SET_ROUTES":
             return action.payload
-            break;
+        case "SET_DRIVER_ROUTING":
+            return action.payload
+        case "ADD_ROUTE":
+            return [action.payload, ...state]
         default:
             return state
     }

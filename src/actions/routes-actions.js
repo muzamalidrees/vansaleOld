@@ -6,5 +6,8 @@ const addNewRoute = (route) => {
 const setRoutes = (routes) => {
     return { type: "SET_ROUTES", payload: routes }
 }
+const setDriverRouting = (DriverRoute) => {
+    return { type: "SET_DRIVER_ROUTING", payload: DriverRoute }
+}
 
-export { addNewRoute, setRoutes }
+export { addNewRoute, setRoutes, setDriverRouting }

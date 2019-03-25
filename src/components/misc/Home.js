@@ -43,15 +43,15 @@ class Home extends Component {
                         {this.addADiv('customers', 'customers/home', faUsers, 'Customers', 'rctngl')}
                         {this.addADiv('drivers', 'drivers/home', faUserTie, 'Drivers', 'rctngl')}
                         {this.addADiv('inventory', 'inventory', faCubes, 'Inventory', 'rctngl')}
-                        {this.addADiv('users', 'users', faUsers, 'Users', 'rctngl')}
+                        {this.addADiv('users', 'users/home', faUsers, 'Users', 'rctngl')}
                         {/* {this.addADiv('returns', 'returns', faUndo, 'Returns', 'rctngl')} */}
-                        {this.addADiv('products', 'products', faCube, 'Products', 'rctngl')}
-                        {this.addADiv('routes', 'routes', faRoute, 'Routes', 'rctngl')}
+                        {this.addADiv('products', 'products/home', faCube, 'Products', 'rctngl')}
+                        {/* {this.addADiv('routes', 'routes', faRoute, 'Routes', 'rctngl')} */}
                         {this.addADiv('stats', 'stats', faChartBar, 'Statistics', 'rctngl')}
                         {/* {this.addADiv('roles', 'roles', faUserCircle, 'Roles', 'rctngl')} */}
                         {/* {this.addADiv('priceGroups', 'priceGroups', faDollarSign, 'Price_Groups', 'rctnglWide')} */}
                         {/* {this.addADiv('productCategories', 'productCategories', faGripHorizontal, 'Product_Categories', 'rctnglWider')} */}
-                        {/* {this.addADiv('areas', 'areas', faChartArea, 'Areas', 'rctngl')} */}
+                        {this.addADiv('areas', 'areas/home', faChartArea, 'Areas', 'rctngl')}
                         {/* {this.addADiv('misc', 'misc', faTasks, 'Misc', 'rctngl')} */}
                         {/* {this.addADiv('permissions', 'permissions', faCheckDouble, 'Permissions', 'rctngl')} */}
                     </div>

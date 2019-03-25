@@ -44,7 +44,7 @@ class NewPriceGroup extends Component {
             .then((json) => {
                 console.log(json)
                 let message = json.message;
-                if (message == 'price group registered successfully') {
+                if (message === 'price group registered successfully') {
                     this.refs.name.value = ''
                     this.refs.price.value = ''
                     this.refs.BBPrice.value = ''

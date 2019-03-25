@@ -18,16 +18,12 @@ class PriceGroups extends Component {
     }
 
     render() {
-        const PGSearchResults = [
-            { id: '', name: "", product_category_id: '', price: '', buying_back_price: '' }
-        ]
-
 
         return (
             <div className="container-fluid p-0" style={{ border: 'none', backgroundColor: '#999999', marginTop: '72px', marginBottom: '0px', padding: '0px' }}>
                 <div style={{ border: 'none' }} className='row m-0 p-0'>
                     <Switch>
-                        <PropsRoute path='/priceGroups/home' component={PriceGroupArea} PGSearchResults={PGSearchResults} />
+                        <PropsRoute path='/priceGroups/home' component={PriceGroupArea} />
                         <PropsRoute path='/priceGroups/add' component={NewPriceGroup} />
                         <PropsRoute path='/priceGroups/customerPricing' component={CustomerPricing} />
                         <PropsRoute path='/priceGroups/import' component={ImportExport} mt='7px' mb='7px' pt='22px' pb='22px' />

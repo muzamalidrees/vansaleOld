@@ -43,7 +43,7 @@ class NewRoute extends Component {
             .then((json) => {
                 console.log(json)
                 let message = json.message;
-                if (message == 'Route registered successfully') {
+                if (message === 'Route registered successfully') {
                     this.refs.name.value = ''
                     this.refs.description.value = ''
                     this.setState({ selectedArea: '' })

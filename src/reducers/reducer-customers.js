@@ -1,12 +1,10 @@
-const customersReducer = (state = [''], action) => {
+const customersReducer = (state = [], action) => {
 
     switch (action.type) {
-        case "ADD_CUSTOMER":
-            return [action.payload, ...state]
-            break;
         case "SET_CUSTOMERS":
             return action.payload
-            break;
+        case "ADD_CUSTOMER":
+            return [action.payload, ...state]
         default:
             return state
     }

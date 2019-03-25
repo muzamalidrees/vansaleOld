@@ -1,12 +1,10 @@
-const driversReducer = (state = [''], action) => {
+const driversReducer = (state = [], action) => {
 
     switch (action.type) {
-        case "ADD_DRIVER":
-            return [action.payload, ...state]
-            break;
         case "SET_DRIVERS":
             return action.payload
-            break;
+        case "ADD_DRIVER":
+            return [action.payload, ...state]
         default:
             return state
     }

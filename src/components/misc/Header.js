@@ -9,7 +9,7 @@ class Header extends Component {
         return (
 
             <div className="container-fluid" >
-                <div style={{ paddingTop: '30px' }} className='row m-0 justify-content-around'>
+                <div style={{ paddingTop: '15px' }} className='row m-0 justify-content-around'>
                     <div  className='row col-md-5 p-0 m-0'>
                         <div  className='col align-self-center'>
                             <h1 className="header-title">Van Sale</h1>

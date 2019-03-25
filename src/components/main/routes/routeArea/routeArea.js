@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
-import FunctionLayer from './breakdown/FunctionLayer'
-import SearchResultsTable from './breakdown/SearchResultsTable'
+import FunctionLayer from './breakDown/FunctionLayer'
+import SearchResultsTable from './breakDown/SearchResultsTable'
 import { setRoutes } from '../../../../actions/routes-actions'
 import { connect } from 'react-redux'
 
 
 class RouteArea extends Component {
-    componentWillMount() {
-        // var options = {
-        //     method: 'POST',
-        //     body: JSON.stringify({ limit: 10 }),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }
+    componentDidMount() {
         fetch('/getAllRoutes',
-            //  options
         )
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
                 this.props.dispatch(setRoutes(json.data))
-                this.setState({ RSearchResults: this.props.Routes })
+                this.setState({ showTable: true })
 
             })
             .catch((error) => console.log(error))
@@ -33,13 +25,24 @@ class RouteArea extends Component {
             searchLimit: '',
             searchFilter: 'name',
             searchText: '',
-            RSearchResults: props.RSearchResults
+            showTable: false
         }
-        // console.log(props.searchResults)
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);
         this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
         this.handleSearchLimitChange = this.handleSearchLimitChange.bind(this);
+    }
 
+    callTable = () => {
+        if (this.state.showTable) {
+            return <SearchResultsTable
+                RSearchResults={this.props.routes}
+                searchFilter={this.state.searchFilter}
+                searchText={this.state.searchText}
+            />
+        }
+        else {
+            return null;
+        }
     }
 
     handleSearchFilterChange(searchFilter) {
@@ -61,7 +64,6 @@ class RouteArea extends Component {
 
     render() {
 
-
         return (
 
             <div style={{ border: 'none' }} className=" col-sm-9 m-0 p-0 ">
@@ -74,11 +76,7 @@ class RouteArea extends Component {
                     onSearchTextChange={this.handleSearchTextChange}
                     onSearchLimitChange={this.handleSearchLimitChange}
                 />
-                <SearchResultsTable
-                    RSearchResults={this.state.RSearchResults}
-                    searchFilter={this.state.searchFilter}
-                    searchText={this.state.searchText}
-                />
+                {this.callTable()}
 
             </div>
 
@@ -88,7 +86,7 @@ class RouteArea extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        Routes: store.routesReducer
+        routes: store.routesReducer
     }
 }
 

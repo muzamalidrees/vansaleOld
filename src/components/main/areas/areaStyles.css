@@ -1,0 +1,103 @@
+/* .customer-container{
+  padding-top: 30px;
+  border: 2px solid red;
+} */
+
+.Abutton-contaner button {
+    margin-left: 4px;
+    margin-right: 4px;
+    /* margin:0px; */
+    width: 236px;
+    color: #783f04;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    background: #ddd;
+    border: 2px solid #783f04;
+    border-radius: 5px;
+}
+
+.Abutton-contaner button:hover {
+    background-color: #f2f2f2;
+    color: #274e13;
+    border: 2px solid #274e13;
+}
+
+.Aselect {
+    margin-right: 0px;
+    margin-left: 1px;
+    box-sizing: border-box;
+    width: 236px;
+    height: 42px;
+    padding: 5px;
+    color: #783f04;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+    background: #ddd;
+    border: 2px solid #783f04;
+    border-radius: 5px;
+}
+
+.Aselect:hover {
+    background-color: #f2f2f2;
+    color: #274e13;
+    border: 2px solid #274e13;
+}
+
+.Asearch-input {
+    margin-right: 0px;
+    margin-left: 1px;
+    background: #ddd;
+    width: 195px;
+    color: #274e13;
+    padding: 7px;
+    border: 2px solid #783f04;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-right: none;
+}
+
+.Asearch-input:hover {
+    background-color: #f2f2f2;
+    border: 2px solid #274e13;
+    border-right: none;
+}
+
+.Asearch-button {
+    color: #783f04;
+}
+
+.Atbl {
+    height: 393px;
+}
+
+.newAHdng {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #274e13;
+    text-align: center;
+}
+
+.ARegisterBtn {
+    padding: 3px 45px 3px 45px;
+    margin-top: 5px;
+    height: 40px;
+    color: white;
+    background-color: #274e13;
+    font-weight: 500;
+    font-size: 21px;
+    border-radius: 8px;
+    border: 1px solid #274e13;
+}
+
+.ARegisterBtn:hover {
+    color: #274e13;
+    background-color: white;
+    border: 1px solid #274e13;
+}
+
+.label-A {
+    font-weight: bold;
+    color: #783f04;
+}

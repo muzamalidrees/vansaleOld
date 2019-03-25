@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './IEStyles.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 
 class ImportExport extends Component {

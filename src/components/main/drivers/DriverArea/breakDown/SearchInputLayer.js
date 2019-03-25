@@ -19,14 +19,14 @@ class SearchInputLayer extends Component {
         // let value = this.refs.search.value;
         this.props.onSearchTextChange(e.target.value);
     }
-    handleSearchLimitChange = (e) => {
-        this.props.onSearchLimitChange(e.target.value);
-    }
+    // handleSearchLimitChange = (e) => {
+    //     this.props.onSearchLimitChange(e.target.value);
+    // }
 
     render() {
         const searchFilter = this.props.searchFilter;
         const searchText = this.props.searchText;
-        const searchLimit = this.props.searchLimit;
+        // const searchLimit = this.props.searchLimit;
         return (
 
             <div className='row col-12 m-0 justify-content-center'>

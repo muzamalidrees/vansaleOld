@@ -4,13 +4,26 @@ import customersReducer from './reducers/reducer-customers';
 import PGReducer from './reducers/reducer-PG';
 import driversReducer from './reducers/reducer-drivers';
 import routesReducer from './reducers/reducer-routes';
+import productsReducer from './reducers/reducer-products';
+import PCReducer from './reducers/reducer-PC';
+import areasReducer from './reducers/reducer-areas';
+import rolesReducer from './reducers/reducer-roles';
+import permissionsReducer from './reducers/reducer-permissions';
+import RPReducer from './reducers/reducer-RP';
+
 
 const allReducers = combineReducers({
     usersReducer,
     customersReducer,
     PGReducer,
     driversReducer,
-    routesReducer
+    routesReducer,
+    productsReducer,
+    PCReducer,
+    areasReducer,
+    rolesReducer,
+    permissionsReducer,
+    RPReducer
 });
 
 

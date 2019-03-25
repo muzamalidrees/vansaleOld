@@ -12,13 +12,13 @@ class SearchResultRow extends Component {
         let pgID = searchResult.price_group_id;
 
         customers.forEach((customer) => {
-            if (customer['id'] == cID) {
+            if (customer['id'] === cID) {
                 cID = customer['name']
                 return;
             }
         })
         priceGroups.forEach((priceGroup) => {
-            if (priceGroup['id'] == pgID) {
+            if (priceGroup['id'] === pgID) {
                 pgID = priceGroup['name']
                 return;
             }

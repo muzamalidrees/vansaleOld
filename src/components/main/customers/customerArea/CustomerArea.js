@@ -7,22 +7,14 @@ import { connect } from 'react-redux'
 
 class CustomerArea extends Component {
     componentWillMount() {
-        // var options = {
-        //     method: 'POST',
-        //     body: JSON.stringify({ limit: 10 }),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }
+
         fetch('/getAllCustomers',
-            //  options
         )
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
                 this.props.dispatch(setCustomers(json.data))
-                this.setState({ searchResults: this.props.customers })
-
+                this.setState({ showTable: true })
             })
             .catch((error) => console.log(error))
     }
@@ -33,21 +25,27 @@ class CustomerArea extends Component {
             searchLimit: '',
             searchFilter: 'name',
             searchText: '',
-            searchResults: props.searchResults
+            showTable: false,
         }
-        // console.log(props.searchResults)
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);
         this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
         this.handleSearchLimitChange = this.handleSearchLimitChange.bind(this);
 
     }
-    getCustomersData = () => {
 
+
+    callTable = () => {
+        if (this.state.showTable) {
+            return <SearchResultsTable
+                searchResults={this.props.customers}
+                searchFilter={this.state.searchFilter}
+                searchText={this.state.searchText}
+            />;
+        }
+        else {
+            return null;
+        }
     }
-
-
-
-
 
     handleSearchFilterChange(searchFilter) {
         this.setState({
@@ -67,7 +65,7 @@ class CustomerArea extends Component {
     }
 
     render() {
-
+        // console.log('"render"')
 
         return (
 
@@ -80,12 +78,7 @@ class CustomerArea extends Component {
                     onSearchTextChange={this.handleSearchTextChange}
                     onSearchLimitChange={this.handleSearchLimitChange}
                 />
-                <SearchResultsTable
-                    searchResults={this.state.searchResults}
-                    searchFilter={this.state.searchFilter}
-                    searchText={this.state.searchText}
-                />
-
+                {this.callTable()}
             </div>
 
         )

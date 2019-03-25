@@ -10,6 +10,12 @@ import Customers from './main/customers/Customers';
 import PriceGroups from './main/priceGroups/PriceGroups';
 import Drivers from './main/drivers/Drivers';
 import Routes from './main/routes/Routes';
+import Products from './main/products/Products';
+import ProductCategories from './main/productCategories/ProductCategories';
+import Areas from './main/areas/Areas'
+import Users from './main/users/Users'
+import RolesAndPermissions from './main/rolesAndPermissions/RolesAndPermissions'
+import SalesOrReturn from './main/salesOrReturn/SalesOrReturn';
 
 
 class Content extends Component {
@@ -39,13 +45,17 @@ class Content extends Component {
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/home" component={Home} />
-                    <PropsRoute path='/drivers' component={Drivers} date={this.state.date} />
                     <PropsRoute path='/customers' component={Customers} date={this.state.date} />
                     <PropsRoute path='/priceGroups' component={PriceGroups} date={this.state.date} />
+                    <PropsRoute path='/drivers' component={Drivers} date={this.state.date} />
                     <PropsRoute path='/routes' component={Routes} date={this.state.date} />
-
+                    <PropsRoute path='/products' component={Products} date={this.state.date} />
+                    <PropsRoute path='/productCategories' component={ProductCategories} date={this.state.date} />
+                    <PropsRoute path='/areas' component={Areas} date={this.state.date} />
+                    <PropsRoute path='/users' component={Users} date={this.state.date} />
+                    <PropsRoute path='/rolesAndPermissions' component={RolesAndPermissions} date={this.state.date} />
+                    <PropsRoute path='/sales' component={SalesOrReturn} date={this.state.date} />
                     <PropsRoute path='/' component={NotFound} pt='186px' pb='185px' class={'sol-sm-12'} />
-
 
                 </Switch>
             </div>

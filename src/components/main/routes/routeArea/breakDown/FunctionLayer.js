@@ -12,13 +12,13 @@ class FunctionLayer extends Component {
             <div style={{ border: 'none' }} className='row m-0 '>
                 <div className='row col-12 m-0 justify-content-center'>
 
-                    <div className='col-md-3 mb-2  Rbutton-contaner '>
+                    <div className='col-md-2.5 mb-2  Rbutton-contaner '>
                         <Link to="/routes/add"> <button >Add New Route</button> </Link>
                     </div>
-                    <div className='col-md-3 mb-2  Rbutton-contaner '>
+                    <div className='col-md-2.5 mb-2  Rbutton-contaner '>
                         <Link to="/routes/import"> <button >Import Routes</button> </Link>
                     </div>
-                    <div className='col-md-3 mb-2  Rbutton-contaner '>
+                    <div className='col-md-2.5 mb-2  Rbutton-contaner '>
                         <Link to="/routes/export"> <button >Export Routes</button> </Link>
                     </div>
 
