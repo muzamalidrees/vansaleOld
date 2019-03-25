@@ -24,14 +24,12 @@ class NewArea extends Component {
     }
     saveToServer = () => {
         let name = this.refs.name.value
-        // let from = this.refs.from.value
-        // let to = this.refs.to.value
+        let areaCode = this.refs.areaCode.value
 
 
         let area = {
             name: name,
-            //  from: from,
-            //   to: to
+            areaCode: areaCode
         }
 
         var options = {
@@ -46,8 +44,7 @@ class NewArea extends Component {
                 let message = json.message;
                 if (json.success) {
                     this.refs.name.value = '';
-                    // this.refs.from.value = '';
-                    // this.refs.to.value = '';
+                    this.refs.areaCode.value = '';
                 }
                 else {
                     this.refs.name.focus();
@@ -74,6 +71,16 @@ class NewArea extends Component {
                             </div>
                             <div className="invalid-feedback">
                                 Please provide a Name.
+                            </div>
+                        </div>
+                        <div className="col-md-10 mb-3">
+                            <label className='label-A' htmlFor="">Area Code</label>
+                            <input type="text" className="form-control" ref="areaCode" placeholder="e.g. 34000" required />
+                            <div className="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div className="invalid-feedback">
+                                Please provide an Area Code.
                             </div>
                         </div>
 

@@ -56,7 +56,7 @@ class NewPermission extends Component {
         return (
             <div style={{ border: 'none', textAlign: 'center', marginTop: '72px', marginBottom: '72px' }} className=" col-sm-9 ">
                 <h1 style={{ border: 'none' }} className='newRPHdng'>Permission Registration</h1>
-                <form style={{ border: 'none', textAlign: 'left' }} onSubmit={this.handlePGRegister} method="POST" ref="myForm" className="form-row m-0 justify-content-center " noValidate>
+                <form style={{ border: 'none', textAlign: 'left' }} onSubmit={this.handlePermissionRegister} method="POST" ref="myForm" className="form-row m-0 justify-content-center " noValidate>
                     <div style={{ border: 'none' }} className="form-row col-8">
                         <div style={{ border: 'none' }} className="col-md-6 mb-3">
                             <label className='label-RP' htmlFor="">Name</label>

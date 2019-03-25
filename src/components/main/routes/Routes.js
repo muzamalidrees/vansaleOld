@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import { PropsRoute } from 'react-router-with-props';
 import './routeStyles.css';
-import RouteArea from './routeArea/RouteArea'
-import NewRoute from './routeArea/breakDown/NewRoute'
+import RouteArea from './routeArea/routeArea'
+import NewRoute from './routeArea/breakdown/NewRoute'
 import ImportExport from '../../importExport/ImportExport'
 import RightPane from '../RightPane'
 import NotFound from '../../misc/NotFound'

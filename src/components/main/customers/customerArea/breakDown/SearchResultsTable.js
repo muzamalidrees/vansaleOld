@@ -5,6 +5,7 @@ class SearchResultsTable extends Component {
 
     render() {
 
+
         const searchText = this.props.searchText;
         const searchFilter = this.props.searchFilter;
         const searchResults = this.props.searchResults;
@@ -30,7 +31,7 @@ class SearchResultsTable extends Component {
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md tbl">
-                <table className='table table-dark table-striped table-bordered table-hover'>
+                <table id='Ctbl' className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>
@@ -43,6 +44,7 @@ class SearchResultsTable extends Component {
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>
+                    
                 </table>
             </div >
         );

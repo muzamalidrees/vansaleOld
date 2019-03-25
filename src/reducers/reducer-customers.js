@@ -5,6 +5,8 @@ const customersReducer = (state = [], action) => {
             return action.payload
         case "ADD_CUSTOMER":
             return [action.payload, ...state]
+        case "REMOVE_CUSTOMER":
+            return state.filter((customer) => { return customer !== action.payload })
         default:
             return state
     }

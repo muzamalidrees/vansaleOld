@@ -80,9 +80,9 @@ class NewRoute extends Component {
                             </div>
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label className='label-R' htmlFor="">Route Area</label>
+                            <label className='label-R' htmlFor="">Area</label>
                             <select value={this.state.selectedArea} onChange={this.handleAreaChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
-                                <option value=''>--Select Route Area--</option>
+                                <option value=''>--Select Area--</option>
                                 <option value='1'>Area 1</option>
                                 <option value='2'>Area 2</option>
                                 <option value='3'>Area 3</option>

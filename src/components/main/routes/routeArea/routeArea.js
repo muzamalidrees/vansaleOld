@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FunctionLayer from './breakDown/FunctionLayer'
-import SearchResultsTable from './breakDown/SearchResultsTable'
+import FunctionLayer from './breakdown/FunctionLayer'
+import SearchResultsTable from './breakdown/SearchResultsTable'
 import { setRoutes } from '../../../../actions/routes-actions'
 import { connect } from 'react-redux'
 
