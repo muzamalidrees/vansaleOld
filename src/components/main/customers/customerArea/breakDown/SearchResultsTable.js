@@ -21,14 +21,6 @@ class SearchResultsTable extends Component {
             );
         });
 
-        // function search( ) {
-        //     for (var i = 0; i < searchResults.length; i++) {
-        //         if (searchResults[i][filterSearch].indexOf(textSerach) === -1) {
-        //             return;
-        //         }
-        //     }
-        // }
-
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md tbl">
                 <table id='Ctbl' className='table table-dark table-striped table-bordered table-hover'>
@@ -41,6 +33,8 @@ class SearchResultsTable extends Component {
                             <th>Address</th>
                             <th>Area_ID</th>
                             <th>Route_ID</th>
+                            <th>Edit/Delete</th>
+
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

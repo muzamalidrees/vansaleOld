@@ -6,8 +6,9 @@ const addNewPriceGroup = (priceGroup) => {
 const setPriceGroups = (priceGroups) => {
     return { type: "SET_PRICE_GROUPS", payload: priceGroups }
 }
-const setCustomerPricing = (customerPriceGroup) => {
-    return { type: "SET_CUSTOMER_PRICING", payload: customerPriceGroup }
+
+const removePG = (PG) => {
+    return { type: "REMOVE_PG", payload: PG }
 }
 
-export { addNewPriceGroup, setPriceGroups, setCustomerPricing }
+export { addNewPriceGroup, setPriceGroups, removePG }

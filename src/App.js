@@ -12,7 +12,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 class App extends Component {
 
-
+    
 
     render() {
 
@@ -21,7 +21,8 @@ class App extends Component {
                 <BrowserRouter>
 
                     <div style={{ backgroundColor: '#999999' }}>
-                        <Header />
+                        <Header
+                        />
                         <hr className="hr1" />
                         <Content />
                         <hr className="hr2" />

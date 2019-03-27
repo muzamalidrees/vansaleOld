@@ -30,13 +30,15 @@ class SearchResultsTable extends Component {
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md PGtbl">
-                <table className='table table-dark table-striped table-bordered table-hover'>
+                <table id='PGtbl' className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Buying_back Price</th>
+                            <th>Product_Category_id</th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

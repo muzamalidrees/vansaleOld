@@ -22,7 +22,7 @@ class NewProduct extends Component {
             .then((json) => {
                 console.log(json)
                 this.props.dispatch(setProductCategories(json.data))
-                this.setState({ productCategoryOptions: json.data, showOptions: true })
+                this.setState({ productCategoryOptions: this.props.productCategories, showOptions: true })
 
             })
             .catch((error) => console.log(error))
@@ -78,7 +78,7 @@ class NewProduct extends Component {
         if (this.state.showOptions) {
             return (
 
-                this.state.productCategoryOptions.map(category => { return <option key={category.id} value={category.name}>{category.name}</option> })
+                this.state.productCategoryOptions.map(category => { return <option key={category.id} value={category.id}>{category.name}</option> })
             )
         }
         else {
@@ -165,7 +165,8 @@ class NewProduct extends Component {
 }
 const mapStateToProps = (store) => {
     return {
-        productsReducer: store.productsReducer
+        productsReducer: store.productsReducer,
+        productCategories: store.PCReducer
     }
 }
 

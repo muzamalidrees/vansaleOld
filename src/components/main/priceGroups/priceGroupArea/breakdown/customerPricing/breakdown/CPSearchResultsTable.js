@@ -57,12 +57,13 @@ class CustomerPrices extends Component {
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md PGtbl">
-                <table className='table table-dark table-striped table-bordered table-hover'>
+                <table id="CPtbl" className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>
                             <th>Customer</th>
                             <th>Price-Group</th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

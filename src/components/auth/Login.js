@@ -3,10 +3,10 @@ import './loginStyles.css';
 
 class Login extends Component {
 
-    validateLogin = (evt) => { 
+    validateLogin = (evt) => {
 
 
-        evt.preventDefault(); 
+        evt.preventDefault();
         evt.stopPropagation();
         let form = this.refs.loginForm;
         if (form.checkValidity() === false) {
@@ -18,7 +18,7 @@ class Login extends Component {
 
     }
     handleLogin = () => {
-
+        console.log(this.props.history)
         var options = {
             method: 'POST',
             body: JSON.stringify({ username: this.refs.email.value, password: this.refs.password.value }),
@@ -43,7 +43,9 @@ class Login extends Component {
                 }
                 this.refs.loginLabel.innerHTML = message;
                 this.refs.loginBtn.style.marginTop = '0px';
+                console.log(this.props)
                 this.props.history.push(json.route);
+                console.log(this.props.history)
             })
             .catch((json) => console.log(json.error))
     }

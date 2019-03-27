@@ -3,7 +3,6 @@ import FunctionLayer from './breakDown/FunctionLayer'
 import SearchResultsTable from './breakDown/SearchResultsTable';
 import { setCustomers } from '../../../../actions/customer-actions'
 import { connect } from 'react-redux'
-import PopUp from './breakDown/PopUp'
 
 
 class CustomerArea extends Component {
@@ -66,7 +65,6 @@ class CustomerArea extends Component {
     }
 
     render() {
-        // console.log('"render"')
 
         return (
 
@@ -80,7 +78,6 @@ class CustomerArea extends Component {
                     onSearchLimitChange={this.handleSearchLimitChange}
                 />
                 {this.callTable()}
-                <PopUp />
             </div>
 
         )

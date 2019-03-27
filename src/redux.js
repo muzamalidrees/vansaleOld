@@ -10,6 +10,7 @@ import areasReducer from './reducers/reducer-areas';
 import rolesReducer from './reducers/reducer-roles';
 import permissionsReducer from './reducers/reducer-permissions';
 import RPReducer from './reducers/reducer-RP';
+import CPReducer from './reducers/reducer-CP';
 
 
 const allReducers = combineReducers({
@@ -23,7 +24,8 @@ const allReducers = combineReducers({
     areasReducer,
     rolesReducer,
     permissionsReducer,
-    RPReducer
+    RPReducer,
+    CPReducer
 });
 
 

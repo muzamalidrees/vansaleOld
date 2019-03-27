@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { setCustomerPricing } from '../../../../../../../actions/PG-actions';
+import { addNewCP } from '../../../../../../../actions/CP-actions';
 
 
 
@@ -84,7 +84,7 @@ class SetCustomerPrices extends Component {
                 if (msg === 'error') {
                     this.refs.msgLbl.innerHTML = displayErrorMessage;
                 }
-                this.props.dispatch(setCustomerPricing(json.data));
+                this.props.dispatch(addNewCP(json.data));
             })
             .catch((error) => console.log(error))
     }

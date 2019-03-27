@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import CPSearchResultsTable from './breakdown/CPSearchResultsTable'
 import CPSearchInputLayer from './breakdown/CPSearchInputLayer';
 import SetCustomerPrices from './breakdown/SetCustomerPrices';
+import { setCustomerPricing } from '../../../../../../actions/CP-actions';
+
 
 class CustomerPricing extends Component {
     componentWillMount() {
@@ -10,7 +12,8 @@ class CustomerPricing extends Component {
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
-                this.setState({ allCustomersPrices: json.data })
+                // this.setState({ allCustomersPrices: json.data })
+                this.props.dispatch(setCustomerPricing(json.data))
             })
             .catch((error) => console.log(error))
 
@@ -24,7 +27,7 @@ class CustomerPricing extends Component {
         this.state = {
             customers: '',
             priceGroups: '',
-            allCustomersPrices: '',
+            allCustomersPrices: props.allCustomersPrices,
             showSearchResultsTable: false,
             clickBtnLabel: 'View',
             searchText: '',
@@ -113,8 +116,8 @@ class CustomerPricing extends Component {
 const mapStateToProps = (store) => {
     return {
         customers: store.customersReducer,
-        priceGroups: store.PGReducer
-
+        priceGroups: store.PGReducer,
+        allCustomersPrices: store.CPReducer
     }
 }
 

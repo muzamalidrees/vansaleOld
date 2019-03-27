@@ -6,5 +6,8 @@ const addNewProduct = (product) => {
 const setProducts = (products) => {
     return { type: "SET_PRODUCTS", payload: products }
 }
+const removeProduct = (product) => {
+    return { type: "REMOVE_PRODUCT", payload: product }
+}
 
-export { addNewProduct, setProducts }
+export { addNewProduct, setProducts, removeProduct }
