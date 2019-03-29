@@ -6,5 +6,9 @@ const addNewPermission = (permission) => {
 const setPermissions = (permissions) => {
     return { type: "SET_PERMISSIONS", payload: permissions }
 }
+const removePermission = (permission) => {
+    return { type: "REMOVE_PERMISSION", payload: permission }
+}
 
-export { addNewPermission, setPermissions }
+
+export { addNewPermission, setPermissions, removePermission }

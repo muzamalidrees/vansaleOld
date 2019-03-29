@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import { addNewRP } from '../../../../../actions/RP-actions';
+import { connect } from 'react-redux';
 
 
 
@@ -145,6 +146,6 @@ class SetRolesPermissions extends Component {
         )
     }
 }
-export default SetRolesPermissions
+export default connect()(SetRolesPermissions)
 
 

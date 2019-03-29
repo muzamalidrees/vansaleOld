@@ -127,10 +127,5 @@ class NewRoute extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        routesReducer: store.routesReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewRoute)
+export default connect()(NewRoute)

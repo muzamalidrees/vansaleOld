@@ -5,6 +5,8 @@ const permissionsReducer = (state = [], action) => {
             return action.payload
         case "ADD_PERMISSION":
             return [action.payload, ...state]
+        case "REMOVE_PERMISSION":
+            return state.filter((permission) => { return permission !== action.payload })
         default:
             return state
     }

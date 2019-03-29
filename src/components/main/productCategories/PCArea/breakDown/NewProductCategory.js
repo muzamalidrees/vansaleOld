@@ -87,10 +87,5 @@ class NewProductCategory extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        PCReducer: store.PCReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewProductCategory)
+export default connect()(NewProductCategory)

@@ -30,11 +30,12 @@ class SearchResultsTable extends Component {
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md RPtbl">
-                <table className='table table-dark table-striped table-bordered table-hover'>
+                <table id='roletbl' className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>
                             <th>Name</th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

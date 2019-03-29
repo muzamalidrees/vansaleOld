@@ -139,10 +139,5 @@ class NewPriceGroup extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        PGReducer: store.PGReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewPriceGroup)
+export default connect()(NewPriceGroup)

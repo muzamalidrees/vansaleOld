@@ -5,6 +5,8 @@ const PCReducer = (state = [], action) => {
             return action.payload
         case "ADD_PRODUCT_CATEGORY":
             return [action.payload, ...state]
+        case "REMOVE_PC":
+            return state.filter((productCategory) => { return productCategory !== action.payload })
         default:
             return state
     }

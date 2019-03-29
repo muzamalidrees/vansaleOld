@@ -173,10 +173,6 @@ class NewCustomer extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        customersReducer: store.customersReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewCustomer)
+
+export default connect()(NewCustomer)

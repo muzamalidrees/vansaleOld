@@ -19,6 +19,7 @@ class SearchResultRow extends Component {
             editCategory: '',
 
         };
+        this.deleteRow = this.deleteRow.bind(this);
         this.updatedb = this.updatedb.bind(this);
     }
     editRow = (e) => {
@@ -164,4 +165,4 @@ class SearchResultRow extends Component {
 }
 
 
-export default SearchResultRow
+export default connect()(SearchResultRow)

@@ -173,10 +173,5 @@ class NewDriver extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        driversReducer: store.driversReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewDriver)
+export default connect()(NewDriver)

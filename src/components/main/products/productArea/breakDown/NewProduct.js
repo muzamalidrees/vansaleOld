@@ -165,7 +165,7 @@ class NewProduct extends Component {
 }
 const mapStateToProps = (store) => {
     return {
-        productsReducer: store.productsReducer,
+
         productCategories: store.PCReducer
     }
 }

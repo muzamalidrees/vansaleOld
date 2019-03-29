@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import CPSearchResultRow from './CPSearchResultRow';
 
 class CustomerPrices extends Component {
+    componentWillMount() {
 
-
+        console.log(this.props.customers)
+        console.log(this.props.priceGroups)
+    }
     render() {
 
         var searchText = this.props.searchText;

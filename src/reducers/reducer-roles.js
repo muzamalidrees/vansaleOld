@@ -5,6 +5,8 @@ const rolesReducer = (state = [], action) => {
             return action.payload
         case "ADD_ROLE":
             return [action.payload, ...state]
+        case "REMOVE_ROLE":
+            return state.filter((role) => { return role !== action.payload })
         default:
             return state
     }

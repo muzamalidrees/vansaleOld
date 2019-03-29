@@ -39,7 +39,7 @@ class Home extends Component {
                 <div className="row justify-content-center homepage">
                     <div className="row col-sm-10 row1 pb-3 ">
 
-                        {this.addADiv('sales', 'sales', faCashRegister, 'Sales', 'rctngl')}
+                        {this.addADiv('sales', 'salesOrReturn/home', faCashRegister, 'Sales', 'rctngl')}
                         {this.addADiv('customers', 'customers/home', faUsers, 'Customers', 'rctngl')}
                         {this.addADiv('drivers', 'drivers/home', faUserTie, 'Drivers', 'rctngl')}
                         {this.addADiv('inventory', 'inventory', faCubes, 'Inventory', 'rctngl')}

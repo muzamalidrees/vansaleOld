@@ -21,24 +21,35 @@ class SearchResultRow extends Component {
             editRoute: '',
 
         };
+        this.deleteRow = this.deleteRow.bind(this);
+
     }
     editRow = (e) => {
-        // console.log('ok')
+        var iconClick = e.target.parentNode.parentNode.parentNode.parentNode;
+        var svgClick = e.target.parentNode.parentNode.parentNode;
         var buttonClick = e.target.parentNode.parentNode;
-        var iconClik = e.target.parentNode.parentNode.parentNode.parentNode;
-        // console.log(buttonClick)
-        // console.log(iconClik)
-        if (buttonClick.rowIndex === undefined) {
-            buttonClick = iconClik;
-            // return;
+        var tdClick = e.target.parentNode;
+        var target = e.target
+
+        if (iconClick.rowIndex === undefined) {
+            iconClick = svgClick;
         }
-        let id = buttonClick.cells[8].innerHTML
-        let name = buttonClick.cells[1].innerHTML
-        let email = buttonClick.cells[2].innerHTML
-        let cell = buttonClick.cells[3].innerHTML
-        let address = buttonClick.cells[4].innerHTML
-        let area = buttonClick.cells[5].innerHTML
-        let route = buttonClick.cells[6].innerHTML
+        if (iconClick.rowIndex === undefined) {
+            iconClick = buttonClick;
+        }
+        if (iconClick.rowIndex === undefined) {
+            iconClick = tdClick;
+        }
+        if (iconClick.rowIndex === undefined) {
+            iconClick = target;
+        }
+        let id = iconClick.cells[8].innerHTML
+        let name = iconClick.cells[1].innerHTML
+        let email = iconClick.cells[2].innerHTML
+        let cell = iconClick.cells[3].innerHTML
+        let address = iconClick.cells[4].innerHTML
+        let area = iconClick.cells[5].innerHTML
+        let route = iconClick.cells[6].innerHTML
         this.setState({
             editId: id,
             editName: name,
@@ -79,15 +90,28 @@ class SearchResultRow extends Component {
             .catch((error) => console.log(error))
     }
     deleteRow(e) {
-        var btnClick = e.target.parentNode.parentNode;
-        var iconClick = e.target.parentNode.parentNode.parentNode.parentNode;
-        if (btnClick.rowIndex == undefined) {
-            btnClick = iconClick;
+        var iconClik = e.target.parentNode.parentNode.parentNode.parentNode;
+        var svgClik = e.target.parentNode.parentNode.parentNode;
+        var buttonClik = e.target.parentNode.parentNode;
+        var tdClik = e.target.parentNode;
+        var targt = e.target
+
+        if (iconClik.rowIndex === undefined) {
+            iconClik = svgClik;
         }
-        var i = btnClick.rowIndex;
+        if (iconClik.rowIndex === undefined) {
+            iconClik = buttonClik;
+        }
+        if (iconClik.rowIndex === undefined) {
+            iconClik = tdClik;
+        }
+        if (iconClik.rowIndex === undefined) {
+            iconClik = targt;
+        }
+        var i = iconClik.rowIndex;
         document.getElementById('Ctbl').deleteRow(i)
 
-        let dRowValue = btnClick.cells[8].innerHTML
+        let dRowValue = iconClik.cells[8].innerHTML
         let customer = { value: dRowValue }
 
         var options = {
@@ -153,10 +177,6 @@ class SearchResultRow extends Component {
         );
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        customers: store.customersReducer
-    }
-}
 
-export default connect(mapStateToProps)(SearchResultRow)
+
+export default connect()(SearchResultRow)

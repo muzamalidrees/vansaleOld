@@ -1,0 +1,34 @@
+.salesSelect {
+    /* margin-right: 1px; */
+    /* margin-left: 2px; */
+    height: 32px;
+    padding: 2px;
+    color: #783f04;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    background: #ddd;
+    border: 2px solid #783f04;
+    border-radius: 4px;
+}
+
+.label-sales {
+    margin-bottom: 0px;
+    font-weight: bold;
+    color: #783f04;
+}
+
+.sales-input {
+    margin-top: 0px;
+    padding: 2px;
+    color: #783f04;
+    border: 2px solid #783f04;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.salestbl {
+    height: 363px;
+}

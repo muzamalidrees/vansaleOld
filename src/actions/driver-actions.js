@@ -6,5 +6,7 @@ const addNewDriver = (driver) => {
 const setDrivers = (drivers) => {
     return { type: "SET_DRIVERS", payload: drivers }
 }
-
-export { addNewDriver, setDrivers }
+const removeDriver = (driver) => {
+    return { type: "REMOVE_DRIVER", payload: driver }
+}
+export { addNewDriver, setDrivers, removeDriver }

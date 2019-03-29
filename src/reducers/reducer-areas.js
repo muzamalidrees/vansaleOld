@@ -5,6 +5,8 @@ const areasReducer = (state = [], action) => {
             return action.payload
         case "ADD_AREA":
             return [action.payload, ...state]
+        case "REMOVE_AREA":
+            return state.filter((area) => { return area !== action.payload })
         default:
             return state
     }

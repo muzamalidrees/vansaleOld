@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import { addNewCP } from '../../../../../../../actions/CP-actions';
+import { connect } from 'react-redux';
 
 
 
@@ -149,6 +150,6 @@ class SetCustomerPrices extends Component {
         )
     }
 }
-export default SetCustomerPrices
+export default connect()(SetCustomerPrices)
 
 

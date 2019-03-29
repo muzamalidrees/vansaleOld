@@ -85,10 +85,6 @@ class NewRole extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        rolesReducer: store.rolesReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewRole)
+
+export default connect()(NewRole)

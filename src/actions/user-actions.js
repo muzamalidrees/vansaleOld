@@ -6,5 +6,8 @@ const addNewUser = (user) => {
 const setUsers = (users) => {
     return { type: "SET_USERS", payload: users }
 }
+const removeUser = (user) => {
+    return { type: "REMOVE_USER", payload: user }
+}
 
-export { addNewUser, setUsers }
+export { addNewUser, setUsers, removeUser }

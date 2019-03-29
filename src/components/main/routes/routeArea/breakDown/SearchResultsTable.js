@@ -20,23 +20,16 @@ class SearchResultsTable extends Component {
             );
         });
 
-        // function search( ) {
-        //     for (var i = 0; i < searchResults.length; i++) {
-        //         if (searchResults[i][filterSearch].indexOf(textSerach) === -1) {
-        //             return;
-        //         }
-        //     }
-        // }
-
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md Rtbl">
-                <table className='table table-dark table-striped table-bordered table-hover'>
+                <table id='Rtbl' className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Area</th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

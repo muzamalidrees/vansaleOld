@@ -22,7 +22,7 @@ class SearchResultsTable extends Component {
         });
 
         return (
-            <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md Dtbl">
+            <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md Ptbl">
                 <table id='Ptbl' className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>

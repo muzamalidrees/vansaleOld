@@ -54,7 +54,7 @@ class Content extends Component {
                     <PropsRoute path='/areas' component={Areas} date={this.state.date} />
                     <PropsRoute path='/users' component={Users} date={this.state.date} />
                     <PropsRoute path='/rolesAndPermissions' component={RolesAndPermissions} date={this.state.date} />
-                    <PropsRoute path='/sales' component={SalesOrReturn} date={this.state.date} />
+                    <PropsRoute path='/salesOrReturn' component={SalesOrReturn} date={this.state.date} />
                     <PropsRoute path='/' component={NotFound} pt='186px' pb='185px' class={'sol-sm-12'} />
 
                 </Switch>

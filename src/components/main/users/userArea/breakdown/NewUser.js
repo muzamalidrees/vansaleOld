@@ -174,10 +174,5 @@ class NewUser extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        users: store.usersReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewUser)
+export default connect()(NewUser)

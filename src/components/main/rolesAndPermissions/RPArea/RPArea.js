@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 
 class RPArea extends Component {
-    componentWillMount() {
+    componentDidMount() {
 
         fetch('/getAllRolesPermissions',
         )
@@ -24,7 +24,7 @@ class RPArea extends Component {
         this.state = {
             // searchLimit: '',
             searchFilter: 'name',
-            searchText: '',
+            searchText: '1',
             showTable: false
         }
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);
@@ -70,7 +70,7 @@ class RPArea extends Component {
             <div style={{ border: 'none' }} className=" col-sm-9 m-0 p-0 ">
 
                 <FunctionLayer
-                    searchLimit={this.state.searchLimit}
+                    // searchLimit={this.state.searchLimit}
                     searchFilter={this.state.searchFilter}
                     searchText={this.state.searchText}
                     onSearchFilterChange={this.handleSearchFilterChange}

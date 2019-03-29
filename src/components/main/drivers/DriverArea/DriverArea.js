@@ -18,6 +18,9 @@ class DriverArea extends Component {
             })
             .catch((error) => console.log(error))
     }
+    componentWillUnmount() {
+        return null;
+    }
 
     constructor(props) {
         super(props);

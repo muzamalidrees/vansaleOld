@@ -85,10 +85,6 @@ class NewPermission extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        permissions: store.permissionsReducer
-    }
-}
 
-export default connect(mapStateToProps)(NewPermission)
+
+export default connect()(NewPermission)

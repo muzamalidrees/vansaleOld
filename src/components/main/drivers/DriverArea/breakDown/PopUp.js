@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+
 
 class PopUp extends Component {
     constructor(props) {
@@ -10,7 +9,7 @@ class PopUp extends Component {
         this.state = {
         };
     }
-    updateCustomer(e) {
+    updateDriver(e) {
         e.preventDefault();
         let form = this.refs.myForm;
         if (form.checkValidity() === false) {
@@ -41,19 +40,19 @@ class PopUp extends Component {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Edit Customer
+                        Edit Driver
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form style={{ border: 'none', textAlign: 'left' }} ref="myForm" method="POST" className="form-row m-0 justify-content-center " noValidate>
+                    <form style={{ border: 'none', textAlign: 'left' }} ref="myForm" method="PUT" className="form-row m-0 justify-content-center " noValidate>
                         <div style={{ border: 'none' }} className="form-row col-8">
 
                             <div className="col-md-6 mb-3">
-                                <label className='label-customer' htmlFor="">Name</label>
+                                <label className='label-driver' htmlFor="">Name</label>
                                 <input type="text" className="form-control" ref="name" defaultValue={this.props.editname} required />
                             </div>
                             <div className="col-md-6 mb-3">
-                                <label className='label-customer' htmlFor="">Email</label>
+                                <label className='label-driver' htmlFor="">Email</label>
                                 <input type="email" className="form-control" ref="email" defaultValue={this.props.editemail} required />
                             </div>
 
@@ -61,11 +60,11 @@ class PopUp extends Component {
                         <div style={{ border: 'none' }} className="form-row col-8">
 
                             <div className="col-md-6 mb-3">
-                                <label className='label-customer' htmlFor="">Cell</label>
+                                <label className='label-driver' htmlFor="">Cell</label>
                                 <input type="text" className="form-control" ref="cell" defaultValue={this.props.editcell} required />
                             </div>
                             <div className="col-md-6 mb-3">
-                                <label className='label-customer' htmlFor="">Address</label>
+                                <label className='label-driver' htmlFor="">Address</label>
                                 <input type="text" className="form-control" ref="address" defaultValue={this.props.editaddress} required />
                             </div>
 
@@ -73,7 +72,7 @@ class PopUp extends Component {
                         <div style={{ border: 'none' }} className="form-row col-8">
 
                             <div className="col-md-6 mb-3">
-                                <label className='label-customer' htmlFor="">Area</label>
+                                <label className='label-driver' htmlFor="">Area</label>
                                 <select defaultValue={this.props.editarea} ref="area" className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                     <option value=''>--Select an Area--</option>
                                     <option value='1'>Area 1</option>
@@ -83,7 +82,7 @@ class PopUp extends Component {
                                 </select>
                             </div>
                             <div className="col-md-6 mb-3">
-                                <label className='label-customer' htmlFor="">Route</label><br></br>
+                                <label className='label-driver' htmlFor="">Route</label><br></br>
                                 <select defaultValue={this.props.editroute} ref="route" className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                     <option value=''>--Select a Route--</option>
                                     <option value='1'>Route 1</option>
@@ -97,7 +96,7 @@ class PopUp extends Component {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.updateCustomer.bind(this)} >Save</Button>
+                    <Button onClick={this.updateDriver.bind(this)} >Save</Button>
                 </Modal.Footer>
             </Modal>
         )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { addNewArea } from '../../../../../actions/area-actions';
-
+import { connect } from 'react-redux';
 
 
 class NewArea extends Component {
@@ -103,4 +103,4 @@ class NewArea extends Component {
 }
 
 
-export default NewArea
+export default connect()(NewArea)

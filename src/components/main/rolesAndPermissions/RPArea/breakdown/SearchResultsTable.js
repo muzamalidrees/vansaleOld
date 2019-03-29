@@ -10,23 +10,31 @@ class SearchResultsTable extends Component {
         const RPSearchResults = this.props.RPSearchResults;
         const rows = [];
         var index = 0;
-        RPSearchResults.forEach((searchResult) => {
-            if (searchResult[searchFilter].indexOf(searchText) === -1) {
-                return;
-            }
+        console.log(RPSearchResults)
+        console.log(searchFilter)
+        console.log(searchText)
+        // RPSearchResults.forEach((searchResult) => {
+        //     if (searchResult[searchFilter].indexOf(searchText) === -1) {
+        //         return;
+        //     }
+        //     index = index + 1;
+        //     rows.push(
+        //         <SearchResultRow index={index} searchResult={searchResult} key={searchResult.id} />
+        //     );
+        // });
+
+
+        for (var i = 0; i < RPSearchResults.length; i++) {
+            // if (RPSearchResults[i][searchFilter].indexOf(searchText) === -1) {
+            //     return;
+            // }
+            let searchResult = RPSearchResults[i];
             index = index + 1;
             rows.push(
                 <SearchResultRow index={index} searchResult={searchResult} key={searchResult.id} />
             );
-        });
+        }
 
-        // function search( ) {
-        //     for (var i = 0; i < searchResults.length; i++) {
-        //         if (searchResults[i][filterSearch].indexOf(textSerach) === -1) {
-        //             return;
-        //         }
-        //     }
-        // }
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md RPtbl">
@@ -36,6 +44,7 @@ class SearchResultsTable extends Component {
                             <th>Sr.</th>
                             <th>Role</th>
                             <th>Permissions</th>
+                            
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>
