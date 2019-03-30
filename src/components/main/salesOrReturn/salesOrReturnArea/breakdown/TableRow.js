@@ -13,31 +13,44 @@ class TableRow extends Component {
         this.deleteRow = this.deleteRow.bind(this);
     }
     editRow = (e) => {
-        e.target.contentEditable = true
-        // var iconClick = e.target.parentNode.parentNode.parentNode.parentNode;
-        // var svgClick = e.target.parentNode.parentNode.parentNode;
-        // var buttonClick = e.target.parentNode.parentNode;
-        // var tdClick = e.target.parentNode;
-        // var target = e.target
+        var iconClick = e.target.parentNode.parentNode.parentNode.parentNode;
+        var svgClick = e.target.parentNode.parentNode.parentNode;
+        var buttonClick = e.target.parentNode.parentNode;
+        var tdClick = e.target.parentNode;
+        var target = e.target
 
-        // if (iconClick.rowIndex === undefined) {
-        //     iconClick = svgClick;
-        // }
-        // if (iconClick.rowIndex === undefined) {
-        //     iconClick = buttonClick;
-        // }
-        // if (iconClick.rowIndex === undefined) {
-        //     iconClick = tdClick;
-        // }
-        // if (iconClick.rowIndex === undefined) {
-        //     iconClick = target;
-        // }
-        // let name = iconClick.cells[1].innerHTML
-        // let description = iconClick.cells[2].innerHTML
-        // let category = iconClick.cells[3].innerHTML
-        // let price = iconClick.cells[4].innerHTML
-        // console.log(id + name + price)
+        if (iconClick.rowIndex === undefined) {
+            iconClick = svgClick;
+        }
+        if (iconClick.rowIndex === undefined) {
+            iconClick = buttonClick;
+        }
+        if (iconClick.rowIndex === undefined) {
+            iconClick = tdClick;
+        }
+        if (iconClick.rowIndex === undefined) {
+            iconClick = target;
+        }
 
+        // iconClick.contentEditable = true;
+        const products = this.props.products;
+        let productName = iconClick.cells[1].innerHTML
+        let product_id;
+
+        products.forEach(product => {
+            if (productName == product.name) {
+                product_id = product.id;
+                return;
+            }
+        });
+
+        let rate = iconClick.cells[2].innerHTML
+        let qty = iconClick.cells[3].innerHTML
+        let discount = iconClick.cells[4].innerHTML
+
+        this.props.EditRow(product_id, rate, qty, discount);
+        var i = iconClick.rowIndex;
+        document.getElementById('salestbl').deleteRow(i)
 
     }
 
@@ -77,6 +90,7 @@ class TableRow extends Component {
                 <td>{'index'}</td>
                 <td>{product_id}</td>
                 <td>{rate}</td>
+                <td>{qty}</td>
                 <td>{qty}</td>
                 <td>{price}</td>
                 <td>

@@ -16,13 +16,16 @@ class TableLayer extends Component {
     addArrayToTbl = (product_id, rate, qty, price) => {
         const products = this.props.products;
         var row = [];
+        var Product_id;
         products.forEach(product => {
-            if (product_id === product.id) {
-                product_id = product.name
+
+            if (product_id == product.id) {
+                Product_id = product.name
+                return;
             }
         })
         row.push(
-            <TableRow product_id={product_id} rate={rate} qty={qty} price={price} key={product_id} />
+            <TableRow products={products} product_id={Product_id} rate={rate} qty={qty} price={price} EditRow={this.props.EditRow} key={product_id} />
         );
         this.setState(state => {
             const rows = [...state.rows, row]
@@ -37,7 +40,7 @@ class TableLayer extends Component {
 
 
         return (
-            <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md salestbl">
+            <div style={{ overflowY: "auto", display: 'block', padding: '9px', textAlign: 'center' }} ref='tbl' className="table-responsive-md salestbl">
                 <table id='salestbl' className='table table-light table-striped table-bordered table-hover'>
                     <thead className='thead-dark'>
                         <tr>
@@ -45,6 +48,7 @@ class TableLayer extends Component {
                             <th>Product</th>
                             <th>Rate</th>
                             <th>QTY</th>
+                            <th>Discount</th>
                             <th>Price</th>
                             <th>Edit/Remove</th>
 
