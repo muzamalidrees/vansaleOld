@@ -6,15 +6,16 @@ class FunctionLayer extends Component {
 
     constructor(props) {
         super(props);
-        this.discount = React.createRef();
+        // this.discount = React.createRef();
         this.state = {
-            trType: '',
-            selectedCustomer: '',
+            trType: 'sales',
+            selectedCustomer: '3',
             selectedProduct: '',
             selectedRate: '',
             selectedQTy: '',
             selectedDiscount: '',
             showCustomerData: false,
+            invoiceId: '',
         }
         this.handleTrTypeChange = this.handleTrTypeChange.bind(this);
         this.handleCustomerChange = this.handleCustomerChange.bind(this);
@@ -31,8 +32,9 @@ class FunctionLayer extends Component {
         this.setState({ selectedCustomer: e.target.value, showCustomerData: true })
     }
     handleProductChange(e) {
-        this.setState({ selectedProduct: e.target.value }, function () {
-        });
+        let pValue = e.target.value;
+        this.setState({ selectedProduct: pValue })
+        this.setProductRate(pValue)
     }
     handleRateChange(e) {
         this.setState({ selectedRate: e.target.value }, function () {
@@ -43,7 +45,7 @@ class FunctionLayer extends Component {
         });
     }
     handleDiscountChange(e) {
-        this.setState({ selecetdDiscount: e.target.value }, function () {
+        this.setState({ selectedDiscount: e.target.value }, function () {
         });
 
     }
@@ -64,15 +66,40 @@ class FunctionLayer extends Component {
 
         }
     }
-    IDdefaultvalue() {
-        return 1125;
+    setProductRate(pValue) {
+        const { products } = this.props;
+        const product = products.filter((product) => product.id == pValue).shift()
+        this.setState({ selectedQTy: '1', selectedDiscount: '0', selectedRate: product.price })
     }
-    discountedPrice() {
-        var initialPrice = (this.state.selectedRate * this.state.selectedQTy)
+    IDdefaultvalue() {
+        var b = 0;
+        fetch('/getLastInvoiceID')
+            .then((res) => res.json())
+            .then(function (json) {
+                // console.log(json)
+                var lastInvoiceID = json.data.shift();
+                let id = lastInvoiceID.id;
+                this.setState({ invoiceId: id })
+                console.log(id)
+                console.log(b);
+                b = id;
+                console.log(b);
+                // this.setState({ invoiceId: id })
+                // console.log(typeof(id));
+                // Number(id)
+                // return b;
+            })
+            .catch((error) => console.log(error));
+        console.log(b);
 
-        var discount = (this.state.selectedDiscount / 100) * initialPrice
-        // var discount = 0
-        var discountedPrice = initialPrice - discount
+        // return b;
+    }
+
+    discountedPrice() {
+        let initialPrice = (this.state.selectedRate * this.state.selectedQTy)
+        let discount = this.state.selectedDiscount
+        let discountAmount = (discount * initialPrice) / 100
+        let discountedPrice = initialPrice - discountAmount
         return discountedPrice;
     }
     handleFormSubmit = (event) => {
@@ -90,24 +117,15 @@ class FunctionLayer extends Component {
         let product_id = this.state.selectedProduct;
         let rate = this.state.selectedRate;
         let qty = this.state.selectedQTy;
+        let discount = this.state.selectedDiscount
         let price = this.refs.price.value;
 
-        this.props.handleAddButtonClick(product_id, rate, qty, price);
+        this.props.handleAddButtonClick(product_id, rate, qty, discount, price);
         this.setState({
             selectedProduct: '',
             selectedQTy: '',
             selectedRate: '',
-        })
-        this.refs.rate.value = '';
-        this.refs.qty.value = '';
-        // console.log(this.refs.price.value)
-    }
-    EditRow(product_id, rate, qty, discount) {
-        this.setState({
-            selectedProduct: product_id,
-            selectedRate: rate,
-            selectedQTy: qty,
-            selecetdDiscount: discount
+            selectedDiscount: '',
         })
     }
 
@@ -119,7 +137,7 @@ class FunctionLayer extends Component {
         return (
 
             <div style={{ border: '1px solid red' }} className=" col-sm-12 m-0 p-0 ">
-                <form style={{ border: 'none' }} onSubmit={this.handleFormSubmit} ref='myForm' method='POST' className='form-row m-0' noValidate>
+                <form style={{ border: 'none' }} onSubmit={this.handleFormSubmit} ref='myForm' method='POST' className='form-row m-0' >
                     <div style={{ border: 'none' }} className='form-row col-12 m-0 p-0 justify-content-start'>
 
                         <div style={{ border: 'none' }} className='col-md-1 mb-2  align-self-end'>
@@ -144,7 +162,7 @@ class FunctionLayer extends Component {
 
                         <div style={{ border: 'none' }} className='col-md  mb-2 p-0'>
                             <label className='label-sales'>ID:</label><br></br>
-                            <input type='text' defaultValue={this.IDdefaultvalue()} className='sales-input' style={{ width: '40px' }} disabled />
+                            <input type='text' ref={this.props.id} value={this.IDdefaultvalue()} className='sales-input' style={{ width: '40px' }} disabled />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Product:</label><br></br>
@@ -155,23 +173,22 @@ class FunctionLayer extends Component {
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Rate:</label><br></br>
-                            <input ref='rate' type='text' value={this.state.selectedRate} onChange={this.handleRateChange} className='sales-input' style={{ width: '' }} required />
+                            <input ref='rate' type='number' value={this.state.selectedRate} onChange={this.handleRateChange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>QTY:</label><br></br>
-                            <input ref='qty' type='text' value={this.state.selectedQTy} onChange={this.handleQTYchange} className='sales-input' style={{ width: '75px' }} required />
+                            <input ref='qty' type='number' value={this.state.selectedQTy} onChange={this.handleQTYchange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
-                            <label className='label-sales'>Discount:</label><br></br>
-                            <input ref={this.discount} value={this.state.selectedDiscount} onChange={this.handleDiscountChange} type='text' className='sales-input' style={{ width: '75px' }} required />
+                            <label className='label-sales'>Discount%:</label><br></br>
+                            <input ref='discount' type='number' value={this.state.selectedDiscount} onChange={this.handleDiscountChange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
-
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Price:</label><br></br>
-                            <input type='text' ref="price" value={this.discountedPrice()} className='sales-input' style={{ width: '' }} disabled />
+                            <input type='number' ref="price" value={this.discountedPrice()} className='sales-input' style={{ width: '75px' }} disabled />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 mt-2 p-0 align-self-end'>
-                            <button type="submit" className='btn btn-info btn-sm' style={{ fontWeight: '600', width: '250px', marginBottom: '1px', marginLeft: '5px', marginRight: '5px' }}>Add</button>
+                            <button type="submit" className='btn btn-info btn-sm' style={{ fontWeight: '600', width: '250px', marginBottom: '0px', marginLeft: '5px', marginRight: '5px' }}>Add</button>
                         </div>
 
                     </div>

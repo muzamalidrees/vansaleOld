@@ -2,37 +2,38 @@ import React, { Component } from 'react';
 import TableRow from './TableRow';
 
 
-
 class TableLayer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            rows: []
+            Rows: [],
         }
         this.addArrayToTbl = this.addArrayToTbl.bind(this);
     }
 
-    addArrayToTbl = (product_id, rate, qty, price) => {
-        const products = this.props.products;
+    addArrayToTbl = (product_id, rate, qty, discount, price) => {
         var row = [];
-        var Product_id;
-        products.forEach(product => {
-
-            if (product_id == product.id) {
-                Product_id = product.name
-                return;
-            }
-        })
         row.push(
-            <TableRow products={products} product_id={Product_id} rate={rate} qty={qty} price={price} EditRow={this.props.EditRow} key={product_id} />
+            <TableRow
+                products={this.props.products}
+                product_id={product_id}
+                rate={rate}
+                qty={qty}
+                discount={discount}
+                price={price}
+                EditRow={this.props.EditRow}
+                DeleteRow={this.props.DeleteRow}
+                key={product_id}
+            />
         );
         this.setState(state => {
-            const rows = [...state.rows, row]
+            var Rows = [...state.Rows, row]
             return {
-                rows
+                Rows
             };
         });
+
     }
 
     render() {
@@ -48,14 +49,15 @@ class TableLayer extends Component {
                             <th>Product</th>
                             <th>Rate</th>
                             <th>QTY</th>
-                            <th>Discount</th>
+                            <th>Discount %</th>
                             <th>Price</th>
                             <th>Edit/Remove</th>
 
                         </tr>
                     </thead>
-                    <tbody>{this.state.rows}</tbody>
+                    <tbody>{this.state.Rows}</tbody>
                 </table>
+
             </div >
         );
     }

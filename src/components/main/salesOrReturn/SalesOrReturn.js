@@ -23,11 +23,10 @@ class SalesOrReturn extends Component {
                 <div style={{ border: 'none' }} className='row m-0 p-0'>
                     <Switch>
                         <PropsRoute path='/salesOrReturn/home' component={SalesOrReturnArea} />
-                        {/* <PropsRoute path='/customers/add' component={NewCustomer} /> */}
                         <PropsRoute path='/' component={NotFound} pt='158px' pb='159px' class={'col-sm-9'} />
                     </Switch>
 
-                    <RightPane label={this.rightPaneLabel()} date={this.props.date} />
+                    {/* <RightPane label={this.rightPaneLabel()} date={this.props.date} /> */}
                 </div>
             </div>
 

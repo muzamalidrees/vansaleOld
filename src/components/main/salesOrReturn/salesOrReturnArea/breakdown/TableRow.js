@@ -10,14 +10,13 @@ class TableRow extends Component {
         this.state = {
 
         };
-        this.deleteRow = this.deleteRow.bind(this);
     }
     editRow = (e) => {
-        var iconClick = e.target.parentNode.parentNode.parentNode.parentNode;
-        var svgClick = e.target.parentNode.parentNode.parentNode;
-        var buttonClick = e.target.parentNode.parentNode;
-        var tdClick = e.target.parentNode;
-        var target = e.target
+        let iconClick = e.target.parentNode.parentNode.parentNode.parentNode;
+        let svgClick = e.target.parentNode.parentNode.parentNode;
+        let buttonClick = e.target.parentNode.parentNode;
+        let tdClick = e.target.parentNode;
+        let target = e.target
 
         if (iconClick.rowIndex === undefined) {
             iconClick = svgClick;
@@ -47,19 +46,21 @@ class TableRow extends Component {
         let rate = iconClick.cells[2].innerHTML
         let qty = iconClick.cells[3].innerHTML
         let discount = iconClick.cells[4].innerHTML
+        let price = iconClick.cells[5].innerHTML
+        let i = iconClick.rowIndex;
 
-        this.props.EditRow(product_id, rate, qty, discount);
-        var i = iconClick.rowIndex;
-        document.getElementById('salestbl').deleteRow(i)
+
+        this.props.EditRow(product_id, rate, qty, discount, price, i);
+        // document.getElementById('salestbl').deleteRow(i)
 
     }
 
-    deleteRow(e) {
-        var iconClik = e.target.parentNode.parentNode.parentNode.parentNode;
-        var svgClik = e.target.parentNode.parentNode.parentNode;
-        var buttonClik = e.target.parentNode.parentNode;
-        var tdClik = e.target.parentNode;
-        var targt = e.target
+    deleteRowfn(e) {
+        let iconClik = e.target.parentNode.parentNode.parentNode.parentNode;
+        let svgClik = e.target.parentNode.parentNode.parentNode;
+        let buttonClik = e.target.parentNode.parentNode;
+        let tdClik = e.target.parentNode;
+        let targt = e.target
 
         if (iconClik.rowIndex === undefined) {
             iconClik = svgClik;
@@ -73,38 +74,50 @@ class TableRow extends Component {
         if (iconClik.rowIndex === undefined) {
             iconClik = targt;
         }
-        var i = iconClik.rowIndex;
-        document.getElementById('salestbl').deleteRow(i)
+        let i = iconClik.rowIndex;
+        let price = iconClik.cells[5].innerHTML
+
+        this.props.DeleteRow(price, i);
+        // document.getElementById('salestbl').deleteRow(i)
 
     }
 
     render() {
         // const index = this.props.index;
         const product_id = this.props.product_id;
+        var productName;
+        const products = this.props.products;
+        products.forEach(product => {
+            if (product_id == product.id) {
+                productName = product.name
+                return;
+            }
+        })
         const rate = this.props.rate;
         const qty = this.props.qty;
+        const discount = this.props.discount;
         const price = this.props.price;
 
         return (
             <tr className=''>
                 <td>{'index'}</td>
-                <td>{product_id}</td>
+                <td>{productName}</td>
                 <td>{rate}</td>
                 <td>{qty}</td>
-                <td>{qty}</td>
+                <td>{discount}</td>
                 <td>{price}</td>
                 <td>
-                    <button style={{ marginRight: '10px' }} onClick={this.editRow} type='button' className=" btn mb-1 btn-dark ">
+                    <button style={{ marginRight: '10px' }} onClick={this.editRow.bind(this)} type='button' className=" btn mb-1 btn-dark ">
                         <FontAwesomeIcon icon={faEdit} />
                         {/* edit */}
                     </button>
 
-                    <button onClick={this.deleteRow} type='button' className=" btn btn-dark mb-1">
+                    <button onClick={this.deleteRowfn.bind(this)} type='button' className=" btn btn-dark mb-1">
                         <FontAwesomeIcon icon={faTrash} />
                         {/* delete */}
                     </button>
                 </td>
-                {/* <td style={{ display: 'none' }}>{id}</td> */}
+                <td style={{ display: 'none' }}>{product_id}</td>
             </tr >
         );
     }
