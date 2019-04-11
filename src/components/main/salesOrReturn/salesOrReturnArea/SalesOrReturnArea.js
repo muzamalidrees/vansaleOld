@@ -8,7 +8,7 @@ var products;
 var TotalPrice = 0;
 class SalesOrReturnArea extends Component {
     componentWillMount() {
-      
+
         fetch('/getAllProducts',
         )
             .then((res) => res.json())
@@ -44,7 +44,7 @@ class SalesOrReturnArea extends Component {
             products: '',
             showFunctions: false,
             showTable: false,
-            showChekout: true,
+            showChekout: false,
         }
         this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
         this.EditRow = this.EditRow.bind(this);
@@ -75,7 +75,11 @@ class SalesOrReturnArea extends Component {
             selectedQTy: qty,
             selectedDiscount: discount,
         })
+        console.log(TotalPrice);
+
         TotalPrice = TotalPrice - price;
+        console.log(TotalPrice);
+
         let x = document.getElementById('salestbl');
         x.deleteRow(i);
         if (x.rows.length === 1) {
@@ -83,7 +87,10 @@ class SalesOrReturnArea extends Component {
         }
     }
     DeleteRow(price, i) {
+
         TotalPrice = TotalPrice - price;
+        console.log(TotalPrice);
+
         let y = document.getElementById('salestbl');
         y.deleteRow(i);
         if (y.rows.length === 1) {
@@ -102,11 +109,12 @@ class SalesOrReturnArea extends Component {
         }
     }
     handleCheckout() {
+        this.setState({ showChekout: false })
         let z = document.getElementById('salestbl');
         const invoice = this.invoice.value;
         const tr = this.refs.functionLayer.state.trType
         const customer_id = this.refs.functionLayer.state.selectedCustomer
-        if (tr === 'sales') {
+        if (tr === 'Sale') {
             for (let index = 1; index < z.rows.length; index++) {
                 const productId = z.rows[index].cells[7].innerHTML;
                 const rate = z.rows[index].cells[2].innerHTML;
@@ -117,12 +125,13 @@ class SalesOrReturnArea extends Component {
                 this.saveSalesToServer(customer_id, productId, rate, qty, discount, price, invoice, TotalPrice, tr);
             }
             this.saveInvoice(TotalPrice, tr);
+            TotalPrice = TotalPrice - TotalPrice;
             for (let index = z.rows.length - 1; index > 0; index--) {
                 z.deleteRow(index);
             }
             return;
         }
-        if (tr === 'returns') {
+        if (tr === 'Return') {
             for (let index = 1; index < z.rows.length; index++) {
                 const productId = z.rows[index].cells[7].innerHTML;
                 const rate = z.rows[index].cells[2].innerHTML;
@@ -133,6 +142,7 @@ class SalesOrReturnArea extends Component {
                 this.saveReturnsToServer(customer_id, productId, rate, qty, discount, price, invoice, TotalPrice, tr);
             }
             this.saveInvoice(TotalPrice, tr);
+            TotalPrice = TotalPrice - TotalPrice;
             for (let index = z.rows.length - 1; index > 0; index--) {
                 z.deleteRow(index);
             }
@@ -192,11 +202,13 @@ class SalesOrReturnArea extends Component {
                 // this.refs.msglabel.innerHTML = message;
             })
             .catch((error) => console.log(error))
+
     }
     callCheckoutLayer() {
         if (this.state.showChekout) {
             return <CheckoutLayer
                 handleCheckout={this.handleCheckout}
+                checkoutBtnTxt={this.refs.functionLayer.state.trType}
             />
         }
     }

@@ -6,16 +6,15 @@ class FunctionLayer extends Component {
 
     constructor(props) {
         super(props);
-        // this.discount = React.createRef();
+        this.test = '';
         this.state = {
-            trType: 'sales',
+            trType: 'Sale',
             selectedCustomer: '3',
             selectedProduct: '',
             selectedRate: '',
             selectedQTy: '',
             selectedDiscount: '',
             showCustomerData: false,
-            invoiceId: '',
         }
         this.handleTrTypeChange = this.handleTrTypeChange.bind(this);
         this.handleCustomerChange = this.handleCustomerChange.bind(this);
@@ -52,7 +51,6 @@ class FunctionLayer extends Component {
     showCustomerData() {
         const { customers } = this.props;
         const customer = customers.filter((customer) => customer.id == this.state.selectedCustomer).shift()
-        // const customerData = 
         if (this.state.showCustomerData) {
             return (<div style={{ border: 'none' }} className='col-sm mb-2 p-0 align-self-end'>
                 <dl className='m-0 p-0'>
@@ -63,7 +61,6 @@ class FunctionLayer extends Component {
                     <dt style={{ display: 'inline' }}>Address: </dt><dd>{customer.address}</dd>
                 </dl>
             </div>)
-
         }
     }
     setProductRate(pValue) {
@@ -72,27 +69,17 @@ class FunctionLayer extends Component {
         this.setState({ selectedQTy: '1', selectedDiscount: '0', selectedRate: product.price })
     }
     IDdefaultvalue() {
-        var b = 0;
+        let currentComponent = this;
         fetch('/getLastInvoiceID')
             .then((res) => res.json())
             .then(function (json) {
                 // console.log(json)
                 var lastInvoiceID = json.data.shift();
                 let id = lastInvoiceID.id;
-                this.setState({ invoiceId: id })
-                console.log(id)
-                console.log(b);
-                b = id;
-                console.log(b);
-                // this.setState({ invoiceId: id })
-                // console.log(typeof(id));
-                // Number(id)
-                // return b;
+                currentComponent.test = id + 1;
             })
             .catch((error) => console.log(error));
-        console.log(b);
-
-        // return b;
+        return this.test;
     }
 
     discountedPrice() {
@@ -142,8 +129,8 @@ class FunctionLayer extends Component {
 
                         <div style={{ border: 'none' }} className='col-md-1 mb-2  align-self-end'>
                             <select value={this.state.trType} onChange={this.handleTrTypeChange} className=' salesSelect' style={{ width: '85px' }}>
-                                <option value="sales">Sales</option>
-                                <option value="returns">Returns</option>
+                                <option value="Sale">Sales</option>
+                                <option value="Return">Returns</option>
                             </select>
                         </div>
                         <div style={{ border: 'none' }} className='col-md-2.5 mb-2 align-self-end'>

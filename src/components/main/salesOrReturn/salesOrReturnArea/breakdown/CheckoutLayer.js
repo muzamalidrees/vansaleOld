@@ -15,8 +15,6 @@ class CheckoutLayer extends Component {
     }
     handleSaleSubmit(event) {
         event.preventDefault();
-        // console.log('ok');
-
         this.props.handleCheckout();
     }
     render() {
@@ -35,7 +33,7 @@ class CheckoutLayer extends Component {
                         </label>
                         </div>
                         <div style={{ border: 'none' }} className='col-md-3 mr-3 p-0 '>
-                            <button type="submit" className='btn btn-info btn-sm' style={{ fontWeight: '700', width: '250px', marginRight: '5px' }}>Sale</button>
+                            <button type="submit" className='btn btn-info btn-sm' style={{ fontWeight: '700', width: '250px', marginRight: '5px' }}>{this.props.checkoutBtnTxt}</button>
                         </div>
 
                     </div>
