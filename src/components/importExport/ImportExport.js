@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import './IEStyles.css';
-import XLSX from 'xlsx'
+import XLSX from 'xlsx';
+import sampleCustomers from './sampleCustomers.xlsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 
 class ImportExport extends Component {
-    // componentWillMount() {
-    //     fetch('/getAllCustomers',
-    //     )
-    //         .then((res) => res.json())
-    //         .then((json) => {
-    //             console.log(json)
-    //             this.setState({ customers: json.data })
-    //         })
-    //         .catch((error) => console.log(error))
-    // }
+    componentWillMount() {
+        fetch('/getAllCustomers',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json)
+                this.setState({ customers: json.data })
+            })
+            .catch((error) => console.log(error))
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +26,7 @@ class ImportExport extends Component {
             selectedFile: '',
             selectedFormat: '',
             customers: '',
+            sample: '',
         }
         this.fileChange = this.fileChange.bind(this);
         this.handleIEChange = this.handleIEChange.bind(this);
@@ -55,14 +57,22 @@ class ImportExport extends Component {
     handleExport = () => {
         console.log('ok');
 
-        // var data = this.state.customers.map(Object.values);
-        // // console.log(data);
+        var data = this.state.customers.map(Object.values);
+        data.map(function (a) {
+            a.pop();
+            a.pop();
+            a.pop();
+        })
+        data.splice(0, 0, ['ID', 'name', 'email', 'cell', 'address', 'area_id', 'route_id'])
+        // console.log(data);
 
-        // /* convert state to workbook */
-        // const ws = XLSX.utils.aoa_to_sheet(data);
-        // const wb = XLSX.utils.book_new();
-        // XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-        // /* generate XLSX file and send to client */
+        /* convert state to workbook */
+        const ws = XLSX.utils.aoa_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+        console.log(wb);
+
+        /* generate XLSX file and send to client */
         // XLSX.writeFile(wb, "sheetjs.xlsx")
 
     }
@@ -79,6 +89,11 @@ class ImportExport extends Component {
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
+                let createdCustomers = json.success;
+                let existingCustomers = json.failure;
+                createdCustomers.reverse();
+                console.log(createdCustomers)
+                console.log(existingCustomers)
             })
             .catch((error) => console.log(error))
     }
@@ -201,7 +216,12 @@ class ImportExport extends Component {
                         <div style={{ border: 'none' }} className="col-md-5.5 mb-3">
 
                             <button className="IEBtn align-self-center" type="submit">{this.state.btnTxt}</button>
+                            <br></br>
+                            <a className='' href={this.state.sample} download>
+                                Download Sample File
+                            </a>
                         </div>
+
                     </div>
 
                 </form>
