@@ -58,13 +58,15 @@ class ImportExport extends Component {
         console.log('ok');
 
         var data = this.state.customers.map(Object.values);
+        console.log(data);
+
         data.map(function (a) {
             a.pop();
             a.pop();
             a.pop();
         })
         data.splice(0, 0, ['ID', 'name', 'email', 'cell', 'address', 'area_id', 'route_id'])
-        // console.log(data);
+        console.log(data);
 
         /* convert state to workbook */
         const ws = XLSX.utils.aoa_to_sheet(data);
@@ -81,17 +83,25 @@ class ImportExport extends Component {
         let file = this.state.selectedFile;
         var fd = new FormData();
         fd.append('data', file)
+        fd.append('importing', this.state.selectedDataValue)
         var options = {
             method: 'POST',
-            body: fd,
+            body: fd
         }
-        fetch('/upload', options)
+        fetch('/import', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
                 let createdCustomers = json.success;
                 let existingCustomers = json.failure;
-                createdCustomers.reverse();
+                createdCustomers.map(Object.values
+                    // debugger
+                    // customer.pop()
+                    // debugger
+                    // customer.splice(5, 2)
+                    // debugger
+                    // customer.pop()
+                    // customer.shift()
+                )
                 console.log(createdCustomers)
                 console.log(existingCustomers)
             })
@@ -101,26 +111,6 @@ class ImportExport extends Component {
     fileChange(e) {
         var files = e.target.files, f = files[0];
         this.setState({ selectedFile: f })
-
-        // var reader = new FileReader();
-        // reader.onload = function (e) {
-        //     var data = new Uint8Array(e.target.result);
-        //     var workbook = XLSX.read(data, { type: 'array' });
-        //     console.log(workbook);
-        //     var first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        //     var data = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 });
-        //     console.log(data);
-        //     var cols = function make_cols(first_worksheet/*:string*/) {
-        //         var o = [];
-        //         var range = XLSX.utils.decode_range(first_worksheet);
-        //         for (var i = 0; i <= range.e.c; ++i) {
-        //             o.push({ name: XLSX.utils.encode_col(i), key: i });
-        //         }
-        //         return o;
-        //     }();
-        //     console.log(cols);
-        // };
-        // reader.readAsArrayBuffer(f);
     }
     handleFormatChange(e) {
         this.setState({ selectedFormat: e.target.value })
@@ -170,17 +160,15 @@ class ImportExport extends Component {
                             <label className='IELabel' htmlFor="dataSelect">Select data which you want to {this.state.selectedIEValue}</label>
                             <select value={this.state.selectedDataValue} onChange={this.handleIEDataChange} className='form-control select' id='dataSelect' ref='dataSelect' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value='' disabled>--Select--</option>
-                                <option value='customers'>Customers</option>
-                                <option value='users'>Users</option>
-                                <option value='roles'>Roles</option>
-                                <option value='permissions'>Permissions</option>
-                                <option value='priceGroups'>Price-Groups</option>
-                                <option value='products'>Products</option>
-                                <option value='productCategories'>Product-Categories</option>
-                                <option value='drivers'>Drivers</option>
-                                <option value='routes'>Routes</option>
-                                <option value='areas'>Areas</option>
-                                <option value='invoices'>Invoices</option>
+                                <option value='AREAS'>Areas</option>
+                                <option value='CUSTOMERS'>Customers</option>
+                                <option value='DRIVERS'>Drivers</option>
+                                <option value='PERMISSIONS'>Permissions</option>
+                                <option value='PRODUCTcATEGORIES'>Product-Categories</option>
+                                <option value='PRODUCTS'>Products</option>
+                                <option value='ROLES'>Roles</option>
+                                <option value='ROUTES'>Routes</option>
+                                <option value='USERS'>Users</option>
                             </select>
                             <div className="invalid-feedback">
                                 Please select at least one option.

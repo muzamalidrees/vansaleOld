@@ -15,12 +15,12 @@ class FunctionLayer extends Component {
                     <div className='col-md-2.5 mb-2  PGbutton-contaner '>
                         <Link to="/priceGroups/add"> <button ref='addPriceGroup'>Add New PriceGroup</button> </Link>
                     </div>
-                    <div className='col-md-2.5 mb-2  PGbutton-contaner '>
+                    {/* <div className='col-md-2.5 mb-2  PGbutton-contaner '>
                         <Link to="/priceGroups/import"> <button ref='importPG'>Import Price Groups</button> </Link>
                     </div>
                     <div className='col-md-2.5 mb-2  PGbutton-contaner '>
                         <Link to="/priceGroups/export"> <button ref='exportPG'>Export Price Groups</button> </Link>
-                    </div>
+                    </div> */}
                     <div className='col-md-2.5 mb-2  PGbutton-contaner '>
                         <Link to="/priceGroups/customerPricing"> <button ref='customerPricing'>Customer Pricing</button> </Link>
                     </div>
