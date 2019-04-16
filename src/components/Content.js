@@ -3,8 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import { PropsRoute } from 'react-router-with-props';
 import About from './misc/About';
 import Contact from './misc/Contact';
-import Home from './misc/Home';
 import NotFound from './misc/NotFound';
+import SecuredHome from './misc/SecuredHome';
 import Login from './auth/Login';
 import Customers from './main/customers/Customers';
 import PriceGroups from './main/priceGroups/PriceGroups';
@@ -41,10 +41,11 @@ class Content extends Component {
             <div style={{}} className="container-fluid">
                 <Switch>
 
-                    <Route exact path='/' component={Login} />
+                    <PropsRoute exact path='/' showLogout={this.props.showLogout} component={Login} />
+                    <PropsRoute path="/login" showLogout={this.props.showLogout} component={Login} />
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
-                    <Route path="/home" component={Home} />
+                    <Route path="/home" component={SecuredHome} />
                     <PropsRoute path='/customers' component={Customers} date={this.state.date} />
                     <PropsRoute path='/priceGroups' component={PriceGroups} date={this.state.date} />
                     <PropsRoute path='/drivers' component={Drivers} date={this.state.date} />

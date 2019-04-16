@@ -11,8 +11,13 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 class App extends Component {
-
-    
+    constructor(props) {
+        super(props);
+        this.showLogout = this.showLogout.bind(this);
+    }
+    showLogout = () => {
+        this.refs.headerLayer.showLogout();
+    }
 
     render() {
 
@@ -22,9 +27,12 @@ class App extends Component {
 
                     <div style={{ backgroundColor: '#999999' }}>
                         <Header
+                            ref='headerLayer'
                         />
                         <hr className="hr1" />
-                        <Content />
+                        <Content
+                            showLogout={this.showLogout}
+                        />
                         <hr className="hr2" />
                         <Footer />
                     </div>

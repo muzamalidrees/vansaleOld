@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './IEStyles.css';
 import XLSX from 'xlsx';
-import sampleCustomers from './sampleCustomers.xlsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import IEPopUp from './IEPopUp';
 
 
 class ImportExport extends Component {
@@ -26,13 +24,17 @@ class ImportExport extends Component {
             selectedFile: '',
             selectedFormat: '',
             customers: '',
-            sample: '',
+            sample: '/sampleCustomers.xlsx',
+            modelShow: false,
+            createdRecords: '',
+            existingRecords: ''
         }
         this.fileChange = this.fileChange.bind(this);
         this.handleIEChange = this.handleIEChange.bind(this);
         this.handleIEDataChange = this.handleIEDataChange.bind(this);
         this.handleFormatChange = this.handleFormatChange.bind(this);
-        this.handleValidate = this.handleValidate.bind(this)
+        this.handleValidate = this.handleValidate.bind(this);
+        this.callModel = this.callModel.bind(this);
     }
 
     handleValidate = (evt) => {
@@ -42,7 +44,6 @@ class ImportExport extends Component {
         let form = this.refs.IEForm;
         if (form.checkValidity() === false) {
             form.classList.add('was-validated');
-            console.log('bk')
         }
         else {
             if (this.state.selectedIEValue === 'Import') {
@@ -52,31 +53,24 @@ class ImportExport extends Component {
                 this.handleExport();
             }
         }
-
     }
     handleExport = () => {
-        console.log('ok');
-
         var data = this.state.customers.map(Object.values);
-        console.log(data);
-
         data.map(function (a) {
             a.pop();
             a.pop();
             a.pop();
         })
         data.splice(0, 0, ['ID', 'name', 'email', 'cell', 'address', 'area_id', 'route_id'])
-        console.log(data);
 
         /* convert state to workbook */
         const ws = XLSX.utils.aoa_to_sheet(data);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-        console.log(wb);
+        // console.log(wb);
 
         /* generate XLSX file and send to client */
-        // XLSX.writeFile(wb, "sheetjs.xlsx")
-
+        XLSX.writeFile(wb, "sheetjs.xlsx")
     }
     handleImport = () => {
 
@@ -91,19 +85,25 @@ class ImportExport extends Component {
         fetch('/import', options)
             .then((res) => res.json())
             .then((json) => {
-                let createdCustomers = json.success;
-                let existingCustomers = json.failure;
-                createdCustomers.map(Object.values
-                    // debugger
-                    // customer.pop()
-                    // debugger
-                    // customer.splice(5, 2)
-                    // debugger
-                    // customer.pop()
-                    // customer.shift()
-                )
-                console.log(createdCustomers)
-                console.log(existingCustomers)
+                let existingRecords = json.failure;
+                let records = json.success.map(Object.values);
+                records.map(function (record) {
+                    record.pop()
+                    record.pop()
+                    record.shift()
+                })
+                console.log(records);
+                console.log(existingRecords);
+
+                var createdRecords = records.map(function (record) {
+                    return {
+                        name: record[0],
+                        email: record[1],
+                        cell: record[2],
+                        address: record[3],
+                    };
+                });
+                this.setState({ createdRecords: createdRecords, existingRecords: existingRecords, modelShow: true })
             })
             .catch((error) => console.log(error))
     }
@@ -128,12 +128,23 @@ class ImportExport extends Component {
             this.refs.iformat.setAttribute("required", '');
             this.refs.ichooseFile.removeAttribute("required");
             this.refs.chooseFile.style.display = 'none';
+            this.refs.sample.style.display = 'none';
         }
     }
     handleIEDataChange(e) {
         this.setState({ selectedDataValue: e.target.value })
+        this.refs.sample.style.display = '';
     }
-
+    callModel() {
+        if (this.state.modelShow) {
+            return <IEPopUp
+                show={this.state.modelShow}
+                onHide={() => { this.setState({ modelShow: false }) }}
+                createdRecords={this.state.createdRecords}
+                existingRecords={this.state.existingRecords}
+            />
+        }
+    }
     render() {
 
         return (
@@ -201,15 +212,21 @@ class ImportExport extends Component {
                         </div>
                     </div>
                     <div style={{ border: 'none' }} className="form-row col-7 justify-content-center">
-                        <div style={{ border: 'none' }} className="col-md-5.5 mb-3">
+                        <div style={{ border: 'none' }} className="col-md-5.5 mb-1">
 
-                            <button className="IEBtn align-self-center" type="submit">{this.state.btnTxt}</button>
+                            <button className="IEBtn" type="submit">{this.state.btnTxt}</button>
                             <br></br>
-                            <a className='' href={this.state.sample} download>
+
+                            {this.callModel()}
+                        </div>
+                        <br></br>
+                        <div style={{ border: 'none', textAlign: "center" }} className="col-md-7">
+
+                            <a ref='sample' style={{ fontFamily: 'cursive', display: 'none', fontWeight: '500', fontSize: '14px' }} className='IELabel' href={this.state.sample} download>
                                 Download Sample File
                             </a>
-                        </div>
 
+                        </div>
                     </div>
 
                 </form>

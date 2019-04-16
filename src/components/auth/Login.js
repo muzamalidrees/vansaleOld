@@ -18,7 +18,7 @@ class Login extends Component {
 
     }
     handleLogin = () => {
-        console.log(this.props.history)
+        // console.log(this.props.history)
         var options = {
             method: 'POST',
             body: JSON.stringify({ username: this.refs.email.value, password: this.refs.password.value }),
@@ -34,20 +34,20 @@ class Login extends Component {
                 // console.log(json.message)
                 let message = json.message;
                 if (message === 'incorrect Password') {
-                    console.log(message)
+                    // console.log(message)
                     this.refs.password.value = "";
                     this.refs.password.focus();
                 }
                 else {
-                    console.log(message)
+                    // console.log(message)
                 }
                 this.refs.loginLabel.innerHTML = message;
                 this.refs.loginBtn.style.marginTop = '0px';
-                console.log(this.props)
                 this.props.history.push(json.route);
-                console.log(this.props.history)
+                // console.log(this.props)
+                this.props.showLogout();
             })
-            .catch((json) => console.log(json.error))
+            .catch((err) => console.log(err))
     }
     onChangeLabel = () => {
         this.refs.loginLabel.innerHTML = '';
