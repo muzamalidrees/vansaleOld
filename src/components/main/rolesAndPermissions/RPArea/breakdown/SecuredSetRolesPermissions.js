@@ -1,0 +1,33 @@
+import React, { Component } from 'react';
+import SetRolesPermissions from './SetRolesPermissions';
+import { Redirect } from 'react-router';
+
+class SecuredSetRolesPermissions extends Component {
+    state = {
+
+    }
+    constructor() {
+        super()
+        fetch('/isAuth')
+
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json);
+                this.setState({ loggedIn: json.loggedIn })
+            })
+            .catch((err => {
+                console.log(err);
+            }))
+    }
+
+    render() {
+        if (this.state.loggedIn == false) {
+            return <Redirect to='/login' />
+        }
+        else {
+            return <SetRolesPermissions roles={this.props.roles} permissions={this.props.permissions} />
+        }
+    }
+}
+
+export default SecuredSetRolesPermissions

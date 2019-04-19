@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './IEStyles.css';
 import XLSX from 'xlsx';
 import IEPopUp from './IEPopUp';
+import Export from './Export'
 
 
 class ImportExport extends Component {
@@ -22,7 +23,7 @@ class ImportExport extends Component {
             selectedDataValue: '',
             btnTxt: 'Import/Export',
             selectedFile: '',
-            selectedFormat: '',
+            // selectedFormat: '',
             customers: '',
             sample: '/sampleCustomers.xlsx',
             modelShow: false,
@@ -32,7 +33,7 @@ class ImportExport extends Component {
         this.fileChange = this.fileChange.bind(this);
         this.handleIEChange = this.handleIEChange.bind(this);
         this.handleIEDataChange = this.handleIEDataChange.bind(this);
-        this.handleFormatChange = this.handleFormatChange.bind(this);
+        // this.handleFormatChange = this.handleFormatChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
         this.callModel = this.callModel.bind(this);
     }
@@ -92,18 +93,20 @@ class ImportExport extends Component {
                     record.pop()
                     record.shift()
                 })
-                console.log(records);
-                console.log(existingRecords);
+                // console.log(records);
+                // console.log(existingRecords);
 
-                var createdRecords = records.map(function (record) {
-                    return {
-                        name: record[0],
-                        email: record[1],
-                        cell: record[2],
-                        address: record[3],
-                    };
-                });
-                this.setState({ createdRecords: createdRecords, existingRecords: existingRecords, modelShow: true })
+                //***** */array of array to array of objects*/**********//
+
+                // var createdRecords = records.map(function (record) {
+                //     return {
+                //         name: record[0],
+                //         email: record[1],
+                //         cell: record[2],
+                //         address: record[3],
+                //     };
+                // });
+                this.setState({ createdRecords: records, existingRecords: existingRecords, modelShow: true })
             })
             .catch((error) => console.log(error))
     }
@@ -112,20 +115,20 @@ class ImportExport extends Component {
         var files = e.target.files, f = files[0];
         this.setState({ selectedFile: f })
     }
-    handleFormatChange(e) {
-        this.setState({ selectedFormat: e.target.value })
-    }
+    // handleFormatChange(e) {
+    //     this.setState({ selectedFormat: e.target.value })
+    // }
     handleIEChange(e) {
         this.setState({ selectedIEValue: e.target.value, btnTxt: e.target.value === "" ? "Import/Export" : e.target.value })
         if (e.target.value === 'Import') {
             this.refs.chooseFile.style.display = '';
             this.refs.ichooseFile.setAttribute("required", '');
-            this.refs.iformat.removeAttribute("required");
-            this.refs.format.style.display = 'none';
+            // this.refs.iformat.removeAttribute("required");
+            // this.refs.format.style.display = 'none';
         }
         else {
-            this.refs.format.style.display = '';
-            this.refs.iformat.setAttribute("required", '');
+            // this.refs.format.style.display = '';
+            // this.refs.iformat.setAttribute("required", '');
             this.refs.ichooseFile.removeAttribute("required");
             this.refs.chooseFile.style.display = 'none';
             this.refs.sample.style.display = 'none';
@@ -133,17 +136,64 @@ class ImportExport extends Component {
     }
     handleIEDataChange(e) {
         this.setState({ selectedDataValue: e.target.value })
-        this.refs.sample.style.display = '';
+        switch (e.target.value) {
+            case 'AREAS':
+                this.setState({ sample: '/sampleAreas.xlsx' })
+                break;
+            case 'CUSTOMERS':
+                this.setState({ sample: '/sampleCustomers.xlsx' })
+                break;
+            case 'DRIVERS':
+                this.setState({ sample: '/sampleDrivers.xlsx' })
+                break;
+            case 'INVENTORY':
+                this.setState({ sample: '/sampleInventory.xlsx' })
+                break;
+            case 'PERMISSIONS':
+                this.setState({ sample: '/samplePermissions.xlsx' })
+                break;
+            case 'PRODUCTcATEGORIES':
+                this.setState({ sample: '/sampleProductCategories.xlsx' })
+                break;
+            case 'PRODUCTS':
+                this.setState({ sample: '/sampleProducts.xlsx' })
+                break;
+            case 'ROLES':
+                this.setState({ sample: '/sampleRoles.xlsx' })
+                break;
+            case 'ROUTES':
+                this.setState({ sample: '/sampleRoutes.xlsx' })
+                break;
+            case 'USERS':
+                this.setState({ sample: '/sampleUsers.xlsx' })
+                break;
+            default:
+                break;
+        }
+        if (this.state.selectedIEValue === 'Import') {
+            this.refs.sample.style.display = '';
+        }
+    }
+    onHide = () => {
+        this.setState({ modelShow: false, selectedDataValue: '', selectedFile: '' })
+        this.refs.ichooseFile.value = '';
     }
     callModel() {
         if (this.state.modelShow) {
             return <IEPopUp
                 show={this.state.modelShow}
-                onHide={() => { this.setState({ modelShow: false }) }}
+                onHide={this.onHide}
                 createdRecords={this.state.createdRecords}
                 existingRecords={this.state.existingRecords}
+                selectedDataValue={this.state.selectedDataValue}
             />
         }
+    }
+    callExport() {
+        if (this.state.selectedIEValue === 'Export') {
+            return <Export />
+        }
+        else { return null }
     }
     render() {
 
@@ -174,6 +224,7 @@ class ImportExport extends Component {
                                 <option value='AREAS'>Areas</option>
                                 <option value='CUSTOMERS'>Customers</option>
                                 <option value='DRIVERS'>Drivers</option>
+                                <option value='INVENTORY'>Inventory</option>
                                 <option value='PERMISSIONS'>Permissions</option>
                                 <option value='PRODUCTcATEGORIES'>Product-Categories</option>
                                 <option value='PRODUCTS'>Products</option>
@@ -198,7 +249,7 @@ class ImportExport extends Component {
 
                         </div>
                     </div>
-                    <div style={{ display: 'none' }} ref='format' className=" form-row col-8 justify-content-center">
+                    {/* <div style={{ display: 'none' }} ref='format' className=" form-row col-8 justify-content-center">
                         <div className='col-md-6 mb-3'>
                             <label className='IELabel' htmlFor="IESelect">File Format</label>
                             <select ref='iformat' value={this.state.selectedFormat} onChange={this.handleFormatChange} className='form-control' id='IESelect' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
@@ -208,9 +259,10 @@ class ImportExport extends Component {
                             </select>
                             <div className="invalid-feedback">
                                 Please select at least one option.
+                            </div>
                         </div>
-                        </div>
-                    </div>
+                    </div> */}
+                    {this.callExport()}
                     <div style={{ border: 'none' }} className="form-row col-7 justify-content-center">
                         <div style={{ border: 'none' }} className="col-md-5.5 mb-1">
 
@@ -222,7 +274,7 @@ class ImportExport extends Component {
                         <br></br>
                         <div style={{ border: 'none', textAlign: "center" }} className="col-md-7">
 
-                            <a ref='sample' style={{ fontFamily: 'cursive', display: 'none', fontWeight: '500', fontSize: '14px' }} className='IELabel' href={this.state.sample} download>
+                            <a ref='sample' style={{ color: 'blue', fontFamily: 'cursive', display: 'none', fontWeight: '500', fontSize: '14px' }} href={this.state.sample} download>
                                 Download Sample File
                             </a>
 

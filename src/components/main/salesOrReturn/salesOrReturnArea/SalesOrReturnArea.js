@@ -216,11 +216,11 @@ class SalesOrReturnArea extends Component {
 
         return (
 
-            <div style={{ float: 'right', border: '1px solid yellow' }} className=" col-sm-12 m-0 ">
+            <div style={{ float: 'right', border: 'none' }} className=" col-sm-9 m-0 ">
 
                 {this.callFunctionLayer()}
                 {this.callTableLayer()}
-                <div style={{ border: '1px solid red' }} className='col-md-5 m-0 p-0'>
+                <div style={{ border: 'none' }} className='col-md-5 m-0 p-0'>
                     <label className="label-sales">Total:</label>
                     <input type='text' value={TotalPrice} className='sales-input' style={{ width: '140px' }} disabled />
 

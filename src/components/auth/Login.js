@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import './loginStyles.css';
 
 class Login extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            // isLoggedIn: false,
+        }
+    }
     validateLogin = (evt) => {
 
 
@@ -18,7 +23,6 @@ class Login extends Component {
 
     }
     handleLogin = () => {
-        // console.log(this.props.history)
         var options = {
             method: 'POST',
             body: JSON.stringify({ username: this.refs.email.value, password: this.refs.password.value }),
@@ -26,26 +30,23 @@ class Login extends Component {
                 'Content-Type': 'application/json'
             }
         }
-        fetch('/login', options)
+        fetch('/auth', options)
             .then((res) => res.json())
             .then((json) => {
                 console.log(json);
-                // var message = JSON.stringify(json.message)
-                // console.log(json.message)
                 let message = json.message;
                 if (message === 'incorrect Password') {
-                    // console.log(message)
                     this.refs.password.value = "";
                     this.refs.password.focus();
                 }
                 else {
-                    // console.log(message)
                 }
                 this.refs.loginLabel.innerHTML = message;
                 this.refs.loginBtn.style.marginTop = '0px';
+                // this.setState({ isLoggedIn: true })
                 this.props.history.push(json.route);
-                // console.log(this.props)
-                this.props.showLogout();
+                document.getElementById('logoutButton').innerHTML = 'Log Out'
+                // this.props.showLogout(json.success);
             })
             .catch((err) => console.log(err))
     }

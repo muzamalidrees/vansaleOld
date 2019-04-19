@@ -13,11 +13,14 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.showLogout = this.showLogout.bind(this);
+        this.state = {
+            // isLoggedIn: this.refs.contentLayer.state.is
+        }
+        // this.showLogout = this.showLogout.bind(this);
     }
-    showLogout = () => {
-        this.refs.headerLayer.showLogout();
-    }
+    // showLogout = (x) => {
+    //     this.setState({ isLoggedIn: x })
+    // }
 
     render() {
 
@@ -28,10 +31,12 @@ class App extends Component {
                     <div style={{ backgroundColor: '#999999' }}>
                         <Header
                             ref='headerLayer'
+                        // isLoggedIn={this.state.isLoggedIn}
                         />
                         <hr className="hr1" />
                         <Content
-                            showLogout={this.showLogout}
+                            ref='contentLayer'
+                        // showLogout={this.showLogout}
                         />
                         <hr className="hr2" />
                         <Footer />

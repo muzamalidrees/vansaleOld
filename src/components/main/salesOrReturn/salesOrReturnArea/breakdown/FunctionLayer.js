@@ -52,13 +52,13 @@ class FunctionLayer extends Component {
         const { customers } = this.props;
         const customer = customers.filter((customer) => customer.id == this.state.selectedCustomer).shift()
         if (this.state.showCustomerData) {
-            return (<div style={{ border: 'none' }} className='col-sm mb-2 p-0 align-self-end'>
+            return (<div style={{ border: 'none' }} className='col-sm-4 mt-2 p-0 justify-content-center' >
                 <dl className='m-0 p-0'>
-                    <dt style={{ display: 'inline' }}>Name: </dt><dd>{customer.name}</dd>
-                    <dt style={{ display: 'inline' }}>Email: </dt><dd>{customer.email}</dd>
+                    <dt style={{ display: 'inline' }}>Name:</dt><dd>{customer.name}</dd>&nbsp;
+                    <dt style={{ display: 'inline' }}>Email:</dt><dd>{customer.email}</dd>
                     <br></br>
-                    <dt style={{ display: 'inline' }}>Phone.no: </dt><dd>{customer.cell}</dd>
-                    <dt style={{ display: 'inline' }}>Address: </dt><dd>{customer.address}</dd>
+                    <dt style={{ display: 'inline' }}>Phone.no:</dt><dd>{customer.cell}</dd>&nbsp;
+                    <dt style={{ display: 'inline' }}>Address:</dt><dd>{customer.address}</dd>
                 </dl>
             </div>)
         }
@@ -123,17 +123,17 @@ class FunctionLayer extends Component {
 
         return (
 
-            <div style={{ border: '1px solid red' }} className=" col-sm-12 m-0 p-0 ">
+            <div style={{ border: 'none' }} className=" col-sm-12 m-0 p-0 ">
                 <form style={{ border: 'none' }} onSubmit={this.handleFormSubmit} ref='myForm' method='POST' className='form-row m-0' >
                     <div style={{ border: 'none' }} className='form-row col-12 m-0 p-0 justify-content-start'>
 
-                        <div style={{ border: 'none' }} className='col-md-1 mb-2  align-self-end'>
-                            <select value={this.state.trType} onChange={this.handleTrTypeChange} className=' salesSelect' style={{ width: '85px' }}>
-                                <option value="Sale">Sales</option>
-                                <option value="Return">Returns</option>
-                            </select>
-                        </div>
-                        <div style={{ border: 'none' }} className='col-md-2.5 mb-2 align-self-end'>
+                        {/* <div style={{ border: '1px solid black' }} className='col-sm m-0 p-0  align-self-end'> */}
+                        <select value={this.state.trType} onChange={this.handleTrTypeChange} className=' salesSelect align-self-end' style={{ width: '85px' }}>
+                            <option value="Sale">Sales</option>
+                            <option value="Return">Returns</option>
+                        </select>
+                        {/* </div> */}
+                        <div style={{ border: 'none' }} className='col-sm-2.5 m-0 p-0 align-self-end'>
                             <label htmlFor='customerSelect' className=' label-sales'>Customer:</label><br></br>
                             <select id='customerSelect' value={this.state.selectedCustomer} onChange={this.handleCustomerChange} className='salesSelect' style={{ width: '132px' }} required>
                                 <option value='' disabled>--Customer--</option>
@@ -160,7 +160,7 @@ class FunctionLayer extends Component {
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Rate:</label><br></br>
-                            <input ref='rate' type='number' value={this.state.selectedRate} onChange={this.handleRateChange} className='sales-input' style={{ width: '75px' }} required />
+                            <input ref='rate' type='number'  value={this.state.selectedRate} onChange={this.handleRateChange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>QTY:</label><br></br>

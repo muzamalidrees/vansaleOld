@@ -16,12 +16,16 @@ import Areas from './main/areas/Areas'
 import Users from './main/users/Users'
 import RolesAndPermissions from './main/rolesAndPermissions/RolesAndPermissions'
 import SalesOrReturn from './main/salesOrReturn/SalesOrReturn';
+import Inventory from './main/inventory/Inventory';
 
 
 class Content extends Component {
     constructor(props) {
         super(props);
-        this.state = { date: new Date() };
+        this.state = {
+            date: new Date(),
+            // isLoggedIn: this.refs.loginLayer.state.isLoggedIn
+        };
     }
 
     componentDidMount() {
@@ -41,11 +45,12 @@ class Content extends Component {
             <div style={{}} className="container-fluid">
                 <Switch>
 
-                    <PropsRoute exact path='/' showLogout={this.props.showLogout} component={Login} />
-                    <PropsRoute path="/login" showLogout={this.props.showLogout} component={Login} />
+                    <PropsRoute exact path='/' component={SecuredHome} />
+                    <PropsRoute path="/login" component={Login} />
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/home" component={SecuredHome} />
+                    <PropsRoute path="/inventory" component={Inventory} date={this.state.date} />
                     <PropsRoute path='/customers' component={Customers} date={this.state.date} />
                     <PropsRoute path='/priceGroups' component={PriceGroups} date={this.state.date} />
                     <PropsRoute path='/drivers' component={Drivers} date={this.state.date} />

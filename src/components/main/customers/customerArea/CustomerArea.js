@@ -6,19 +6,23 @@ import { connect } from 'react-redux'
 
 
 class CustomerArea extends Component {
+    _isMounted = false;
     componentWillMount() {
-
+        this._isMounted = true;
         fetch('/getAllCustomers',
         )
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 this.props.dispatch(setCustomers(json.data))
-                this.setState({ showTable: true })
+                if (this._isMounted) {
+                    this.setState({ showTable: true })
+                }
             })
             .catch((error) => console.log(error))
     }
     componentWillUnmount() {
+        this._isMounted = false;
         return null;
     }
 

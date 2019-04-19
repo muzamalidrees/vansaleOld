@@ -53,3 +53,8 @@ dd {
     margin-right: 3px;
     display: inline;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
