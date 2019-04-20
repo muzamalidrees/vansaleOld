@@ -26,7 +26,7 @@ class SearchInputLayer extends Component {
     render() {
         const searchFilter = this.props.searchFilter;
         const searchText = this.props.searchText;
-        const searchLimit = this.props.searchLimit;
+        // const searchLimit = this.props.searchLimit;
         return (
 
             <div className='row col-12 m-0 justify-content-center'>
@@ -37,7 +37,6 @@ class SearchInputLayer extends Component {
                         <option value="address">Search By Address</option>
                         <option value="cell">Search By Cell #</option>
                         <option value="email">Search By Email</option>
-                        <option value="role_id">Search By Role</option>
                     </select>
                 </div>
                 <div className='col-md-2.5 mb-2  '>

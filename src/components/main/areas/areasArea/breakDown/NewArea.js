@@ -65,7 +65,7 @@ class NewArea extends Component {
                     <div style={{ border: 'none' }} className="form-row col-6 justify-content-center">
                         <div className="col-md-10 mb-3">
                             <label className='label-A' htmlFor="">Name</label>
-                            <input type="text" className="form-control" ref="name" placeholder="e.g. Electronics" required />
+                            <input type="text" className="form-control" ref="name" placeholder="e.g. ModelTown" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
@@ -75,12 +75,12 @@ class NewArea extends Component {
                         </div>
                         <div className="col-md-10 mb-3">
                             <label className='label-A' htmlFor="">Area Code</label>
-                            <input type="text" className="form-control" ref="areaCode" placeholder="e.g. 34000" required />
+                            <input type="number" className="form-control" ref="areaCode" placeholder="e.g. 34000" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
                             <div className="invalid-feedback">
-                                Please provide an Area Code.
+                                Please provide a valid Area Code.
                             </div>
                         </div>
 

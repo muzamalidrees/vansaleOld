@@ -2,21 +2,26 @@ import React, { Component } from 'react';
 import SearchResultRow from './SearchResultRow';
 
 class SearchResultsTable extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
 
     render() {
 
         const searchText = this.props.searchText;
         const searchFilter = this.props.searchFilter;
-        const ASearchResults = this.props.ASearchResults;
-        const rows = [];
+        var ASearchResults = this.props.ASearchResults;
+        this.rows = [];
         var index = 0;
         ASearchResults.forEach((searchResult) => {
             if (searchResult[searchFilter].indexOf(searchText) === -1) {
                 return;
             }
             index = index + 1;
-            rows.push(
-                <SearchResultRow index={index} searchResult={searchResult} key={searchResult.id} />
+            this.rows.push(
+                <SearchResultRow sr={index} onUpdate={this.onUpdate} searchResult={searchResult} key={searchResult.id} />
             );
         });
 
@@ -35,10 +40,11 @@ class SearchResultsTable extends Component {
                         <tr>
                             <th>Sr.</th>
                             <th>Name</th>
+                            <th>Area_Code</th>
                             <th>Edit/Delete</th>
                         </tr>
                     </thead>
-                    <tbody>{rows}</tbody>
+                    <tbody>{this.rows}</tbody>
                 </table>
             </div >
         );

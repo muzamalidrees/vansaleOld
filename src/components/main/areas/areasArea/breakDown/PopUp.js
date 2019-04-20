@@ -20,7 +20,8 @@ class PopUp extends Component {
         }
         else {
             let updateName = this.refs.name.value;
-            this.props.updatedb(updateName)
+            let updateCode = this.refs.aCode.value;
+            this.props.updatedb(updateName, updateCode)
         }
     }
     render() {
@@ -47,6 +48,10 @@ class PopUp extends Component {
                             <div className="col-md-6 mb-3">
                                 <label className='label-PC' htmlFor="">Name</label>
                                 <input type="text" className="form-control" ref="name" defaultValue={this.props.editname} required />
+                            </div>
+                            <div className="col-md-6 mb-3">
+                                <label className='label-PC' htmlFor="">Area_Code</label>
+                                <input type="number" className="form-control" ref="aCode" defaultValue={this.props.editCode} required />
                             </div>
 
                         </div>

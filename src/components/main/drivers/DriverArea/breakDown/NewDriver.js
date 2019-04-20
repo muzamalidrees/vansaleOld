@@ -48,7 +48,7 @@ class NewDriver extends Component {
             .then((json) => {
                 console.log(json)
                 let message = json.message;
-                if (message == 'driver registered successfully') {
+                if (message === 'driver registered successfully') {
                     this.refs.name.value = ''
                     this.refs.email.value = ''
                     this.refs.cell.value = ''

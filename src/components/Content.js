@@ -5,7 +5,7 @@ import About from './misc/About';
 import Contact from './misc/Contact';
 import NotFound from './misc/NotFound';
 import SecuredHome from './misc/SecuredHome';
-import Login from './auth/Login';
+import SecuredLogin from './auth/SecuredLogin';
 import Customers from './main/customers/Customers';
 import PriceGroups from './main/priceGroups/PriceGroups';
 import Drivers from './main/drivers/Drivers';
@@ -20,13 +20,10 @@ import Inventory from './main/inventory/Inventory';
 
 
 class Content extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date(),
-            // isLoggedIn: this.refs.loginLayer.state.isLoggedIn
-        };
-    }
+    state = {
+        date: new Date(),
+    };
+    
 
     componentDidMount() {
         this.timerID = setInterval(() => this.tick(), 1000);
@@ -44,9 +41,9 @@ class Content extends Component {
 
             <div style={{}} className="container-fluid">
                 <Switch>
-
+                    {/* <Route path="/home" render={() => this.state.loggedIn ? <Home /> : <Redirect to='/login' />} /> */}
                     <PropsRoute exact path='/' component={SecuredHome} />
-                    <PropsRoute path="/login" component={Login} />
+                    <PropsRoute path="/login" component={SecuredLogin} />
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/home" component={SecuredHome} />
@@ -62,7 +59,6 @@ class Content extends Component {
                     <PropsRoute path='/rolesAndPermissions' component={RolesAndPermissions} date={this.state.date} />
                     <PropsRoute path='/salesOrReturn' component={SalesOrReturn} date={this.state.date} />
                     <PropsRoute path='/' component={NotFound} pt='186px' pb='185px' class={'sol-sm-12'} />
-
                 </Switch>
             </div>
 

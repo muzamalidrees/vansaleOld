@@ -47,7 +47,7 @@ class CustomerPricing extends Component {
     }
     handleClick() {
         this.setState({ showSearchResultsTable: !this.state.showSearchResultsTable })
-        if (this.state.clickBtnLabel == 'View') {
+        if (this.state.clickBtnLabel === 'View') {
             this.setState({ clickBtnLabel: 'Hide' })
             this.refs.clickBtn.style.color = '#274e13'
             this.newPGHdng.style.color = '#783f04'

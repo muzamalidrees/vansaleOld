@@ -1,13 +1,44 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+
 
 class PopUp extends Component {
+    _isMounted = false;
+    componentWillMount() {
+        this._isMounted = true;
+        fetch('/getAllAreas',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ areas: json.data, showAreas: true })
+                }
+            })
+            .catch((error) => console.log(error))
+        fetch('/getAllRoutes',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ routes: json.data, showRoutes: true })
+                }
+            })
+            .catch((error) => console.log(error))
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+        return null;
+    }
     constructor(props) {
         super(props);
 
         this.state = {
+            areas: '',
+            routes: '',
+            showAreas: false,
+            showRoutes: false
         };
     }
     updateCustomer(e) {
@@ -24,6 +55,19 @@ class PopUp extends Component {
             let updateArea = this.refs.area.value;
             let updateRoute = this.refs.route.value;
             this.props.updatedb(updateName, updateEmail, updateCell, updateAddress, updateArea, updateRoute)
+        }
+    }
+    areasOptions = () => {
+        if (this.state.showAreas) {
+            const areasOptions = this.state.areas.map(area => { return <option value={area.id} key={area.id}>{area.name}</option> })
+            return areasOptions;
+        }
+        else return null;
+    }
+    routesOptions = () => {
+        if (this.state.showRoutes) {
+            const routesOptions = this.state.routes.map(route => { return <option value={route.id} key={route.id}>{route.name}</option> })
+            return routesOptions;
         }
     }
 
@@ -76,20 +120,14 @@ class PopUp extends Component {
                                 <label className='label-customer' htmlFor="">Area</label>
                                 <select defaultValue={this.props.editarea} ref="area" className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                     <option value=''>--Select an Area--</option>
-                                    <option value='1'>Area 1</option>
-                                    <option value='2'>Area 2</option>
-                                    <option value='3'>Area 3</option>
-                                    <option value='4'>Area 4</option>
+                                    {this.areasOptions()}
                                 </select>
                             </div>
                             <div className="col-md-6 mb-3">
                                 <label className='label-customer' htmlFor="">Route</label><br></br>
                                 <select defaultValue={this.props.editroute} ref="route" className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                     <option value=''>--Select a Route--</option>
-                                    <option value='1'>Route 1</option>
-                                    <option value='2'>Route 2</option>
-                                    <option value='3'>Route 3</option>
-                                    <option value='4'>Route 4</option>
+                                    {this.routesOptions()}
                                 </select>
                             </div>
 

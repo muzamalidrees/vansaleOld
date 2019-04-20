@@ -46,7 +46,7 @@ class SearchResultRow extends Component {
         let description = iconClick.cells[2].innerHTML
         let rate = iconClick.cells[3].innerHTML
         let qty = iconClick.cells[4].innerHTML
-        let price = iconClick.cells[5].innerHTML
+        // let price = iconClick.cells[5].innerHTML
 
         this.setState({
             editId: id,

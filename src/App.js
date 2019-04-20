@@ -13,17 +13,23 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            // isLoggedIn: this.refs.contentLayer.state.is
+        fetch('/isAuth')
+            .then((res) => res.json())
+            .then((json) => {
+                this.setState({ loggedIn: json.loggedIn })
+            })
+            .catch((err => {
+                console.log(err);
+            }))
+            this.state = {
+            }
         }
-        // this.showLogout = this.showLogout.bind(this);
-    }
-    // showLogout = (x) => {
-    //     this.setState({ isLoggedIn: x })
-    // }
+        
+        render() {
+        if (this.state.loggedIn) {
+            document.getElementById('logoutButton').style.display = ''
 
-    render() {
-
+        }
         return (
             <Provider store={store}>
                 <BrowserRouter>
@@ -31,13 +37,12 @@ class App extends Component {
                     <div style={{ backgroundColor: '#999999' }}>
                         <Header
                             ref='headerLayer'
-                        // isLoggedIn={this.state.isLoggedIn}
                         />
                         <hr className="hr1" />
-                        <Content
+                        <Route path='/' component={Content} />
+                        {/* <Content
                             ref='contentLayer'
-                        // showLogout={this.showLogout}
-                        />
+                        /> */}
                         <hr className="hr2" />
                         <Footer />
                     </div>

@@ -14,6 +14,7 @@ class SearchResultRow extends Component {
             modalShow: false,
             editId: '',
             editName: '',
+            editCode: ''
         };
         this.deleteRow = this.deleteRow.bind(this);
         this.updatedb = this.updatedb.bind(this);
@@ -37,17 +38,20 @@ class SearchResultRow extends Component {
         if (iconClick.rowIndex === undefined) {
             iconClick = target;
         }
-        let id = iconClick.cells[3].innerHTML
+        this.selectedRow = iconClick.rowIndex;
+        let id = iconClick.cells[4].innerHTML
         let name = iconClick.cells[1].innerHTML
+        let code = iconClick.cells[2].innerHTML
 
         this.setState({
             editId: id,
             editName: name,
+            editCode: code,
             modalShow: true
         })
     }
-    updatedb = (name) => {
-        let area = { id: this.state.editId, name: name }
+    updatedb = (name, code) => {
+        let area = { id: this.state.editId, name: name, area_code: code }
 
         var options = {
             method: 'PUT',
@@ -59,6 +63,7 @@ class SearchResultRow extends Component {
             .then((json) => {
                 console.log(json)
                 // this.props.dispatch(removeProduct(json.data));
+                // this.props.onUpdate(json.data, this.selectedRow);
                 this.setState({
                     editId: '',
                     editName: '',
@@ -89,7 +94,7 @@ class SearchResultRow extends Component {
         var i = iconClik.rowIndex;
         document.getElementById('Atbl').deleteRow(i)
 
-        let dRowValue = iconClik.cells[3].innerHTML
+        let dRowValue = iconClik.cells[4].innerHTML
         let area = { value: dRowValue }
 
         var options = {
@@ -108,17 +113,19 @@ class SearchResultRow extends Component {
     }
     render() {
 
-        const index = this.props.index;
+        const sr = this.props.sr;
         const searchResult = this.props.searchResult;
         const id = searchResult.id;
         const name = searchResult.name;
+        const code = searchResult.area_code
 
 
         return (
             <tr className=''>
 
-                <td>{index}</td>
+                <td>{sr}</td>
                 <td>{name}</td>
+                <td>{code}</td>
                 <td>
                     <button style={{ marginRight: '10px' }} onClick={this.editRow} type='button' className=" btn mb-1 btn-light ">
                         <FontAwesomeIcon icon={faEdit} />
@@ -127,6 +134,7 @@ class SearchResultRow extends Component {
                     <PopUp
 
                         editname={this.state.editName}
+                        editCode={this.state.editCode}
                         show={this.state.modalShow}
                         updatedb={this.updatedb}
                         onHide={() => { this.setState({ modalShow: false }) }}

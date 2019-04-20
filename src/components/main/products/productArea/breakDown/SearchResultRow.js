@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faUserEdit, faPencilAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { removeProduct } from '../../../../../actions/product-actions';
 import { connect } from 'react-redux'
 import PopUp from './PopUp';

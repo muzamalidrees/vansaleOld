@@ -43,7 +43,7 @@ class SearchResultRow extends Component {
         if (iconClick.rowIndex === undefined) {
             iconClick = target;
         }
-        console.log(iconClick.rowIndex);
+        // console.log(iconClick.rowIndex);
         // console.log(this.rowIndex);
 
         let id = iconClick.cells[8].innerHTML

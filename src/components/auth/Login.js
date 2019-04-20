@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router'
 import './loginStyles.css';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // isLoggedIn: false,
+            isLoggedIn: false,
         }
     }
     validateLogin = (evt) => {
@@ -43,10 +44,8 @@ class Login extends Component {
                 }
                 this.refs.loginLabel.innerHTML = message;
                 this.refs.loginBtn.style.marginTop = '0px';
-                // this.setState({ isLoggedIn: true })
-                this.props.history.push(json.route);
-                document.getElementById('logoutButton').innerHTML = 'Log Out'
-                // this.props.showLogout(json.success);
+                this.setState({ isLoggedIn: true })
+                // this.props.history.push(json.route);
             })
             .catch((err) => console.log(err))
     }
@@ -55,8 +54,11 @@ class Login extends Component {
     }
 
     render() {
-
-        return (
+        if (this.state.isLoggedIn) {
+            document.getElementById('logoutButton').style.display = '';
+            return <Redirect to='/home' />
+        }
+        else return (
 
             <div className="container" style={{ textAlign: 'center', backgroundColor: '#999999', marginTop: '81px', marginBottom: '81px', paddingTop: '81px', paddingBottom: '81px' }}>
                 <form className='loginForm' ref='loginForm' onSubmit={this.validateLogin} method='POST' noValidate>

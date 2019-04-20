@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import UserArea from './UserArea';
-import { Redirect } from 'react-router';
+import Login from './Login'
+import { Redirect } from 'react-router'
 
-class SecuredUserArea extends Component {
+class SecuredLogin extends Component {
     state = {
 
     }
@@ -21,14 +21,14 @@ class SecuredUserArea extends Component {
     }
 
     render() {
-        if (this.state.loggedIn === false) {
-            return <Redirect to='/login' />
+        if (this.state.loggedIn === true) {
+            return <Redirect to='/home' />
         }
         else {
-            return <UserArea />
+            return <Login />
         }
 
     }
 }
 
-export default SecuredUserArea
+export default SecuredLogin

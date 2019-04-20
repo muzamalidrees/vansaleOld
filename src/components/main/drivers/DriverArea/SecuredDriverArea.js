@@ -21,7 +21,7 @@ class SecuredDriverArea extends Component {
     }
 
     render() {
-        if (this.state.loggedIn == false) {
+        if (this.state.loggedIn === false) {
             return <Redirect to='/login' />
         }
         else {

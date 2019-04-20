@@ -5,9 +5,42 @@ import { addNewCustomer } from '../../../../../actions/customer-actions';
 
 
 class NewCustomer extends Component {
+    _isMounted = false;
+    componentWillMount() {
+        this._isMounted = true;
+        fetch('/getAllAreas',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ areas: json.data, showAreas: true })
+                }
+            })
+            .catch((error) => console.log(error))
+        fetch('/getAllRoutes',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ routes: json.data, showRoutes: true })
+                }
+
+            })
+            .catch((error) => console.log(error))
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+        return null;
+    }
     constructor(props) {
         super(props);
         this.state = {
+            areas: '',
+            routes: '',
+            showAreas: false,
+            showRoutes: false,
             selectedRouteValue: '',
             selectedAreaValue: ''
         }
@@ -48,7 +81,7 @@ class NewCustomer extends Component {
             .then((json) => {
                 console.log(json)
                 let message = json.message;
-                if (message == 'customer registered successfully') {
+                if (message === 'customer registered successfully') {
                     this.refs.name.value = ''
                     this.refs.email.value = ''
                     this.refs.cell.value = ''
@@ -72,7 +105,21 @@ class NewCustomer extends Component {
     handleAreaChange(e) {
         this.setState({ selectedAreaValue: e.target.value })
     }
+    areasOptions = () => {
+        if (this.state.showAreas) {
+            const areasOptions = this.state.areas.map(area => { return <option value={area.id} key={area.id}>{area.name}</option> })
+            return areasOptions;
+        }
+        else return null;
+    }
+    routesOptions = () => {
+        if (this.state.showRoutes) {
+            const routesOptions = this.state.routes.map(route => { return <option value={route.id} key={route.id}>{route.name}</option> })
+            return routesOptions;
+        }
+    }
     render() {
+
         return (
             <div style={{ border: 'none', textAlign: 'center', marginTop: '30px', marginBottom: '30px' }} className=" col-sm-9 ">
                 <h1 style={{ border: 'none' }} className='newCustomerHdng'>Customer Registration</h1>
@@ -128,10 +175,7 @@ class NewCustomer extends Component {
                             <label className='label-customer' htmlFor="">Area</label>
                             <select value={this.state.selectedAreaValue} onChange={this.handleAreaChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value=''>--Select an Area--</option>
-                                <option value='1'>Area 1</option>
-                                <option value='2'>Area 2</option>
-                                <option value='3'>Area 3</option>
-                                <option value='4'>Area 4</option>
+                                {this.areasOptions()}
                             </select>
                             <div className="valid-feedback">
                                 Looks good!
@@ -144,10 +188,7 @@ class NewCustomer extends Component {
                             <label className='label-customer' htmlFor="">Route</label><br></br>
                             <select value={this.state.selectedRouteValue} onChange={this.handleRouteChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value=''>--Select a Route--</option>
-                                <option value='1'>Route 1</option>
-                                <option value='2'>Route 2</option>
-                                <option value='3'>Route 3</option>
-                                <option value='4'>Route 4</option>
+                                {this.routesOptions()}
                             </select>
                             <div className="valid-feedback">
                                 Looks good!
