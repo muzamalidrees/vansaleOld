@@ -5,6 +5,22 @@ import SearchInputLayer from './SearchInputLayer';
 
 
 class FunctionLayer extends Component {
+    componentDidMount() {
+        let role_id = parseInt(this.props.user.role_id)
+        console.log(typeof (role_id));
+
+        if (role_id === 2) {
+            this.addCustomer.style.display = ''
+        }
+        else {
+            this.addCustomer.style.display = 'none'
+        }
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
 
     render() {
 
@@ -12,10 +28,10 @@ class FunctionLayer extends Component {
 
             <div style={{ border: 'none' }} className='row m-0 '>
                 <div className='row col-12 m-0 justify-content-center'>
-
-                    <div className='col-md-2.5 mb-2  button-contaner '>
-                        <Link to="/customers/add"> <button ref='addCustomer'>Add New Customer</button> </Link>
+                    <div ref={(el) => { this.addCustomer = el }} className='col-md-2.5 mb-2  button-contaner '>
+                        <Link to="/customers/add"> <button >Add New Customer</button> </Link>
                     </div>
+
                     <div className='col-md-2.5 mb-2  button-contaner '>
                         <Link to="/customers/import"> <button ref='importCustomer'>Import Customers</button> </Link>
                     </div>

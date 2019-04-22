@@ -4,7 +4,8 @@ import { Redirect } from 'react-router';
 
 class SecuredCustomerArea extends Component {
     state = {
-
+        user: '',
+        call: false
     }
     constructor() {
         super()
@@ -13,20 +14,25 @@ class SecuredCustomerArea extends Component {
             .then((res) => res.json())
             .then((json) => {
                 // console.log(json);
-                this.setState({ loggedIn: json.loggedIn })
+                this.setState({ loggedIn: json.loggedIn, user: json.user, call: true })
+
             })
             .catch((err => {
                 console.log(err);
             }))
     }
 
+
     render() {
         if (this.state.loggedIn === false) {
             return <Redirect to='/login' />
         }
-        else {
-            return <CustomerArea />
+        else if (this.state.call) {
+            // console.log(this.state.user);
+            return <CustomerArea
+                user={this.state.user} />
         }
+        else return null
 
     }
 }
