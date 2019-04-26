@@ -11,6 +11,7 @@ class SearchResultsTable extends Component {
         const rows = [];
         var index = 0;
         DsearchResults.forEach((searchResult) => {
+
             if (searchResult[searchFilter].indexOf(searchText) === -1) {
                 return;
             }

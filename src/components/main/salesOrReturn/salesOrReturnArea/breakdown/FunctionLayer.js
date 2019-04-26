@@ -160,15 +160,15 @@ class FunctionLayer extends Component {
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Rate:</label><br></br>
-                            <input ref='rate' type='number'  value={this.state.selectedRate} onChange={this.handleRateChange} className='sales-input' style={{ width: '75px' }} required />
+                            <input ref='rate' type='number' min='1' value={this.state.selectedRate} onChange={this.handleRateChange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>QTY:</label><br></br>
-                            <input ref='qty' type='number' value={this.state.selectedQTy} onChange={this.handleQTYchange} className='sales-input' style={{ width: '75px' }} required />
+                            <input ref='qty' type='number' min='0' value={this.state.selectedQTy} onChange={this.handleQTYchange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Discount%:</label><br></br>
-                            <input ref='discount' type='number' value={this.state.selectedDiscount} onChange={this.handleDiscountChange} className='sales-input' style={{ width: '75px' }} required />
+                            <input ref='discount' type='number' min='0' value={this.state.selectedDiscount} onChange={this.handleDiscountChange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Price:</label><br></br>

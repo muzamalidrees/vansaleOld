@@ -35,7 +35,7 @@ class SearchInputLayer extends Component {
                     <select value={searchFilter} onChange={this.handleSearchFilterChange} className='Dselect'>
                         <option value="name">Search By Name</option>
                         <option value="price">Search By price</option>
-                        <option value="category">Search By Category</option>
+                        <option value="product_category_id">Search By Category</option>
                         <option value="description">Search By Description</option>
                     </select>
                 </div>
