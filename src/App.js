@@ -16,7 +16,7 @@ class App extends Component {
         fetch('/isAuth')
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 this.setState({ loggedIn: json.loggedIn })
             })
             .catch((err => {

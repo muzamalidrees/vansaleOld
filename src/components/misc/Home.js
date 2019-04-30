@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import './miscStyles.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCashRegister, faDollarSign, faGripHorizontal, faUserTie, faTasks } from '@fortawesome/free-solid-svg-icons';
+import { faCashRegister, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faCubes } from '@fortawesome/free-solid-svg-icons';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+// import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { faCube } from '@fortawesome/free-solid-svg-icons';
-import { faRoute } from '@fortawesome/free-solid-svg-icons';
+// import { faRoute } from '@fortawesome/free-solid-svg-icons';
 import { faChartBar } from '@fortawesome/free-solid-svg-icons';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+// import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faChartArea } from '@fortawesome/free-solid-svg-icons';
-import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+// import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 
 
 class Home extends Component {

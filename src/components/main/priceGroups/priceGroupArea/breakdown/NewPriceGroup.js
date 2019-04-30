@@ -3,12 +3,25 @@ import { connect } from 'react-redux';
 import { addNewPriceGroup } from '../../../../../actions/PG-actions';
 
 
-
 class NewPriceGroup extends Component {
+
+    componentWillMount() {
+        fetch('/getAllProductCategories',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json)
+                this.setState({ allPCs: json.data })
+
+            })
+            .catch((error) => console.log(error))
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-            selectedCategoryValue: ''
+            selectedCategoryValue: '',
+            allPCs: ''
         }
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
     }
@@ -66,6 +79,12 @@ class NewPriceGroup extends Component {
     }
 
     render() {
+        if (this.state.allPCs !== '') {
+            var productCategoriesOptions = this.state.allPCs.map((PC) => { return <option key={PC.id} value={PC.id}>{PC.name}</option> })
+        }
+        else {
+            var productCategoriesOptions = null
+        }
         return (
             <div style={{ border: 'none', textAlign: 'center', marginTop: '72px', marginBottom: '72px' }} className=" col-sm-9 ">
                 <h1 style={{ border: 'none' }} className='newPGHdng'>Price Group Registration</h1>
@@ -85,10 +104,7 @@ class NewPriceGroup extends Component {
                             <label className='label-PG' htmlFor="">Product Category</label>
                             <select value={this.state.selectedCategoyrValue} onChange={this.handleCategoryChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value=''>--Select Product Category--</option>
-                                <option value='1'>Area 1</option>
-                                <option value='2'>Area 2</option>
-                                <option value='3'>Area 3</option>
-                                <option value='4'>Area 4</option>
+                                {productCategoriesOptions}
                             </select>
                             <div className="valid-feedback">
                                 Looks good!
@@ -102,7 +118,7 @@ class NewPriceGroup extends Component {
                     <div style={{ border: 'none' }} className="form-row col-8">
                         <div className="col-md-6 mb-3">
                             <label className='label-PG' htmlFor="">Price</label>
-                            <input type="text" className="form-control" ref="price" placeholder="e.g. 1000" required />
+                            <input type="number" className="form-control" ref="price" placeholder="e.g. 1000" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
@@ -112,7 +128,7 @@ class NewPriceGroup extends Component {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label className='label-PG' htmlFor="">Byuing_back Price</label>
-                            <input type="text" className="form-control" ref="BBPrice" placeholder="e.g. 950" required />
+                            <input type="number" className="form-control" ref="BBPrice" placeholder="e.g. 950" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>

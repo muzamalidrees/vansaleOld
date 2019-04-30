@@ -1,5 +1,54 @@
 // This optional code is used to register a service worker.
 // register() is not called by default.
+var self = this
+var cacheName = 'vansale cache 20';
+const FILES_TO_CACHE = [
+  '/',
+  '/index.html',
+];
+
+window.addEventListener('activate', function (evt) {
+  evt.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== cacheName) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  return self.clients.claim();
+})
+window.addEventListener('install', function (evt) {
+
+  evt.waitUntil(
+    caches.open(cacheName).then((cache) => {
+      console.log('[ServiceWorker] Pre-caching offline page');
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
+  return self.skipWaiting();
+})
+
+window.addEventListener('fetch', function (evt) {
+  if (evt.request.mode !== 'navigate') {
+    // Not a page navigation, bail.
+    return;
+  }
+  evt.respondWith(
+    // caches.match(evt.request).then(function (response) {
+    //   return response || fetch(evt.request)
+    // })
+    fetch(evt.request)
+      .catch(() => {
+        return caches.open(cacheName)
+          .then((cache) => {
+            return cache.match('offline.html');
+          });
+      })
+  );
+})
 
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
@@ -12,12 +61,12 @@
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  // [::1] is the IPv6 localhost address.
+  window.location.hostname === '[::1]' ||
+  // 127.0.0.1/8 is considered localhost for IPv4.
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  )
 );
 
 export function register(config) {
@@ -43,7 +92,7 @@ export function register(config) {
         navigator.serviceWorker.ready.then(() => {
           console.log(
             'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://bit.ly/CRA-PWA'
+            'worker. To learn more, visit https://bit.ly/CRA-PWA'
           );
         });
       } else {
@@ -71,7 +120,7 @@ function registerValidSW(swUrl, config) {
               // content until all client tabs are closed.
               console.log(
                 'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
+                'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
               );
 
               // Execute callback

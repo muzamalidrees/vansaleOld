@@ -21,17 +21,17 @@ class SetCustomerPrices extends Component {
         event.preventDefault();
 
         if (this.state.selectedCustomer === '') {
-            this.refs.msgLbl.innerHTML = "please select customer";
+            this.refs.msgLblf.innerHTML = "Please select customer";
             this.refs.customerSelect.focus();
         }
         else {
-            this.refs.msgLbl.innerHTML = "";
+            this.refs.msgLblf.innerHTML = "";
             if (this.state.selectedPriceGroup === '') {
-                this.refs.msgLbl.innerHTML = "please select priceGroup";
+                this.refs.msgLblf.innerHTML = "Please select priceGroup";
                 this.refs.priceGroupSelect.focus();
             }
             else {
-                this.refs.msgLbl.innerHTML = "";
+                this.refs.msgLblf.innerHTML = "";
                 this.saveToServer();
             }
         }
@@ -49,7 +49,7 @@ class SetCustomerPrices extends Component {
         fetch('/customerPricing', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 let msg = json.msg;
                 let cID = json.customerID;
                 let pgID = json.priceGroupID;
@@ -72,18 +72,18 @@ class SetCustomerPrices extends Component {
                 let displayErrorMessage = 'something went wrong';
 
                 if (msg === 'created') {
-                    this.refs.msgLbl.innerHTML = displaySuccessMessage;
+                    this.refs.msgLbls.innerHTML = displaySuccessMessage;
                     this.setState({ selectedCustomer: '', selectedPriceGroup: '' })
                     this.refs.customerSelect.state.value.label = ''
                     this.refs.priceGroupSelect.state.value.label = ''
                     this.refs.customerSelect.focus();
                 }
                 if (msg === 'existing') {
-                    this.refs.msgLbl.innerHTML = displayExistingMessage;
+                    this.refs.msgLbls.innerHTML = displayExistingMessage;
                     this.refs.priceGroupSelect.focus();
                 }
                 if (msg === 'error') {
-                    this.refs.msgLbl.innerHTML = displayErrorMessage;
+                    this.refs.msgLbls.innerHTML = displayErrorMessage;
                 }
                 this.props.dispatch(addNewCP(json.data));
             })
@@ -91,11 +91,13 @@ class SetCustomerPrices extends Component {
     }
     handleCustomerChange(e) {
         this.setState({ selectedCustomer: e.value })
-        console.log('state changed')
+        this.refs.msgLblf.innerHTML = "";
+        this.refs.msgLbls.innerHTML = "";
     }
     handlePriceGroupChange(e) {
         this.setState({ selectedPriceGroup: e.value })
-        console.log('state changed')
+        this.refs.msgLblf.innerHTML = "";
+        this.refs.msgLbls.innerHTML = "";
     }
 
 
@@ -138,7 +140,9 @@ class SetCustomerPrices extends Component {
 
 
                     <div style={{ border: 'none' }} className="row col-7 justify-content-center">
-                        <label ref='msgLbl' className='label-PG'></label>
+
+                        <label ref='msgLbls' className='label-PG'></label>
+                        <label ref='msgLblf' style={{ color: '#cc0000', fontFamily: 'mono-space', fontWeight: "normal" }}></label>
                         <div style={{ display: 'flex', justifyContent: 'center' }} className="form-group col-12">
                             <button className="PGRegisterBtn" type="submit">Submit</button><br></br>
                         </div>

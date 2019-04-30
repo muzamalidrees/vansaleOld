@@ -38,7 +38,7 @@ class SearchInputLayer extends Component {
                 </div>
                 <div className='col-md-2.5 mb-2  '>
                     <div className="input-group">
-                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="PGsearch-input" ref='search' placeholder="Search Customers.." />
+                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="PGsearch-input" ref='search' placeholder="Search Pricegroups.." />
                         <div className="input-group-append">
                             <button style={{ border: '2px solid #783f04', borderLeft: 'none', background: '#ddd' }} className="btn " type="button" disabled>
                                 <FontAwesomeIcon className='PGsearch-button' icon={faSearch} />
@@ -46,7 +46,7 @@ class SearchInputLayer extends Component {
                         </div>
                     </div>
                 </div>
-                <div style={{display:'none'}} className='col-md-2.5 mb-2  '>
+                {/* <div style={{display:'none'}} className='col-md-2.5 mb-2  '>
                     <select value={searchLimit} onChange={this.handleSearchLimitChange} className='PGselect'>
                         <option value="">--Limit--</option>
                         <option value="10">10</option>
@@ -54,7 +54,7 @@ class SearchInputLayer extends Component {
                         <option value="50">50</option>
 
                     </select>
-                </div>
+                </div> */}
             </div>
 
         )

@@ -13,7 +13,7 @@ class SalesOrReturnArea extends Component {
         )
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 products = json.data;
                 this.setState({
                     showTable: true,
@@ -27,7 +27,7 @@ class SalesOrReturnArea extends Component {
         )
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 customers = json.data
                 this.setState({
                     showFunctions: true,
@@ -53,12 +53,13 @@ class SalesOrReturnArea extends Component {
 
     }
     handleAddButtonClick(product_id, rate, qty, discount, price) {
+        this.msgLabel.innerHTML = ""
         TotalPrice = TotalPrice + parseInt(price);
         this.setState({ showChekout: true })
         this.refs.tableLayer.addArrayToTbl(product_id, rate, qty, discount, price);
     }
     callFunctionLayer() {
-        if (this.state.showFunctions) {
+        if (this.state.showFunctions && this.state.showTable) {
             return <FunctionLayer
                 ref='functionLayer'
                 customers={customers}
@@ -75,10 +76,10 @@ class SalesOrReturnArea extends Component {
             selectedQTy: qty,
             selectedDiscount: discount,
         })
-        console.log(TotalPrice);
+        // console.log(TotalPrice);
 
         TotalPrice = TotalPrice - price;
-        console.log(TotalPrice);
+        // console.log(TotalPrice);
 
         let x = document.getElementById('salestbl');
         x.deleteRow(i);
@@ -89,7 +90,7 @@ class SalesOrReturnArea extends Component {
     DeleteRow(price, i) {
 
         TotalPrice = TotalPrice - price;
-        console.log(TotalPrice);
+        // console.log(TotalPrice);
 
         let y = document.getElementById('salestbl');
         y.deleteRow(i);
@@ -116,13 +117,13 @@ class SalesOrReturnArea extends Component {
         const customer_id = this.refs.functionLayer.state.selectedCustomer
         if (tr === 'Sale') {
             for (let index = 1; index < z.rows.length; index++) {
+                const productName = z.rows[index].cells[1].innerHTML;
                 const productId = z.rows[index].cells[7].innerHTML;
                 const rate = z.rows[index].cells[2].innerHTML;
                 const qty = z.rows[index].cells[3].innerHTML;
                 const discount = z.rows[index].cells[4].innerHTML;
                 const price = z.rows[index].cells[5].innerHTML;
-
-                this.saveSalesToServer(customer_id, productId, rate, qty, discount, price, invoice, TotalPrice, tr);
+                this.saveSalesToServer(customer_id, productId, rate, qty, discount, price, invoice, productName);
             }
             this.saveInvoice(TotalPrice, tr);
             TotalPrice = TotalPrice - TotalPrice;
@@ -133,13 +134,14 @@ class SalesOrReturnArea extends Component {
         }
         if (tr === 'Return') {
             for (let index = 1; index < z.rows.length; index++) {
+                const productName = z.rows[index].cells[1].innerHTML;
                 const productId = z.rows[index].cells[7].innerHTML;
                 const rate = z.rows[index].cells[2].innerHTML;
                 const qty = z.rows[index].cells[3].innerHTML;
                 const discount = z.rows[index].cells[4].innerHTML;
                 const price = z.rows[index].cells[5].innerHTML;
 
-                this.saveReturnsToServer(customer_id, productId, rate, qty, discount, price, invoice, TotalPrice, tr);
+                this.saveReturnsToServer(customer_id, productId, rate, qty, discount, price, invoice, productName);
             }
             this.saveInvoice(TotalPrice, tr);
             TotalPrice = TotalPrice - TotalPrice;
@@ -149,9 +151,8 @@ class SalesOrReturnArea extends Component {
             return;
         }
     }
-    saveSalesToServer = (customer, product, rate, qty, discount, price, invoice, TotalPrice, tr) => {
-        // alert('hello')
-        let sales = { customer: customer, product: product, rate: rate, qty: qty, discount: discount, price: price, invoice: invoice }
+    saveSalesToServer = (customer, product, rate, qty, discount, price, invoice, productName) => {
+        let sales = { customer: customer, product: product, rate: rate, qty: qty, discount: discount, price: price, invoice: invoice, productName: productName }
 
         var options = {
             method: 'POST',
@@ -161,16 +162,29 @@ class SalesOrReturnArea extends Component {
         fetch('/addNewSale', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
+                let message = json.message;
+                this.msgLabel.innerHTML = message;
+            })
+            .catch((error) => console.log(error))
+
+        var options2 = {
+            method: 'PUT',
+            body: JSON.stringify(sales),
+            headers: { 'Content-Type': 'application/json' }
+        }
+        fetch('/updateSalesItemQty', options2)
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
                 // let message = json.message;
                 // this.refs.msglabel.innerHTML = message;
             })
             .catch((error) => console.log(error))
 
     }
-    saveReturnsToServer = (customer, product, rate, qty, discount, price, invoice, TotalPrice, tr) => {
-        // alert('hello')
-        let returns = { customer: customer, product: product, rate: rate, qty: qty, discount: discount, price: price, invoice: invoice }
+    saveReturnsToServer = (customer, product, rate, qty, discount, price, invoice, productName) => {
+        let returns = { customer: customer, product: product, rate: rate, qty: qty, discount: discount, price: price, invoice: invoice, productName: productName }
 
         var options = {
             method: 'POST',
@@ -180,7 +194,22 @@ class SalesOrReturnArea extends Component {
         fetch('/addNewReturn', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
+                let message = json.message;
+                this.msgLabel.innerHTML = message;
+            })
+            .catch((error) => console.log(error))
+
+        var options2 = {
+            method: 'PUT',
+            body: JSON.stringify(returns),
+            headers: { 'Content-Type': 'application/json' }
+        }
+
+        fetch('/updateReturnsItemQty', options2)
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
                 // let message = json.message;
                 // this.refs.msglabel.innerHTML = message;
             })
@@ -197,12 +226,9 @@ class SalesOrReturnArea extends Component {
         fetch('/addNewInvoice', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
-                // let message = json.message;
-                // this.refs.msglabel.innerHTML = message;
+                // console.log(json)
             })
             .catch((error) => console.log(error))
-
     }
     callCheckoutLayer() {
         if (this.state.showChekout) {
@@ -220,10 +246,10 @@ class SalesOrReturnArea extends Component {
 
                 {this.callFunctionLayer()}
                 {this.callTableLayer()}
-                <div style={{ border: 'none' }} className='col-md-5 m-0 p-0'>
+                <div style={{ border: 'none' }} className='col-md-5 mt-2 p-0'>
                     <label className="label-sales">Total:</label>
                     <input type='text' value={TotalPrice} className='sales-input' style={{ width: '140px' }} disabled />
-
+                    &nbsp;&nbsp;&nbsp;&nbsp; <label ref={(el) => { this.msgLabel = el }} style={{ color: '#274e13', fontWeight: 'bold' }}></label>
                 </div>
                 {this.callCheckoutLayer()}
 

@@ -26,12 +26,12 @@ class FunctionLayer extends Component {
                     </div>
                 </div>
                 <SearchInputLayer
-                    searchLimit={this.props.searchLimit}
+                    // searchLimit={this.props.searchLimit}
                     searchFilter={this.props.searchFilter}
                     searchText={this.props.searchText}
                     onSearchFilterChange={this.props.onSearchFilterChange}
                     onSearchTextChange={this.props.onSearchTextChange}
-                    onSearchLimitChange={this.props.onSearchLimitChange}
+                    // onSearchLimitChange={this.props.onSearchLimitChange}
                 />
 
 

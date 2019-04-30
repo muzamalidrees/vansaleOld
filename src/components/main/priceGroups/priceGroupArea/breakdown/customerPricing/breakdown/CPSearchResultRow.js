@@ -40,8 +40,8 @@ class SearchResultRow extends Component {
             iconClick = target;
         }
         let id = iconClick.cells[4].innerHTML
-        let customer = iconClick.cells[1].innerHTML
-        let priceGroup = iconClick.cells[2].innerHTML
+        let customer = iconClick.cells[5].innerHTML
+        let priceGroup = iconClick.cells[6].innerHTML
         this.setState({
             editId: id,
             editCustomer: customer,
@@ -118,18 +118,23 @@ class SearchResultRow extends Component {
         const index = this.props.index;
         const searchResult = this.props.searchResult;
         const id = searchResult.id;
-        let cID = searchResult.customer_id;
-        let pgID = searchResult.price_group_id;
-
+        var cID = searchResult.customer_id;
+        var pgID = searchResult.price_group_id;
+        var cName;
+        var pgName;
         customers.forEach((customer) => {
-            if (customer['id'] === cID) {
-                cID = customer['name']
+
+            if (customer.id == cID) {
+                cName = customer.name
+                // console.log(cID);
+
                 return;
             }
         })
         priceGroups.forEach((priceGroup) => {
-            if (priceGroup['id'] === pgID) {
-                pgID = priceGroup['name']
+
+            if (priceGroup.id == pgID) {
+                pgName = priceGroup.name
                 return;
             }
         })
@@ -138,8 +143,8 @@ class SearchResultRow extends Component {
         return (
             <tr className=''>
                 <td>{index}</td>
-                <td>{cID}</td>
-                <td>{pgID}</td>
+                <td>{cName}</td>
+                <td>{pgName}</td>
                 <td>
                     <button style={{ marginRight: '10px' }} onClick={this.editRow} type='button' className=" btn mb-1 btn-light ">
                         <FontAwesomeIcon icon={faEdit} />
@@ -160,6 +165,8 @@ class SearchResultRow extends Component {
                     </button>
                 </td>
                 <td style={{ display: 'none' }}>{id}</td>
+                <td style={{ display: 'none' }}>{cID}</td>
+                <td style={{ display: 'none' }}>{pgID}</td>
             </tr>
         );
     }

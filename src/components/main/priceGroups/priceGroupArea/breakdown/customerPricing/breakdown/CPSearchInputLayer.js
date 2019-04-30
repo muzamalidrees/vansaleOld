@@ -31,7 +31,7 @@ class CPSearchInputLayer extends Component {
                 </div>
                 <div className='col-md-2.5 mb-2  '>
                     <div className="input-group">
-                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="PGsearch-input" placeholder="Search Customers.." />
+                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="PGsearch-input" placeholder="Search Customer-PriceGroups.." />
                         <div className="input-group-append">
                             <button style={{ border: '2px solid #783f04', borderLeft: 'none', background: '#ddd' }} className="btn " disabled>
                                 <FontAwesomeIcon className='PGsearch-button' icon={faSearch} />

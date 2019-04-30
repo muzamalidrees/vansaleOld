@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import CPSearchResultRow from './CPSearchResultRow';
 
 class CustomerPrices extends Component {
-    componentWillMount() {
 
-        console.log(this.props.customers)
-        console.log(this.props.priceGroups)
-    }
     render() {
+
 
         var searchText = this.props.searchText;
         const searchFilter = this.props.searchFilter;
@@ -19,7 +16,8 @@ class CustomerPrices extends Component {
         if (searchFilter === 'customer_id' && searchText !== '') {
             var text = '';
             customers.forEach((customer) => {
-                if (customer["name"].indexOf(searchText) === -1) {
+
+                if (customer["name"].search(searchText) === -1) {
                     return;
                 }
                 text = customer.id
@@ -27,7 +25,7 @@ class CustomerPrices extends Component {
         }
         else if (searchFilter === 'price_group_id' && searchText !== '') {
             priceGroups.forEach((priceGroup) => {
-                if (priceGroup["name"].indexOf(searchText) === -1) {
+                if (priceGroup["name"].search(searchText) === -1) {
                     return;
                 }
                 text = priceGroup.id
@@ -41,7 +39,7 @@ class CustomerPrices extends Component {
         // if (searchFilter === 'price_group_id') {
         // }
         CPSearchResults.forEach((searchResult) => {
-            if (searchResult[searchFilter].indexOf(text) === -1) {
+            if (searchResult[searchFilter].indexOf(text) == -1) {
                 return;
             }
             index = index + 1;

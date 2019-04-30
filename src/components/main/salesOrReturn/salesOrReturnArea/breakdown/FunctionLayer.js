@@ -15,6 +15,7 @@ class FunctionLayer extends Component {
             selectedQTy: '',
             selectedDiscount: '',
             showCustomerData: false,
+            selectedProductName: ''
         }
         this.handleTrTypeChange = this.handleTrTypeChange.bind(this);
         this.handleCustomerChange = this.handleCustomerChange.bind(this);
@@ -23,6 +24,7 @@ class FunctionLayer extends Component {
         this.handleQTYchange = this.handleQTYchange.bind(this);
         this.handleDiscountChange = this.handleDiscountChange.bind(this);
         this.discountedPrice = this.discountedPrice.bind(this);
+        this.saveToTable = this.saveToTable.bind(this);
     }
     handleTrTypeChange(e) {
         this.setState({ trType: e.target.value })
@@ -34,11 +36,16 @@ class FunctionLayer extends Component {
         let pValue = e.target.value;
         this.setState({ selectedProduct: pValue })
         this.setProductRate(pValue)
+        let { options, selectedIndex } = e.target;
+        let productName = options[selectedIndex].innerHTML
+        this.setState({ selectedProductName: productName })
+
     }
     handleRateChange(e) {
         this.setState({ selectedRate: e.target.value }, function () {
         });
     }
+
     handleQTYchange(e) {
         this.setState({ selectedQTy: e.target.value }, function () {
         });
@@ -49,8 +56,8 @@ class FunctionLayer extends Component {
 
     }
     showCustomerData() {
-        const { customers } = this.props;
-        const customer = customers.filter((customer) => customer.id == this.state.selectedCustomer).shift()
+        let { customers } = this.props;
+        let customer = customers.filter((customer) => customer.id == this.state.selectedCustomer).shift()
         if (this.state.showCustomerData) {
             return (<div style={{ border: 'none' }} className='col-sm-4 mt-2 p-0 justify-content-center' >
                 <dl className='m-0 p-0'>
@@ -101,6 +108,31 @@ class FunctionLayer extends Component {
         this.handleAddBtnClick();
     }
     handleAddBtnClick() {
+        if (this.state.trType === 'Sale') {
+
+            let item = this.state.selectedProductName
+            fetch('/checkItemQty/' + item)
+                .then((res) => res.json())
+                .then((json) => {
+                    // console.log(json)
+                    let stock = json.qty;
+                    if (this.state.selectedQTy > stock) {
+                        alert("Maximum Available Qty of " + item + " is: " + stock)
+                        this.refs.qty.focus();
+                        return;
+                    }
+                    else {
+                        this.saveToTable();
+                    }
+                })
+                .catch((error) => console.log(error))
+        }
+        else {
+            this.saveToTable();
+        }
+
+    }
+    saveToTable() {
         let product_id = this.state.selectedProduct;
         let rate = this.state.selectedRate;
         let qty = this.state.selectedQTy;
@@ -164,7 +196,7 @@ class FunctionLayer extends Component {
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>QTY:</label><br></br>
-                            <input ref='qty' type='number' min='0' value={this.state.selectedQTy} onChange={this.handleQTYchange} className='sales-input' style={{ width: '75px' }} required />
+                            <input ref='qty' type='number' min='1' value={this.state.selectedQTy} onChange={this.handleQTYchange} className='sales-input' style={{ width: '75px' }} required />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 p-0'>
                             <label className='label-sales'>Discount%:</label><br></br>
@@ -175,7 +207,7 @@ class FunctionLayer extends Component {
                             <input type='number' ref="price" value={this.discountedPrice()} className='sales-input' style={{ width: '75px' }} disabled />
                         </div>
                         <div style={{ border: 'none' }} className='col-sm  mb-2 mt-2 p-0 align-self-end'>
-                            <button type="submit" className='btn btn-info btn-sm' style={{ fontWeight: '600', width: '250px', marginBottom: '0px', marginLeft: '5px', marginRight: '5px' }}>Add</button>
+                            <button ref={(el) => { this.addButton = el }} type="submit" className='btn btn-info btn-sm' style={{ fontWeight: '600', width: '250px', marginBottom: '0px', marginLeft: '5px', marginRight: '5px' }}>Add</button>
                         </div>
 
                     </div>

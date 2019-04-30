@@ -127,12 +127,12 @@ class NewCustomer extends Component {
                     <div style={{ border: 'none' }} className="form-row col-8">
                         <div className="col-md-6 mb-3">
                             <label className='label-customer' htmlFor="">Name</label>
-                            <input type="text" className="form-control" ref="name" placeholder="e.g. John" required />
+                            <input type="text" className="form-control" ref="name" pattern="[0-9a-zA-Z]+" placeholder="e.g. John" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
                             <div className="invalid-feedback">
-                                Please provide a Name.
+                                Only letters and numbers allowed.
                             </div>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -150,7 +150,7 @@ class NewCustomer extends Component {
 
                         <div className="col-md-6 mb-3">
                             <label className='label-customer' htmlFor="">Cell</label>
-                            <input type="text" className="form-control" ref="cell" placeholder="e.g. +923011234567" required />
+                            <input type="number" className="form-control" ref="cell" placeholder="e.g. +923011234567" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>

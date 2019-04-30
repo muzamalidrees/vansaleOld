@@ -11,7 +11,7 @@ class ProductArea extends Component {
         )
             .then((res) => res.json())
             .then((json) => {
-                // console.log(json)
+                console.log(json)
                 this.props.dispatch(setProducts(json.data))
                 this.setState({ showTable: true })
 
@@ -29,7 +29,7 @@ class ProductArea extends Component {
         }
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);
         this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
-        this.handleSearchLimitChange = this.handleSearchLimitChange.bind(this);
+        // this.handleSearchLimitChange = this.handleSearchLimitChange.bind(this);
 
     }
     callTable = () => {
@@ -56,11 +56,11 @@ class ProductArea extends Component {
             searchText: searchText
         })
     }
-    handleSearchLimitChange(searchLimit) {
-        this.setState({
-            searchLimit: searchLimit
-        });
-    }
+    // handleSearchLimitChange(searchLimit) {
+    //     this.setState({
+    //         searchLimit: searchLimit
+    //     });
+    // }
 
     render() {
 
@@ -68,12 +68,12 @@ class ProductArea extends Component {
 
             <div style={{ border: 'none' }} className=" col-sm-9 m-0 p-0 ">
                 <FunctionLayer
-                    searchLimit={this.state.searchLimit}
+                    // searchLimit={this.state.searchLimit}
                     searchFilter={this.state.searchFilter}
                     searchText={this.state.searchText}
                     onSearchFilterChange={this.handleSearchFilterChange}
                     onSearchTextChange={this.handleSearchTextChange}
-                    onSearchLimitChange={this.handleSearchLimitChange}
+                // onSearchLimitChange={this.handleSearchLimitChange}
                 />
                 {this.callTable()}
             </div>

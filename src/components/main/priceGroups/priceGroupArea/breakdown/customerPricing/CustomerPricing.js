@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CPSearchResultsTable from './breakdown/CPSearchResultsTable'
 import CPSearchInputLayer from './breakdown/CPSearchInputLayer';
 import SetCustomerPrices from './breakdown/SetCustomerPrices';
-import { setCustomerPricing } from '../../../../../../actions/CP-actions';
+// import { setCustomerPricing } from '../../../../../../actions/CP-actions';
 
 
 class CustomerPricing extends Component {
@@ -11,23 +11,37 @@ class CustomerPricing extends Component {
         fetch('/getAllCustomerPricing')
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
-                // this.setState({ allCustomersPrices: json.data })
-                this.props.dispatch(setCustomerPricing(json.data))
+                // console.log(json)
+                this.setState({ allCustomersPrices: json.data })
+                // this.props.dispatch(setCustomerPricing(json.data))
             })
             .catch((error) => console.log(error))
-
-        const customers = this.props.customers
-        const priceGroups = this.props.priceGroups
-        this.setState({ customers: customers, priceGroups: priceGroups })
+        fetch('/getAllCustomers')
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                this.setState({ customers: json.data, showCustomers: true })
+                // this.props.dispatch(setCustomerPricing(json.data))
+            })
+            .catch((error) => console.log(error))
+        fetch('/getAllPriceGroups')
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                this.setState({ priceGroups: json.data, showPriceGroups: true })
+                // this.props.dispatch(setCustomerPricing(json.data))
+            })
+            .catch((error) => console.log(error))
     }
 
     constructor(props) {
         super(props);
         this.state = {
+            showCustomers: '',
             customers: '',
             priceGroups: '',
-            allCustomersPrices: props.allCustomersPrices,
+            showPriceGroups: '',
+            allCustomersPrices: null,
             showSearchResultsTable: false,
             clickBtnLabel: 'View',
             searchText: '',
@@ -74,7 +88,7 @@ class CustomerPricing extends Component {
         }
     }
     viewSearchResultsTable = () => {
-        if (this.state.showSearchResultsTable) {
+        if (this.state.showSearchResultsTable && this.state.showCustomers && this.state.showPriceGroups) {
             return <CPSearchResultsTable
                 searchText={this.state.searchText}
                 searchFilter={this.state.searchFilter}
@@ -82,14 +96,25 @@ class CustomerPricing extends Component {
                 priceGroups={this.state.priceGroups}
                 CPSearchResults={this.state.allCustomersPrices}
             />;
-
         }
         else {
             return null;
         }
     }
 
-
+    callSetCustomerPrices = () => {
+        if (this.state.showCustomers && this.state.showPriceGroups) {
+            return <SetCustomerPrices
+                myForm={el => (this.myForm = el)}
+                newPGHdng={el => (this.newPGHdng = el)}
+                customers={this.state.customers}
+                priceGroups={this.state.priceGroups}
+            />
+        }
+        else {
+            return null;
+        }
+    }
 
 
 
@@ -99,12 +124,7 @@ class CustomerPricing extends Component {
         return (
 
             <div style={{ border: 'none', textAlign: 'center', marginTop: '1px', marginBottom: '2px' }} className=" col-sm-9 ">
-                <SetCustomerPrices
-                    myForm={el => (this.myForm = el)}
-                    newPGHdng={el => (this.newPGHdng = el)}
-                    customers={this.state.customers}
-                    priceGroups={this.state.priceGroups}
-                />
+                {this.callSetCustomerPrices()}
                 <button style={{ color: '#783f04' }} ref='clickBtn' className='btn btn-link' onClick={this.handleClick}>{this.state.clickBtnLabel} Customer's Prices</button>
                 {this.showSearchFilter()}
                 {this.viewSearchResultsTable()}
@@ -113,12 +133,14 @@ class CustomerPricing extends Component {
         )
     }
 }
-const mapStateToProps = (store) => {
-    return {
-        customers: store.customersReducer,
-        priceGroups: store.PGReducer,
-        allCustomersPrices: store.CPReducer
-    }
-}
+// const mapStateToProps = (store) => {
+//     return {
+//         customers: store.customersReducer,
+//         priceGroups: store.PGReducer,
+//         allCustomersPrices: store.CPReducer
+//     }
+// }
 
-export default connect(mapStateToProps)(CustomerPricing)
+export default
+    // connect(mapStateToProps)
+    (CustomerPricing)
