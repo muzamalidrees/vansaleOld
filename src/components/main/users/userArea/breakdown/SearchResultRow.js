@@ -124,7 +124,7 @@ class SearchResultRow extends Component {
         fetch('/deleteUser', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 this.props.dispatch(removeUser(json.data));
 
             })

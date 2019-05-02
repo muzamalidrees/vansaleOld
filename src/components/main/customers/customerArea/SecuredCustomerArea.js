@@ -3,19 +3,26 @@ import CustomerArea from './CustomerArea';
 import { Redirect } from 'react-router';
 
 class SecuredCustomerArea extends Component {
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+    _isMounted = false;
+
     state = {
         user: '',
         call: false
     }
     constructor() {
         super()
+        this._isMounted = true;
         fetch('/isAuth')
 
             .then((res) => res.json())
             .then((json) => {
                 // console.log(json);
-                this.setState({ loggedIn: json.loggedIn, user: json.user, call: true })
-
+                if (this._isMounted) {
+                    this.setState({ loggedIn: json.loggedIn, user: json.user, call: true })
+                }
             })
             .catch((err => {
                 console.log(err);

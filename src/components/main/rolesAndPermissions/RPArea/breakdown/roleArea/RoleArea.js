@@ -12,7 +12,7 @@ class RoleArea extends Component {
         )
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 this.props.dispatch(setRoles(json.data))
                 this.setState({ showTable: true })
             })

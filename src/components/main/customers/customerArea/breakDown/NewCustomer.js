@@ -38,8 +38,8 @@ class NewCustomer extends Component {
         super(props);
         this.state = {
             areas: '',
-            routes: '',
             showAreas: false,
+            routes: '',
             showRoutes: false,
             selectedRouteValue: '',
             selectedAreaValue: ''

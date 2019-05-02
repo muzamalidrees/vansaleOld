@@ -34,12 +34,12 @@ class SearchInputLayer extends Component {
                 <div className='col-md-2.5 mb-2  '>
                     <select value={searchFilter} onChange={this.handleSearchFilterChange} className='PGselect'>
                         <option value="name">Search By Name</option>
-                        <option value="area_id">Search By Area</option>
+                        {/* <option value="area_id">Search By Area</option> */}
                     </select>
                 </div>
                 <div className='col-md-2.5 mb-2  '>
                     <div className="input-group">
-                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="PGsearch-input" ref='search' placeholder="Search Customers.." />
+                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="PGsearch-input" ref='search' placeholder="Search Routes.." />
                         <div className="input-group-append">
                             <button style={{ border: '2px solid #783f04', borderLeft: 'none', background: '#ddd' }} className="btn " type="button" disabled>
                                 <FontAwesomeIcon className='PGsearch-button' icon={faSearch} />

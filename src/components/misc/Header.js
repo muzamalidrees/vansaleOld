@@ -16,7 +16,7 @@ class Header extends Component {
         fetch('/logout')
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 this.refs.logoutButton.style.display = 'none'
                 this.setState({ redirect: true, route: json.route })
 

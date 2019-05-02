@@ -6,19 +6,23 @@ import { connect } from 'react-redux'
 
 
 class PriceGroupArea extends Component {
+    _isMounted = false;
     componentWillMount() {
-
+        this._isMounted = true;
         fetch('/getAllPriceGroups',
         )
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
                 this.props.dispatch(setPriceGroups(json.data))
-                this.setState({ showTable: true })
+                if (this._isMounted) {
+                    this.setState({ showTable: true })
+                }
             })
             .catch((error) => console.log(error))
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
+        this._isMounted = false;
         return null;
     }
 

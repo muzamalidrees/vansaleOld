@@ -34,7 +34,7 @@ class Login extends Component {
         fetch('/auth', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 let message = json.message;
                 if (message === 'incorrect Password') {
                     this.refs.password.value = "";

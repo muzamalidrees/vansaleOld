@@ -34,7 +34,7 @@ class SearchInputLayer extends Component {
                 </div>
                 <div className='col-md-2.5 mb-2  '>
                     <div className="input-group">
-                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="Inventorysearch-input" ref='search' placeholder="Search Customers.." />
+                        <input value={searchText} onChange={this.handleSearchTextChange} type="text" className="Inventorysearch-input" ref='search' placeholder="Search Inventory.." />
                         <div className="input-group-append">
                             <button style={{ border: '2px solid #783f04', borderLeft: 'none', background: '#ddd' }} className="btn " type="button" disabled>
                                 <FontAwesomeIcon className='Inventorysearch-button' icon={faSearch} />

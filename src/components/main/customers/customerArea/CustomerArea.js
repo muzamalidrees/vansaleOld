@@ -29,14 +29,12 @@ class CustomerArea extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchLimit: '',
             searchFilter: 'name',
             searchText: '',
             showTable: false,
         }
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);
         this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
-        this.handleSearchLimitChange = this.handleSearchLimitChange.bind(this);
 
     }
 
@@ -65,11 +63,7 @@ class CustomerArea extends Component {
             searchText: searchText
         })
     }
-    handleSearchLimitChange(searchLimit) {
-        this.setState({
-            searchLimit: searchLimit
-        });
-    }
+
 
     render() {
 
@@ -78,12 +72,10 @@ class CustomerArea extends Component {
             <div style={{ border: 'none' }} className=" col-sm-9 m-0 p-0 ">
                 <FunctionLayer
                     user={this.props.user}
-                    searchLimit={this.state.searchLimit}
                     searchFilter={this.state.searchFilter}
                     searchText={this.state.searchText}
                     onSearchFilterChange={this.handleSearchFilterChange}
                     onSearchTextChange={this.handleSearchTextChange}
-                    onSearchLimitChange={this.handleSearchLimitChange}
                 />
                 {this.callTable()}
             </div>

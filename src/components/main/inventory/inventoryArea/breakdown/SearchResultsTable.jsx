@@ -5,13 +5,19 @@ class SearchResultsTable extends Component {
 
     render() {
 
-        const searchText = this.props.searchText;
-        const searchFilter = this.props.searchFilter;
-        const inventorySearchResults = this.props.inventorySearchResults;
-        const rows = [];
+        var searchText = this.props.searchText;
+        var searchFilter = this.props.searchFilter;
+        var inventorySearchResults = this.props.inventorySearchResults;
+        var rows = [];
         var index = 0;
+
         inventorySearchResults.forEach((searchResult) => {
-            if (searchResult[searchFilter].indexOf(searchText) === -1) {
+
+            var value = searchResult[searchFilter]
+            if (searchFilter !== 'name') {
+                value = value.toString()
+            }
+            if (value.indexOf(searchText) === -1) {
                 return;
             }
             index++;

@@ -3,10 +3,30 @@ import { Button, Modal } from 'react-bootstrap';
 
 
 class PopUp extends Component {
+    _isMounted = false;
+    componentWillMount() {
+        this._isMounted = true
+        fetch('/getAllRoles',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ roles: json.data, showRoles: true })
+                }
+            })
+            .catch((error) => console.log(error))
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+        return null;
+    }
     constructor(props) {
         super(props);
 
         this.state = {
+            roles: '',
+            showRoles: false
         };
     }
     updateUser(e) {
@@ -28,6 +48,9 @@ class PopUp extends Component {
     }
 
     render() {
+        if (this.state.showRoles) {
+            var roleOptions = this.state.roles.map(role => { return <option key={role.id} value={role.id}>{role.name}</option> })
+        }
 
         return (
 
@@ -88,10 +111,7 @@ class PopUp extends Component {
                                 <label className='label-U' htmlFor="">Role</label>
                                 <select ref='role' defaultValue={this.props.editrole} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                     <option value=''>--Select Role--</option>
-                                    <option value='1'>Role 1</option>
-                                    <option value='2'>Role 2</option>
-                                    <option value='3'>Area 3</option>
-                                    <option value='4'>Area 4</option>
+                                    {roleOptions}
                                 </select>
                             </div>
                         </div>

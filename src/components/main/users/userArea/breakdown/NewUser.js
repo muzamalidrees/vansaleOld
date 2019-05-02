@@ -5,10 +5,30 @@ import { addNewUser } from '../../../../../actions/user-actions';
 
 
 class NewUser extends Component {
+    _isMounted = false;
+    componentWillMount() {
+        this._isMounted = true
+        fetch('/getAllRoles',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ roles: json.data, showRoles: true })
+                }
+            })
+            .catch((error) => console.log(error))
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+        return null;
+    }
     constructor(props) {
         super(props);
         this.state = {
-            selectedRole: ''
+            selectedRole: '',
+            roles: '',
+            showRoles: false
         }
         this.handleRoleChange = this.handleRoleChange.bind(this);
     }
@@ -44,7 +64,7 @@ class NewUser extends Component {
         fetch('/addNewUser', options)
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 let message = json.message;
                 if (json.success) {
                     this.refs.name.value = ''
@@ -59,7 +79,7 @@ class NewUser extends Component {
                     this.refs.email.focus();
                 }
                 this.props.dispatch(addNewUser(json.data));
-                
+
                 this.refs.msglabel.innerHTML = message;
 
 
@@ -72,6 +92,9 @@ class NewUser extends Component {
     }
 
     render() {
+        if (this.state.showRoles) {
+            var roleOptions = this.state.roles.map(role => { return <option key={role.id} value={role.id}>{role.name}</option> })
+        }
         return (
             <div style={{ border: 'none', textAlign: 'center', marginTop: '72px', marginBottom: '72px' }} className=" col-sm-9 ">
                 <h1 style={{ border: 'none' }} className='newUHdng'>User Registration</h1>
@@ -102,7 +125,7 @@ class NewUser extends Component {
                     <div style={{ border: 'none' }} className="form-row col-8">
                         <div className="col-md-6 mb-3">
                             <label className='label-U' htmlFor="">Phone no.</label>
-                            <input type="text" className="form-control" ref="cell" placeholder="e.g. +923011234567" required />
+                            <input type="number" className="form-control" ref="cell" placeholder="e.g. +923011234567" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
@@ -134,7 +157,7 @@ class NewUser extends Component {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label className='label-U' htmlFor="">Password</label>
-                            <input type="text" className="form-control" ref="password" placeholder="e.g. Your Wish" required />
+                            <input type="password" className="form-control" ref="password" placeholder="e.g. Your Wish" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
@@ -148,10 +171,7 @@ class NewUser extends Component {
                             <label className='label-U' htmlFor="">Role</label>
                             <select value={this.state.selectedRole} onChange={this.handleRoleChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value=''>--Select Role--</option>
-                                <option value='1'>Role 1</option>
-                                <option value='2'>Role 2</option>
-                                <option value='3'>Area 3</option>
-                                <option value='4'>Area 4</option>
+                                {roleOptions}
                             </select>
                             <div className="valid-feedback">
                                 Looks good!

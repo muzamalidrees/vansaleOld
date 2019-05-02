@@ -6,19 +6,25 @@ import { connect } from 'react-redux'
 
 
 class DriverArea extends Component {
+    _isMounted = false;
     componentWillMount() {
+        this._isMounted = true
         fetch('/getAllDrivers',
         )
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 this.props.dispatch(setDrivers(json.data))
-                this.setState({ showTable: true })
+                if (this._isMounted) {
+
+                    this.setState({ showTable: true })
+                }
 
             })
             .catch((error) => console.log(error))
     }
     componentWillUnmount() {
+        this._isMounted = false
         return null;
     }
 

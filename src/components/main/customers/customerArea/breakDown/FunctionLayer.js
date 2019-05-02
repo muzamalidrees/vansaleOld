@@ -5,17 +5,16 @@ import SearchInputLayer from './SearchInputLayer';
 
 
 class FunctionLayer extends Component {
-    componentDidMount() {
-        let role_id = parseInt(this.props.user.role_id)
-        console.log(typeof (role_id));
+    // componentDidMount() {
+    //     let role_id = parseInt(this.props.user.role_id)
 
-        if (role_id === 2) {
-            this.addCustomer.style.display = ''
-        }
-        else {
-            this.addCustomer.style.display = 'none'
-        }
-    }
+    //     if (role_id === 2) {
+    //         this.addCustomer.style.display = ''
+    //     }
+    //     else {
+    //         this.addCustomer.style.display = 'none'
+    //     }
+    // }
     constructor(props) {
         super(props);
         this.state = {

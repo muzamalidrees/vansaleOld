@@ -37,7 +37,7 @@ class SearchInputLayer extends Component {
                         <option value="email">Search By Email</option>
                         <option value="cell">Search By Cell</option>
                         <option value="username">Search By Username</option>
-                        <option value="area">Search By Area</option>
+                        <option value="address">Search By Address</option>
                     </select>
                 </div>
                 <div className='col-md-2.5 mb-2  '>

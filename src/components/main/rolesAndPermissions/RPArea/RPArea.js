@@ -24,7 +24,7 @@ class RPArea extends Component {
         this.state = {
             // searchLimit: '',
             searchFilter: 'name',
-            searchText: '1',
+            searchText: '',
             showTable: false
         }
         this.handleSearchFilterChange = this.handleSearchFilterChange.bind(this);

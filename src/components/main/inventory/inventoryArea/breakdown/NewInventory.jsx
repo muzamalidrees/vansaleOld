@@ -103,22 +103,22 @@ class NewInventory extends Component {
                     <div style={{ border: 'none' }} className="form-row col-8">
                         <div className="col-md-6 mb-3">
                             <label className='label-Inventory' htmlFor="">Rate</label>
-                            <input type="number" className="form-control" value={this.state.rate} onChange={this.handleRateChange} ref="rate" placeholder="e.g. 1000" required />
+                            <input type="number" min='1' className="form-control" value={this.state.rate} onChange={this.handleRateChange} ref="rate" placeholder="e.g. 1000" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
                             <div className="invalid-feedback">
-                                Please provide Rate.
+                                Rate can't be a -ve value
                             </div>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label className='label-Inventory' htmlFor="">Qty.</label>
-                            <input type="number" className="form-control" value={this.state.qty} onChange={this.handleQtyChange} ref="qty" placeholder="e.g. 125" required />
+                            <input type="number" min='1' className="form-control" value={this.state.qty} onChange={this.handleQtyChange} ref="qty" placeholder="e.g. 125" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
                             <div className="invalid-feedback">
-                                Please provide Qty..
+                                Qty can't be a -ve value
                             </div>
                         </div>
 

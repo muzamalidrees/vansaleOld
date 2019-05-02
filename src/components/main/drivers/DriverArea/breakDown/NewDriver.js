@@ -5,9 +5,42 @@ import { addNewDriver } from '../../../../../actions/driver-actions';
 
 
 class NewDriver extends Component {
+    _isMounted = false;
+    componentWillMount() {
+        this._isMounted = true;
+        fetch('/getAllAreas',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ areas: json.data, showAreas: true })
+                }
+            })
+            .catch((error) => console.log(error))
+        fetch('/getAllRoutes',
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json)
+                if (this._isMounted) {
+                    this.setState({ routes: json.data, showRoutes: true })
+                }
+
+            })
+            .catch((error) => console.log(error))
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+        return null;
+    }
     constructor(props) {
         super(props);
         this.state = {
+            areas: '',
+            showAreas: false,
+            routes: '',
+            showRoutes: '',
             selectedRouteValue: '',
             selectedAreaValue: ''
         }
@@ -72,6 +105,19 @@ class NewDriver extends Component {
     handleAreaChange(e) {
         this.setState({ selectedAreaValue: e.target.value })
     }
+    areasOptions = () => {
+        if (this.state.showAreas) {
+            const areasOptions = this.state.areas.map(area => { return <option value={area.id} key={area.id}>{area.name}</option> })
+            return areasOptions;
+        }
+        else return null;
+    }
+    routesOptions = () => {
+        if (this.state.showRoutes) {
+            const routesOptions = this.state.routes.map(route => { return <option value={route.id} key={route.id}>{route.name}</option> })
+            return routesOptions;
+        }
+    }
     render() {
         return (
             <div style={{ border: 'none', textAlign: 'center', marginTop: '30px', marginBottom: '30px' }} className=" col-sm-9 ">
@@ -103,7 +149,7 @@ class NewDriver extends Component {
 
                         <div className="col-md-6 mb-3">
                             <label className='label-driver' htmlFor="">Cell</label>
-                            <input type="text" className="form-control" ref="cell" placeholder="e.g. +923011234567" required />
+                            <input type="number" className="form-control" ref="cell" placeholder="e.g. +923011234567" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
@@ -128,10 +174,7 @@ class NewDriver extends Component {
                             <label className='label-driver' htmlFor="">Area</label>
                             <select value={this.state.selectedAreaValue} onChange={this.handleAreaChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value=''>--Select an Area--</option>
-                                <option value='1'>Area 1</option>
-                                <option value='2'>Area 2</option>
-                                <option value='3'>Area 3</option>
-                                <option value='4'>Area 4</option>
+                                {this.areasOptions()}
                             </select>
                             <div className="valid-feedback">
                                 Looks good!
@@ -144,10 +187,7 @@ class NewDriver extends Component {
                             <label className='label-customer' htmlFor="">Route</label><br></br>
                             <select value={this.state.selectedRouteValue} onChange={this.handleRouteChange} className=' form-control ' style={{ padding: '6px', color: '#783f04', textAlign: 'center', fontSize: '17px', fontWeight: '600', border: '1px solid #783f04', borderRadius: '5px' }} required>
                                 <option value=''>--Select a Route--</option>
-                                <option value='1'>Route 1</option>
-                                <option value='2'>Route 2</option>
-                                <option value='3'>Route 3</option>
-                                <option value='4'>Route 4</option>
+                                {this.routesOptions()}
                             </select>
                             <div className="valid-feedback">
                                 Looks good!
