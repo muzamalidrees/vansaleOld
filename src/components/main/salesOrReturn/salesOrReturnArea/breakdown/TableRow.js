@@ -82,6 +82,7 @@ class TableRow extends Component {
 
     }
 
+
     render() {
         // const index = this.props.index;
         const product_id = this.props.product_id;
@@ -97,10 +98,11 @@ class TableRow extends Component {
         const qty = this.props.qty;
         const discount = this.props.discount;
         const price = this.props.price;
+        const index = this.props.index
 
         return (
             <tr className=''>
-                <td>{'index'}</td>
+                <td></td>
                 <td>{productName}</td>
                 <td>{rate}</td>
                 <td>{qty}</td>

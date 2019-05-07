@@ -9,10 +9,9 @@ class SearchResultsTable extends Component {
         const searchFilter = this.props.searchFilter;
         const RPSearchResults = this.props.RPSearchResults;
         const rows = [];
-        var index = 0;
-        console.log(RPSearchResults)
-        console.log(searchFilter)
-        console.log(searchText)
+        // console.log(RPSearchResults)
+        // console.log(searchFilter)
+        // console.log(searchText)
         // RPSearchResults.forEach((searchResult) => {
         //     if (searchResult[searchFilter].indexOf(searchText) === -1) {
         //         return;
@@ -29,22 +28,21 @@ class SearchResultsTable extends Component {
             //     return;
             // }
             let searchResult = RPSearchResults[i];
-            index = index + 1;
             rows.push(
-                <SearchResultRow index={index} searchResult={searchResult} key={searchResult.id} />
+                <SearchResultRow searchResult={searchResult} key={searchResult.id} />
             );
         }
 
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md RPtbl">
-                <table className='table table-dark table-striped table-bordered table-hover'>
+                <table id='RPtbl' className='table table-dark table-striped table-bordered table-hover css-serial'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>
                             <th>Role</th>
                             <th>Permissions</th>
-                            
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

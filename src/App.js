@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './redux';
+
 import './App.css';
 import Header from './components/misc/Header';
 import Footer from './components/misc/Footer';
@@ -16,15 +17,17 @@ class App extends Component {
         fetch('/isAuth')
             .then((res) => res.json())
             .then((json) => {
-                // console.log(json)
-                this.setState({ loggedIn: json.loggedIn })
+                console.log(json)
+                this.setState({ loggedIn: json.loggedIn, user: json.user })
             })
             .catch((err => {
                 console.log(err);
             }))
         this.state = {
+            ability: 1
         }
     }
+   
 
     render() {
         if (this.state.loggedIn) {
@@ -32,24 +35,26 @@ class App extends Component {
 
         }
         return (
-            <Provider store={store}>
-                <BrowserRouter>
 
-                    <div style={{ backgroundColor: '#999999' }}>
-                        <Header
-                            ref='headerLayer'
-                        />
-                        <hr className="hr1" />
-                        <Route path='/' component={Content} />
-                        {/* <Content
+                <Provider store={store}>
+                    <BrowserRouter>
+
+                        <div style={{ backgroundColor: '#999999' }}>
+                            <Header
+                                ref='headerLayer'
+                            />
+                            <hr className="hr1" />
+                            <Route path='/' component={Content} />
+                            {/* <Content
                             ref='contentLayer'
                         /> */}
-                        <hr className="hr2" />
-                        <Footer />
-                    </div>
+                            <hr className="hr2" />
+                            <Footer />
+                        </div>
 
-                </BrowserRouter>
-            </Provider>
+                    </BrowserRouter>
+                </Provider>
+
         );
 
     }

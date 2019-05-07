@@ -8,6 +8,7 @@ class SecuredLogin extends Component {
     }
     constructor() {
         super()
+       
         fetch('/isAuth')
 
             .then((res) => res.json())
@@ -25,7 +26,9 @@ class SecuredLogin extends Component {
             return <Redirect to='/home' />
         }
         else {
-            return <Login />
+            return <Login
+            changeUserState={this.props.changeUserState}
+            />
         }
 
     }

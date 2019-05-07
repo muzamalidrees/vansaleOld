@@ -29,7 +29,7 @@ class RolesAndPermissions extends Component {
                 <div style={{ border: 'none' }} className='row m-0 p-0'>
                     <Switch>
                         <Route path='/rolesAndPermissions/home' component={SecuredRPArea} />
-                        <PropsRoute path='/rolesAndPermissions/set' component={SecuredSetRolesPermissions} roles={this.props.roles} permissions={this.props.permissions} />
+                        <PropsRoute path='/rolesAndPermissions/set' component={SecuredSetRolesPermissions} />
                         <Route path='/rolesAndPermissions/r/home' component={SecuredRoleArea} />
                         <Route path='/rolesAndPermissions/r/add' component={SecuredNewRole} />
                         <PropsRoute path='/rolesAndPermissions/r/import' component={SecuredImportExport} mt='7px' mb='7px' pt='22px' pb='22px' />
@@ -48,11 +48,6 @@ class RolesAndPermissions extends Component {
     }
 }
 
-const mapStateToProps = (store) => {
-    return {
-        roles: store.rolesReducer,
-        permissions: store.permissionsReducer
-    }
-}
 
-export default connect(mapStateToProps)(RolesAndPermissions)
+
+export default RolesAndPermissions

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow';
+import '../../salesOrReturnStyles.css'
 
 
 class TableLayer extends Component {
+    index = 0;
     constructor(props) {
         super(props);
 
@@ -13,6 +15,7 @@ class TableLayer extends Component {
     }
 
     addArrayToTbl = (product_id, rate, qty, discount, price) => {
+        this.index++;
         var row = [];
         row.push(
             <TableRow
@@ -25,6 +28,7 @@ class TableLayer extends Component {
                 EditRow={this.props.EditRow}
                 DeleteRow={this.props.DeleteRow}
                 key={product_id}
+                index={this.index}
             />
         );
         this.setState(state => {
@@ -42,7 +46,7 @@ class TableLayer extends Component {
 
         return (
             <div style={{ overflowY: "auto", display: 'block', padding: '9px', textAlign: 'center' }} ref='tbl' className="table-responsive-md salestbl">
-                <table id='salestbl' className='table table-light table-striped table-bordered table-hover'>
+                <table id='salestbl' className='table table-light table-striped table-bordered table-hover css-serial'>
                     <thead className='thead-dark'>
                         <tr>
                             <th>Sr.</th>

@@ -6,19 +6,26 @@ import { connect } from 'react-redux'
 
 
 class PermissionArea extends Component {
+    _isMounted = false
     componentWillMount() {
-
+        this._isMounted = true
         fetch('/getAllPermissions',
         )
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
                 this.props.dispatch(setPermissions(json.data))
-                this.setState({ showTable: true })
+                if (this._isMounted) {
+
+                    this.setState({ showTable: true })
+                }
             })
             .catch((error) => console.log(error))
     }
-
+    componentWillUnmount() {
+        this._isMounted = false;
+        return null
+    }
     constructor(props) {
         super(props);
         this.state = {

@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import './miscStyles.css';
 
 class Header extends Component {
+    _isMounted = false
     constructor(props) {
         super(props);
         this.state = {
@@ -13,17 +14,31 @@ class Header extends Component {
     }
 
     logout = () => {
+        this._isMounted = true
         fetch('/logout')
             .then((res) => res.json())
             .then((json) => {
                 // console.log(json)
                 this.refs.logoutButton.style.display = 'none'
-                this.setState({ redirect: true, route: json.route })
+                if (this._isMounted) {
+                    if (window.location.pathname !== '/login') {
+                        this.setState({ redirect: true, route: json.route })
+                    }
+                }
 
             })
             .catch((err) => console.log(err))
     }
-
+    redirect() {
+        if (window.location.pathname !== '/login') {
+            return < Redirect to={this.state.route} />
+        }
+        else return null
+    }
+    componentWillUnmount() {
+        this._isMounted = false
+        return null
+    }
     render() {
 
         return (
@@ -34,10 +49,7 @@ class Header extends Component {
                             <h1 className="header-title">Van Sale</h1>
                         </div>
                     </div>
-                    {this.state.redirect ?
-                        (
-                            < Redirect to={this.state.route} />
-                        ) : null}
+                    {this.state.redirect ? this.redirect() : null}
                     <div className='row col-md-5 m-0'>
                         <div className='col align-self-center  nav'>
                             <Link to="/contact">Contact</Link> <code>|</code>

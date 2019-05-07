@@ -3,6 +3,11 @@ import { Redirect } from 'react-router'
 import './loginStyles.css';
 
 class Login extends Component {
+    _isMounted = false
+    componentWillUnmount() {
+        this._isMounted = false;
+        return null
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -24,6 +29,7 @@ class Login extends Component {
 
     }
     handleLogin = () => {
+        this._isMounted = true
         var options = {
             method: 'POST',
             body: JSON.stringify({ username: this.refs.email.value, password: this.refs.password.value }),
@@ -34,23 +40,36 @@ class Login extends Component {
         fetch('/auth', options)
             .then((res) => res.json())
             .then((json) => {
-                // console.log(json);
+                console.log(json);
                 let message = json.message;
                 if (message === 'incorrect Password') {
+                    this.msgLabel.innerHTML = message;
                     this.refs.password.value = "";
                     this.refs.password.focus();
                 }
-                else {
+                else if (message === `email doesn't exist`) {
+                    this.msgLabel.innerHTML = message;
+                    this.refs.email.value = "";
+                    this.refs.email.focus();
                 }
-                this.refs.loginLabel.innerHTML = message;
-                this.refs.loginBtn.style.marginTop = '0px';
-                this.setState({ isLoggedIn: true })
-                // this.props.history.push(json.route);
+                else {
+
+                    this.msgLabel.innerHTML = message;
+                    this.msgLabel.style.marginTop = '0px';
+                    if (this._isMounted) {
+                        this.setState({ isLoggedIn: true })
+                        // this.props.history.push(json.route);
+                    }
+                    this.props.changeUserState(json.user.role_id)
+                }
             })
             .catch((err) => console.log(err))
     }
     onChangeLabel = () => {
-        this.refs.loginLabel.innerHTML = '';
+        this.msgLabel.innerHTML = '';
+    }
+    redirect() {
+
     }
 
     render() {
@@ -96,7 +115,7 @@ class Login extends Component {
                         <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                         </div> */}
                     <div style={{ display: 'inline-block' }} className="form-row  col-lg-5  ">
-                        <label className="loginLabel" ref='loginLabel' htmlFor="loginBtn"></label>
+                        <label className="loginLabel" ref={el => { this.msgLabel = el }} htmlFor="loginBtn"></label>
                         <button type="submit" id='loginBtn' ref='loginBtn' className="col-sm-12 loginBtn">Sign In</button>
                     </div>
 

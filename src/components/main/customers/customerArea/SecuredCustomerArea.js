@@ -10,7 +10,7 @@ class SecuredCustomerArea extends Component {
 
     state = {
         user: '',
-        call: false
+        callComponent: false
     }
     constructor() {
         super()
@@ -21,7 +21,7 @@ class SecuredCustomerArea extends Component {
             .then((json) => {
                 // console.log(json);
                 if (this._isMounted) {
-                    this.setState({ loggedIn: json.loggedIn, user: json.user, call: true })
+                    this.setState({ loggedIn: json.loggedIn, callComponent: true })
                 }
             })
             .catch((err => {
@@ -34,12 +34,10 @@ class SecuredCustomerArea extends Component {
         if (this.state.loggedIn === false) {
             return <Redirect to='/login' />
         }
-        else if (this.state.call) {
-            // console.log(this.state.user);
-            return <CustomerArea
-                user={this.state.user} />
+        else {
+            return <CustomerArea />
         }
-        else return null
+
 
     }
 }

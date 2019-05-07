@@ -6,19 +6,25 @@ import { connect } from 'react-redux'
 
 
 class RoleArea extends Component {
+    _isMounted = false;
     componentWillMount() {
-
+        this._isMounted = true
         fetch('/getAllRoles',
         )
             .then((res) => res.json())
             .then((json) => {
                 // console.log(json)
                 this.props.dispatch(setRoles(json.data))
-                this.setState({ showTable: true })
+                if (this._isMounted) {
+                    this.setState({ showTable: true })
+                }
             })
             .catch((error) => console.log(error))
     }
-
+    componentWillUnmount() {
+        this._isMounted = false
+        return null
+    }
     constructor(props) {
         super(props);
         this.state = {

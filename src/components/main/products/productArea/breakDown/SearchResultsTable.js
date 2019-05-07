@@ -10,20 +10,18 @@ class SearchResultsTable extends Component {
         const searchFilter = this.props.searchFilter;
         const PsearchResults = this.props.PsearchResults;
         const rows = [];
-        var index = 0;
         PsearchResults.forEach((searchResult) => {
             if (searchResult[searchFilter].indexOf(searchText) === -1) {
                 return;
             }
-            index = index + 1;
             rows.push(
-                <SearchResultRow index={index} searchResult={searchResult} key={searchResult.id} />
+                <SearchResultRow searchResult={searchResult} key={searchResult.id} />
             );
         });
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md Ptbl">
-                <table id='Ptbl' className='table table-dark table-striped table-bordered table-hover'>
+                <table id='Ptbl' className='table table-dark table-striped table-bordered table-hover css-serial'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>

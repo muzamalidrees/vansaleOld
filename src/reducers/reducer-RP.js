@@ -5,6 +5,8 @@ const RPReducer = (state = [], action) => {
             return action.payload
         case "ADD_RP":
             return [action.payload, ...state]
+        case "REMOVE_RP":
+            return state.filter((RP) => { return RP !== action.payload })
         default:
             return state
     }

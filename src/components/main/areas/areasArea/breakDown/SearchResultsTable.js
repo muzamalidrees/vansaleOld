@@ -14,14 +14,14 @@ class SearchResultsTable extends Component {
         const searchFilter = this.props.searchFilter;
         var ASearchResults = this.props.ASearchResults;
         this.rows = [];
-        var index = 0;
+
         ASearchResults.forEach((searchResult) => {
             if (searchResult[searchFilter].indexOf(searchText) === -1) {
                 return;
             }
-            index = index + 1;
+
             this.rows.push(
-                <SearchResultRow sr={index} onUpdate={this.onUpdate} searchResult={searchResult} key={searchResult.id} />
+                <SearchResultRow onUpdate={this.onUpdate} searchResult={searchResult} key={searchResult.id} />
             );
         });
 
@@ -35,7 +35,7 @@ class SearchResultsTable extends Component {
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md Atbl">
-                <table id='Atbl' className='table table-dark table-striped table-bordered table-hover'>
+                <table id='Atbl' className='table table-dark table-striped table-bordered table-hover css-serial'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>

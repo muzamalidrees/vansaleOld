@@ -6,17 +6,25 @@ import { connect } from 'react-redux'
 
 
 class RPArea extends Component {
+    _isMounted = false
     componentDidMount() {
-
+        this._isMounted = true
         fetch('/getAllRolesPermissions',
         )
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 this.props.dispatch(setRolesPermissions(json.data))
-                this.setState({ showTable: true })
+                if (this._isMounted) {
+
+                    this.setState({ showTable: true })
+                }
             })
             .catch((error) => console.log(error))
+    }
+    componentWillUnmount() {
+        this._isMounted = false
+        return null;
     }
 
     constructor(props) {
