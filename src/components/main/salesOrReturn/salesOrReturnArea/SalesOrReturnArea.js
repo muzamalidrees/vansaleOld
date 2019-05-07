@@ -7,22 +7,18 @@ var customers;
 var products;
 var TotalPrice = 0;
 class SalesOrReturnArea extends Component {
-    _isMounted = false
     componentWillMount() {
-        this._isMounted = true
+
         fetch('/getAllProducts',
         )
             .then((res) => res.json())
             .then((json) => {
                 // console.log(json)
                 products = json.data;
-                if (this._isMounted) {
-
-                    this.setState({
-                        showTable: true,
-                        // products: json.data
-                    })
-                }
+                this.setState({
+                    showTable: true,
+                    // products: json.data
+                })
 
             })
             .catch((error) => console.log(error));
@@ -33,17 +29,12 @@ class SalesOrReturnArea extends Component {
             .then((json) => {
                 // console.log(json)
                 customers = json.data
-                if (this._isMounted) {
-                    this.setState({
-                        showFunctions: true,
-                        //   customers: json.data 
-                    })
-                }
+                this.setState({
+                    showFunctions: true,
+                    //   customers: json.data 
+                })
             })
             .catch((error) => console.log(error))
-    }
-    componentWillUnmount(){
-        this._isMounted = false
     }
 
     constructor(props) {

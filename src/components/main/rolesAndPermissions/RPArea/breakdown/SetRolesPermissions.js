@@ -7,39 +7,11 @@ import { connect } from 'react-redux';
 
 
 class SetRolesPermissions extends Component {
-    _isMounted = false;
-    componentWillMount() {
-        this._isMounted = true
-        fetch('/getAllPermissions',
-        )
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json)
-                // this.props.dispatch(setPermissions(json.data))
-                if (this._isMounted) {
-                    this.setState({ permissions: json.data, showPermissions: true })
-                }
-            })
-            .catch((error) => console.log(error))
-        fetch('/getAllRoles',
-        )
-            .then((res) => res.json())
-            .then((json) => {
-                // console.log(json)
-                // this.props.dispatch(setRoles(json.data))
-                if (this._isMounted) {
-                    this.setState({ roles: json.data, showRoles: true })
-                }
-            })
-            .catch((error) => console.log(error))
-    }
     constructor(props) {
         super(props);
         this.state = {
             selectedRole: '',
             selectedPermission: '',
-            roles: '',
-            permissions: ''
         }
         this.handleRoleChange = this.handleRoleChange.bind(this);
         this.handlePermissionChange = this.handlePermissionChange.bind(this);
@@ -78,28 +50,29 @@ class SetRolesPermissions extends Component {
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
-                let msg = json.message;
-                let rID = json.role_id;
-                let pID = json.permission_id;
+                let msg = json.msg;
+                let rID = json.roleID;
+                let pID = json.permissionID;
 
-                this.state.roles.forEach((role) => {
-                    if (role.id == rID) {
-                        rID = role.name
+                this.props.roles.forEach((role) => {
+                    if (role['id'] === rID) {
+                        rID = role['name']
                         return;
                     }
                 })
-                this.state.permissions.forEach((permission) => {
-                    if (permission.id == pID) {
-                        pID = permission.name
+                this.props.permissions.forEach((permission) => {
+                    if (permission['id'] === pID) {
+                        pID = permission['name']
                         return;
                     }
                 })
+
                 let displaySuccessMessage = 'Role: ' + rID + ', has been assigned Permission: ' + pID;
                 let displayExistingMessage = 'Role: ' + rID + ', already has Permission: ' + pID;
                 let displayErrorMessage = 'something went wrong';
 
                 if (msg === 'created') {
-                    this.refs.msgLbl.innerHTML = displaySuccessMessage
+                    this.refs.msgLbl.innerHTML = displaySuccessMessage;
                     this.setState({ selectedRole: '', selectedPermission: '' })
                     this.refs.roleSelect.state.value.label = ''
                     this.refs.permissionSelect.state.value.label = ''
@@ -112,7 +85,6 @@ class SetRolesPermissions extends Component {
                 if (msg === 'error') {
                     this.refs.msgLbl.innerHTML = displayErrorMessage;
                 }
-                // this.refs.msgLbl.innerHTML = json.message
                 this.props.dispatch(addNewRP(json.data));
             })
             .catch((error) => console.log(error))
@@ -127,12 +99,8 @@ class SetRolesPermissions extends Component {
 
     render() {
 
-        if (this.state.showRoles) {
-            var roleOptions = this.state.roles.map(role => ({ key: role.id, label: role.name, value: role.id }));
-        }
-        if (this.state.showPermissions) {
-            var permissionOptions = this.state.permissions.map(permission => ({ key: permission.id, label: permission.name, value: permission.id }))
-        }
+        const roleOptions = this.props.roles.map(role => ({ key: role.id, label: role.name, value: role.id }));
+        const permissionOptions = this.props.permissions.map(permission => ({ key: permission.id, label: permission.name, value: permission.id }))
 
         return (
             <div style={{ border: 'none' }} className=" col-sm-9 m-0 p-0 ">

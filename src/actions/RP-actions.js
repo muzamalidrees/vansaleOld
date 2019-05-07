@@ -6,8 +6,5 @@ const addNewRP = (RP) => {
 const setRolesPermissions = (RPs) => {
     return { type: "SET_ROLES_PERMISSIONS", payload: RPs }
 }
-const removeRP = (RP) => {
-    return { type: "REMOVE_RP", payload: RP }
-}
 
-export { addNewRP, setRolesPermissions, removeRP }
+export { addNewRP, setRolesPermissions }

@@ -123,6 +123,7 @@ class SearchResultRow extends Component {
     }
 
     render() {
+        const index = this.props.index;
         const searchResult = this.props.searchResult;
         const id = searchResult.id;
         const name = searchResult.name;
@@ -132,7 +133,7 @@ class SearchResultRow extends Component {
 
         return (
             <tr className=''>
-                <td></td>
+                <td>{index}</td>
                 <td>{name}</td>
                 <td>{description}</td>
                 <td>{category}</td>

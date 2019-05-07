@@ -9,12 +9,14 @@ class SearchResultsTable extends Component {
         const searchFilter = this.props.searchFilter;
         const PGSearchResults = this.props.PGSearchResults;
         const rows = [];
+        var index = 0;
         PGSearchResults.forEach((searchResult) => {
             if (searchResult[searchFilter].indexOf(searchText) === -1) {
                 return;
             }
+            index = index + 1;
             rows.push(
-                <SearchResultRow searchResult={searchResult} key={searchResult.id} />
+                <SearchResultRow index={index} searchResult={searchResult} key={searchResult.id} />
             );
         });
 
@@ -28,7 +30,7 @@ class SearchResultsTable extends Component {
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md PGtbl">
-                <table id='PGtbl' className='table table-dark table-striped table-bordered table-hover css-serial'>
+                <table id='PGtbl' className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>

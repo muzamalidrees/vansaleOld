@@ -3,28 +3,21 @@ import SalesOrReturnArea from './SalesOrReturnArea';
 import { Redirect } from 'react-router';
 
 class SecuredSalesOrReturnArea extends Component {
-    _isMounted = flase
     state = {
 
     }
     constructor() {
         super()
-        this._isMounted = true
         fetch('/isAuth')
 
             .then((res) => res.json())
             .then((json) => {
                 // console.log(json);
-                if (this._isMounted) {
-                    this.setState({ loggedIn: json.loggedIn })
-                }
+                this.setState({ loggedIn: json.loggedIn })
             })
             .catch((err => {
                 console.log(err);
             }))
-    }
-    componentWillUnmount() {
-        this._isMounted = false;
     }
 
     render() {

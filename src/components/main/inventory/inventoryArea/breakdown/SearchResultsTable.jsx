@@ -9,6 +9,7 @@ class SearchResultsTable extends Component {
         var searchFilter = this.props.searchFilter;
         var inventorySearchResults = this.props.inventorySearchResults;
         var rows = [];
+        var index = 0;
 
         inventorySearchResults.forEach((searchResult) => {
 
@@ -19,14 +20,15 @@ class SearchResultsTable extends Component {
             if (value.indexOf(searchText) === -1) {
                 return;
             }
+            index++;
             rows.push(
-                <SearchResultRow searchResult={searchResult} key={searchResult.id} />
+                <SearchResultRow index={index} searchResult={searchResult} key={searchResult.id} />
             );
         });
 
         return (
             <div style={{ overflowY: "auto", display: 'block' }} ref='tbl' className="table-responsive-md Inventorytbl">
-                <table id='Inventorytbl' className='table table-dark table-striped table-bordered table-hover css-serial'>
+                <table id='Inventorytbl' className='table table-dark table-striped table-bordered table-hover'>
                     <thead className='thead-light'>
                         <tr>
                             <th>Sr.</th>

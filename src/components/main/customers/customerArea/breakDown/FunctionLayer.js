@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SearchInputLayer from './SearchInputLayer';
-import { Can } from '../../../../../configs/Ability-context'
 
 
 
 class FunctionLayer extends Component {
+    // componentDidMount() {
+    //     let role_id = parseInt(this.props.user.role_id)
 
+    //     if (role_id === 2) {
+    //         this.addCustomer.style.display = ''
+    //     }
+    //     else {
+    //         this.addCustomer.style.display = 'none'
+    //     }
+    // }
     constructor(props) {
         super(props);
         this.state = {
@@ -17,13 +25,10 @@ class FunctionLayer extends Component {
 
         return (
 
-
             <div style={{ border: 'none' }} className='row m-0 '>
                 <div className='row col-12 m-0 justify-content-center'>
                     <div ref={(el) => { this.addCustomer = el }} className='col-md-2.5 mb-2  button-contaner '>
-                        <Can I="create" a="customer">
-                            <Link to="/customers/add"> <button >Add New Customer</button> </Link>
-                        </Can>
+                        <Link to="/customers/add"> <button >Add New Customer</button> </Link>
                     </div>
 
                     <div className='col-md-2.5 mb-2  button-contaner '>
@@ -46,7 +51,7 @@ class FunctionLayer extends Component {
                 />
 
 
-            </div >
+            </div>
 
 
         )
