@@ -42,7 +42,7 @@ class Home extends Component {
                         {this.addADiv('sales', 'salesOrReturn/home', faCashRegister, 'Sales', 'rctngl')}
                         {this.addADiv('customers', 'customers/home', faUsers, 'Customers', 'rctngl')}
                         {this.addADiv('drivers', 'drivers/home', faUserTie, 'Drivers', 'rctngl')}
-                        {this.addADiv('inventory', 'inventory/home', faCubes, 'Inventory', 'rctngl')}
+                        {this.addADiv('inventory', 'inventoryLocationWise/home', faCubes, 'Inventory', 'rctngl')}
                         {this.addADiv('users', 'users/home', faUsers, 'Users', 'rctngl')}
                         {/* {this.addADiv('returns', 'returns', faUndo, 'Returns', 'rctngl')} */}
                         {this.addADiv('products', 'products/home', faCube, 'Products', 'rctngl')}
@@ -51,7 +51,7 @@ class Home extends Component {
                         {/* {this.addADiv('roles', 'roles', faUserCircle, 'Roles', 'rctngl')} */}
                         {/* {this.addADiv('priceGroups', 'priceGroups', faDollarSign, 'Price_Groups', 'rctnglWide')} */}
                         {/* {this.addADiv('productCategories', 'productCategories', faGripHorizontal, 'Product_Categories', 'rctnglWider')} */}
-                        {this.addADiv('areas', 'areas/home', faChartArea, 'Areas', 'rctngl')}
+                        {this.addADiv('inventory', 'inventoryDriverWise/home', faCubes, 'Inventory', 'rctngl')}
                         {/* {this.addADiv('misc', 'misc', faTasks, 'Misc', 'rctngl')} */}
                         {/* {this.addADiv('permissions', 'permissions', faCheckDouble, 'Permissions', 'rctngl')} */}
                     </div>

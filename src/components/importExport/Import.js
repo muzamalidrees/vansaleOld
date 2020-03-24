@@ -26,7 +26,7 @@ class Import extends Component {
         fd.append('importing', this.props.data)
         var options = {
             method: 'POST',
-            body: fd
+            body: fd    
         }
         fetch('/import', options)
             .then((res) => res.json())

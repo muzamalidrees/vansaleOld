@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router'
 import './loginStyles.css';
+import { user } from '../../actions/login-actions'
+import { connect } from 'react-redux'
 
 class Login extends Component {
     constructor(props) {
@@ -34,7 +36,7 @@ class Login extends Component {
         fetch('/auth', options)
             .then((res) => res.json())
             .then((json) => {
-                // console.log(json);
+                console.log(json);
                 let message = json.message;
                 if (message === 'incorrect Password') {
                     this.refs.password.value = "";
@@ -42,9 +44,12 @@ class Login extends Component {
                 }
                 else {
                 }
+                this.props.dispatch(user(json.user));
                 this.refs.loginLabel.innerHTML = message;
                 this.refs.loginBtn.style.marginTop = '0px';
                 this.setState({ isLoggedIn: true })
+                this.props.changeUserState(json.user.role_id);
+
                 // this.props.history.push(json.route);
             })
             .catch((err) => console.log(err))
@@ -55,7 +60,8 @@ class Login extends Component {
 
     render() {
         if (this.state.isLoggedIn) {
-            document.getElementById('logoutButton').style.display = '';
+            document.getElementById('homeLink').style.display = ''
+            document.getElementById('homeLinkCode').style.display = ''
             return <Redirect to='/home' />
         }
         else return (
@@ -80,7 +86,7 @@ class Login extends Component {
 
                     <div style={{ display: 'inline-block' }} className="form-row col-lg-6 m-0 p-0 ">
                         <div className='col form-group'>
-                            <input type="password" onChange={this.onChangeLabel} className="form-control form-control-lg" ref="password" placeholder="Password" required />
+                            <input type='password' onChange={this.onChangeLabel} className="form-control form-control-lg" ref="password" placeholder="Password" required />
                             <div className="valid-feedback">
                                 Looks good!
                             </div>
@@ -108,8 +114,8 @@ class Login extends Component {
         )
     }
 }
-const button = () => {
 
-}
 
-export default Login
+export default
+ connect()
+(Login)

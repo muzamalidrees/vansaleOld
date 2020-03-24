@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import { PropsRoute } from 'react-router-with-props';
 import './salesOrReturnStyles.css'
-import SecuredSalesOrReturnArea from './salesOrReturnArea/SalesOrReturnArea'
+import SecuredSalesOrReturnArea from './salesOrReturnArea/SecuredSalesOrReturnArea'
 import RightPane from '../RightPane'
 import NotFound from '../../misc/NotFound'
 

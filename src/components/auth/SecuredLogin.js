@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Login from './Login'
 import { Redirect } from 'react-router'
+import { connect } from 'react-redux'
+
 
 class SecuredLogin extends Component {
     state = {
@@ -19,16 +21,29 @@ class SecuredLogin extends Component {
                 console.log(err);
             }))
     }
+    // componentDidMount() {
+    //     console.log(this.props.user)
+
+    //     console.log(this.props.user)
+    // }
 
     render() {
-        if (this.state.loggedIn === true) {
+        if (this.state.loggedIn == true) {
             return <Redirect to='/home' />
         }
         else {
-            return <Login />
+            return <Login changeUserState={this.props.changeUserState} />
         }
 
     }
 }
 
-export default SecuredLogin
+const mapStateToProps = (store) => {
+    return {
+        user: store.loginReducer
+    }
+}
+
+export default
+    connect(mapStateToProps)
+        (SecuredLogin)

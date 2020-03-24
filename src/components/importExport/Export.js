@@ -44,7 +44,26 @@ class Export extends Component {
     }
 
     settingFetchRequest = (data) => {
-        this.setState({ exportFileName: data })
+        this.setState({ exportFileName: data });
+        // console.log(data);
+
+        // let options = {
+        //     method: 'GET',
+        //     body: data
+        // }
+        // fetch('/getExportFile' + data
+        // )
+        //     .then((res) => {
+        //         console.log(res);
+
+        //         return res.json()
+        //     })
+        //     .then((json) => {
+        //         console.log(json)
+
+        //     })
+        //     .catch((error) => console.log(error))
+
         var promises = []
         switch (data) {
 

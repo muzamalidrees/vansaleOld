@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SearchInputLayer from './SearchInputLayer';
-
+import { Can } from "../../../../../configs/Ability-context";
 
 
 class FunctionLayer extends Component {
@@ -15,12 +15,14 @@ class FunctionLayer extends Component {
     //         this.addCustomer.style.display = 'none'
     //     }
     // }
-    constructor(props) {
+    
+    constructor(props ) {
         super(props);
+
         this.state = {
         }
     }
-
+   
     render() {
 
         return (
@@ -28,9 +30,10 @@ class FunctionLayer extends Component {
             <div style={{ border: 'none' }} className='row m-0 '>
                 <div className='row col-12 m-0 justify-content-center'>
                     <div ref={(el) => { this.addCustomer = el }} className='col-md-2.5 mb-2  button-contaner '>
-                        <Link to="/customers/add"> <button >Add New Customer</button> </Link>
+                        <Can I="create" a="customer">
+                            <Link to="/customers/add"> <button >Add New Customer</button> </Link>
+                        </Can>
                     </div>
-
                     <div className='col-md-2.5 mb-2  button-contaner '>
                         <Link to="/customers/import"> <button ref='importCustomer'>Import Customers</button> </Link>
                     </div>

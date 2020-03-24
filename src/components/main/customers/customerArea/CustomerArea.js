@@ -71,7 +71,8 @@ class CustomerArea extends Component {
 
             <div style={{ border: 'none' }} className=" col-sm-9 m-0 p-0 ">
                 <FunctionLayer
-                    user={this.props.user}
+                    // ability={this.props.ability}
+                    // user={this.props.user}
                     searchFilter={this.state.searchFilter}
                     searchText={this.state.searchText}
                     onSearchFilterChange={this.handleSearchFilterChange}

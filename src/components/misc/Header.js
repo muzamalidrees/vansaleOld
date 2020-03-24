@@ -1,28 +1,15 @@
-import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+    import React, { Component } from 'react';
+import { Link, } from 'react-router-dom';
 import './miscStyles.css';
+import Logout from '../auth/Logout';
 
 class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false,
-            route: '',
         }
-        this.logout = this.logout.bind(this)
     }
 
-    logout = () => {
-        fetch('/logout')
-            .then((res) => res.json())
-            .then((json) => {
-                // console.log(json)
-                this.refs.logoutButton.style.display = 'none'
-                this.setState({ redirect: true, route: json.route })
-
-            })
-            .catch((err) => console.log(err))
-    }
 
     render() {
 
@@ -34,15 +21,15 @@ class Header extends Component {
                             <h1 className="header-title">Van Sale</h1>
                         </div>
                     </div>
-                    {this.state.redirect ?
-                        (
-                            < Redirect to={this.state.route} />
-                        ) : null}
+
                     <div className='row col-md-5 m-0'>
                         <div className='col align-self-center  nav'>
-                            <Link to="/contact">Contact</Link> <code>|</code>
-                            <Link to="/about">About us</Link> <code>|</code>
-                            <button ref='logoutButton' id='logoutButton' onClick={this.logout} type='button' className='btn btn-link p-0 m-0' style={{ display: 'none', color: '#783f04', fontSize: '17px', fontWeight: '700' }}>Log Out </button>
+                            <Link style={{ display: 'none' }} id='homeLink' to="/home">Home</Link> <code style={{ display: 'none' }} id='homeLinkCode'>|</code>
+                            {/* <Link to="/contact">Contact</Link> <code>|</code> */}
+                            {/* <Link to="/about">About us</Link> <code>|</code> */}
+
+                            {/*  calling Logout button  */}
+                            {this.props.loggedIn ? <Logout loggedOut={this.props.loggedOut} /> : null}
                         </div>
                     </div>
                 </div>
